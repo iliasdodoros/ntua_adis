@@ -17,6 +17,7 @@ def load_data_into_redis(redis_client, table_name, data):
     for record_id, record_data in data.items():
         key = f"{table_name}:{record_id}"
         redis_client.hset(key, mapping=record_data)
+        print(f"Added {record_id}")
 
 # Example TPC-DS data file paths (replace these with your actual paths)
 tpcds_data_paths = {

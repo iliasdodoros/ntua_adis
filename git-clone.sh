@@ -1,0 +1,1 @@
+git clone https://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@github.com/iliasdodoros/ntua_adis.git

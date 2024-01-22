@@ -27,7 +27,7 @@ tpcds_columns = {
 }
 
 # Connect to Redis
-redis_client = redis.StrictRedis(host='localhost', port=6379, decode_responses=True)
+redis_client = redis.StrictRedis(host='192.168.2.41', port=6379, decode_responses=True)
 
 # Load TPC-DS data into Redis for 'customer' table as separate JSONs
 for table_name, data_path in tpcds_data_paths.items():

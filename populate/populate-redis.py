@@ -6,7 +6,7 @@ from redis.commands.json.path import Path
 # Function to load TPC-DS data into Redis as separate JSON objects for each row
 def load_tpcds_data_into_redis(redis_client, table_name, tpcds_data_path, limit=None):
     # Load TPC-DS data from CSV file into a Pandas DataFrame
-    df = pd.read_csv(tpcds_data_path, sep='|', header=None, names=tpcds_columns[table_name], nrows=limit)
+    df = pd.read_csv(tpcds_data_path, sep='|', header=None, names=tpcds_columns[table_name], nrows=limit, encoding='latin1')
 
     # Iterate over each row and store it as a separate JSON in Redis
     for index, row in df.iterrows():

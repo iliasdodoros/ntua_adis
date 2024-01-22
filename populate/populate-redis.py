@@ -1,23 +1,19 @@
 import redis
 import pandas as pd
+import json
 
-# Function to load a limited number of TPC-DS data into Redis
-def load_tpcds_data_into_redis(redis_client, table_name, tpcds_data_path, limit=1000):
-    # Load limited TPC-DS data from CSV file into a Pandas DataFrame
+# Function to load TPC-DS data into Redis as JSON
+def load_tpcds_data_into_redis(redis_client, table_name, tpcds_data_path, limit=None):
+    # Load TPC-DS data from CSV file into a Pandas DataFrame
     df = pd.read_csv(tpcds_data_path, sep='|', header=None, names=tpcds_columns[table_name], nrows=limit)
 
-    # Convert DataFrame to a dictionary where keys are record IDs
-    data_dict = df.to_dict(orient='index')
+    # Convert DataFrame to JSON
+    json_data = df.to_json(orient='records', lines=True)
 
-    # Load data into Redis
-    load_data_into_redis(redis_client, table_name, data_dict)
-
-# Function to load data into Redis
-def load_data_into_redis(redis_client, table_name, data):
-    for record_id, record_data in data.items():
-        key = f"{table_name}:{record_id}"
-        redis_client.hset(key, mapping=record_data)
-        print(f"Added {record_id}")
+    # Load JSON data into Redis
+    redis_key = f"{table_name}:data"
+    redis_client.set(redis_key, json_data)
+    print(f"Added data to {redis_key}")
 
 # Example TPC-DS data file paths (replace these with your actual paths)
 tpcds_data_paths = {
@@ -32,6 +28,6 @@ tpcds_columns = {
 # Connect to Redis
 redis_client = redis.StrictRedis(host='192.168.2.41', port=6379, decode_responses=True)
 
-# Load a limited number of TPC-DS data into Redis for each table
+# Load TPC-DS data into Redis for each table as JSON
 for table_name, data_path in tpcds_data_paths.items():
     load_tpcds_data_into_redis(redis_client, table_name, data_path, limit=1000)

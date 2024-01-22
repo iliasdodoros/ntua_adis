@@ -13,7 +13,7 @@ def load_tpcds_data_into_redis(redis_client, table_name, tpcds_data_path, limit=
         json_data = row.to_json()
         print(json_data)
         redis_key = f"{table_name}:{index + 1}"  # Assuming index starts from 0
-        redis_client.json().set(redis_key, Path.rootPath(), json_data)
+        redis_client.json().set(redis_key, Path.root_path(), json_data)
         print(f"Added data to {redis_key}")
 
 # Example TPC-DS data file paths (replace these with your actual paths)

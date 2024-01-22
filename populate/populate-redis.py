@@ -5,7 +5,7 @@ import json
 # Function to load TPC-DS data into Redis as JSON
 def load_tpcds_data_into_redis(redis_client, table_name, tpcds_data_path, limit=None):
     # Load TPC-DS data from CSV file into a Pandas DataFrame
-    df = pd.read_csv(tpcds_data_path, sep='|', header=None, names=tpcds_columns[table_name], nrows=limit)
+    df = pd.read_csv(tpcds_data_path, sep='|', header=None, names=tpcds_columns[table_name], nrows=limit, encoding='latin1')
 
     # Convert DataFrame to JSON
     json_data = df.to_json(orient='records', lines=True)

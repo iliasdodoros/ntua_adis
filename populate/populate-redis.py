@@ -1,10 +1,10 @@
 import redis
 import pandas as pd
 
-# Function to load TPC-DS data into Redis
-def load_tpcds_data_into_redis(redis_client, table_name, tpcds_data_path):
-    # Load TPC-DS data from CSV file into a Pandas DataFrame
-    df = pd.read_csv(tpcds_data_path, sep='|', header=None, names=tpcds_columns[table_name])
+# Function to load a limited number of TPC-DS data into Redis
+def load_tpcds_data_into_redis(redis_client, table_name, tpcds_data_path, limit=1000):
+    # Load limited TPC-DS data from CSV file into a Pandas DataFrame
+    df = pd.read_csv(tpcds_data_path, sep='|', header=None, names=tpcds_columns[table_name], nrows=limit)
 
     # Convert DataFrame to a dictionary where keys are record IDs
     data_dict = df.to_dict(orient='index')
@@ -30,8 +30,8 @@ tpcds_columns = {
 }
 
 # Connect to Redis
-redis_client = redis.StrictRedis(host='localhost', port=6379, decode_responses=True)
+redis_client = redis.StrictRedis(host='192.168.2.41', port=6379, decode_responses=True)
 
-# Load TPC-DS data into Redis for each table
+# Load a limited number of TPC-DS data into Redis for each table
 for table_name, data_path in tpcds_data_paths.items():
-    load_tpcds_data_into_redis(redis_client, table_name, data_path)
+    load_tpcds_data_into_redis(redis_client, table_name, data_path, limit=1000)

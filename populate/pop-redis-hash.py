@@ -19,7 +19,7 @@ def load_tpcds_data_into_redis(redis_client, table_name, tpcds_data_path, limit=
             record_data = dict(zip(column_names, row))
             
             # Load data into Redis
-            load_data_into_redis(redis_client, table_name, row_count, record_data)
+            load_data_into_redis(redis_client, table_name, record_data)
 
 # Function to load data into Redis
 def load_data_into_redis(redis_client, table_name, data):

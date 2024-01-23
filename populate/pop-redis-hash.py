@@ -12,7 +12,7 @@ def load_tpcds_data_into_redis(redis_client, table_name, tpcds_data_path):
         csv_reader = csv.DictReader(csvfile, fieldnames=header, delimiter='|')
 
         # Read the header from the TPC-DS column names you provided
-
+        print(f"Adding {table_name}")
         # Load a limited number of TPC-DS data into Redis
         for i, row in enumerate(csv_reader):
             row = {k: v for k, v in row.items() if k is not None}
@@ -24,7 +24,7 @@ def load_tpcds_data_into_redis(redis_client, table_name, tpcds_data_path):
 
             # Store the hash data in Redis
             redis_client.hset(key, mapping=row)
-            print(f"Added {key}")
+        print(f"Added {table_name}")
 
 
 # Example TPC-DS data file paths (replace these with your actual paths)

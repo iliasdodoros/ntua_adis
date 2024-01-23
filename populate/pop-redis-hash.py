@@ -1,33 +1,30 @@
-import csv
 import redis
+import csv
 
 # Function to load a limited number of TPC-DS data into Redis
 def load_tpcds_data_into_redis(redis_client, table_name, tpcds_data_path, limit=1000):
-    with open(tpcds_data_path, 'r', encoding='latin1') as csv_file:
-        csv_reader = csv.reader(csv_file, delimiter='|')
-        
-        # Skip header if it exists
-        next(csv_reader, None)
-        
-        # Load a limited number of TPC-DS data from CSV file
-        for row_count, row in enumerate(csv_reader):
-            if row_count >= limit:
-                break
-            
-            # Extract column names and values
-            column_names = tpcds_columns[table_name]
-            record_data = dict(zip(column_names, row))
-            
-            # Load data into Redis
-            load_data_into_redis(redis_client, table_name, record_data)
+    # Open the TPC-DS data file
+    with open(tpcds_data_path, 'r', encoding='latin1') as csvfile:
+        # Create a CSV reader
+        csv_reader = csv.DictReader(csvfile, delimiter='|', fieldnames=tpcds_columns[table_name])
 
-# Function to load data into Redis
-def load_data_into_redis(redis_client, table_name, data):
-    for record_id, record_data in data.items():
-        key = f"{table_name}:{record_id}"
-        # Use hmset to set multiple fields for each key
-        redis_client.hmset(key, record_data)
-        print(f"Added {record_id}")
+        # Load a limited number of TPC-DS data into Redis
+        for row in csv_reader:
+            # Convert record_data values to strings before storing in Redis
+            string_row = {str(k): str(v) for k, v in row.items()}
+            
+            # Include all columns in the Redis hash
+            hash_data = string_row.copy()
+            
+            # Remove the key used for the Redis hash if it exists
+            hash_data.pop(tpcds_columns[table_name][0], None)
+            
+            # Create a key for the Redis hash
+            key = f"{table_name}:{row[tpcds_columns[table_name][0]]}"
+
+            # Store the hash data in Redis
+            redis_client.hset(key, mapping=hash_data)
+            print(f"Added {row[tpcds_columns[table_name][0]]}")
 
 # Example TPC-DS data file paths (replace these with your actual paths)
 tpcds_data_paths = {

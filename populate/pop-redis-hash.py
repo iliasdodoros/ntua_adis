@@ -17,7 +17,7 @@ def load_tpcds_data_into_redis(redis_client, table_name, tpcds_data_path, limit=
             # Extract column names and values
             column_names = tpcds_columns[table_name]
             record_data = dict(zip(column_names, row))
-            
+            print(record_data)
             # Load data into Redis
             load_data_into_redis(redis_client, table_name, row_count, record_data)
 

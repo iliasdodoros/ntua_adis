@@ -8,9 +8,9 @@ def load_tpcds_data_into_redis(redis_client, table_name, tpcds_data_path, limit=
     
     # Convert DataFrame to a dictionary where keys are record IDs
     data_dict = df.to_dict(orient='index')
-
+    print(data_dict)
     # Load data into Redis
-    load_data_into_redis(redis_client, table_name, data_dict)
+    # load_data_into_redis(redis_client, table_name, data_dict)
 
 # Function to load data into Redis
 def load_data_into_redis(redis_client, table_name, data):

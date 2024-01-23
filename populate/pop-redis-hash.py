@@ -17,23 +17,17 @@ def load_tpcds_data_into_redis(redis_client, table_name, tpcds_data_path, limit=
             # Extract column names and values
             column_names = tpcds_columns[table_name]
             record_data = dict(zip(column_names, row))
-            print(record_data)
+            
             # Load data into Redis
             load_data_into_redis(redis_client, table_name, row_count, record_data)
 
 # Function to load data into Redis
-def load_data_into_redis(redis_client, table_name, record_id, record_data):
-    key = f"{table_name}:{record_id}"
-    
-    # Include all columns in the Redis hash
-    hash_data = {str(k): str(v) for k, v in record_data.items()}
-    
-    # Remove the key used for the Redis hash if it exists
-    hash_data.pop(tpcds_columns[table_name][0], None)
-    
-    # Store the hash data in Redis
-    redis_client.hset(key, mapping=hash_data)
-    print(f"Added {record_id}")
+def load_data_into_redis(redis_client, table_name, data):
+    for record_id, record_data in data.items():
+        key = f"{table_name}:{record_id}"
+        # Use hmset to set multiple fields for each key
+        redis_client.hmset(key, record_data)
+        print(f"Added {record_id}")
 
 # Example TPC-DS data file paths (replace these with your actual paths)
 tpcds_data_paths = {

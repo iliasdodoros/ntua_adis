@@ -4,7 +4,7 @@ import csv
 # Function to load a limited number of TPC-DS data into Redis
 
 
-def load_tpcds_data_into_redis(redis_client, table_name, tpcds_data_path, limit=1000):
+def load_tpcds_data_into_redis(redis_client, table_name, tpcds_data_path):
     # Open the TPC-DS data file
     with open(tpcds_data_path, 'r', encoding='latin1') as csvfile:
         # Create a CSV reader
@@ -15,8 +15,6 @@ def load_tpcds_data_into_redis(redis_client, table_name, tpcds_data_path, limit=
 
         # Load a limited number of TPC-DS data into Redis
         for i, row in enumerate(csv_reader):
-            if i >= limit:
-                break
             row = {k: v for k, v in row.items() if k is not None}
             row.popitem()
             print(row)
@@ -93,4 +91,4 @@ redis_client = redis.StrictRedis(
 
 # Load a limited number of TPC-DS data into Redis for each table
 for table_name, data_path in tpcds_data_paths.items():
-    load_tpcds_data_into_redis(redis_client, table_name, data_path, limit=1000)
+    load_tpcds_data_into_redis(redis_client, table_name, data_path)

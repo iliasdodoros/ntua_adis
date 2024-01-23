@@ -17,6 +17,7 @@ def load_tpcds_data_into_redis(redis_client, table_name, tpcds_data_path, limit=
             if i >= limit:
                 break
             print(row)
+            del row[None]
             # Create a key for the Redis hash (using the first column)
             key = f"{table_name}:{i+1}"
 

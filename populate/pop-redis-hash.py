@@ -1,22 +1,39 @@
+import csv
 import redis
-import pandas as pd
 
 # Function to load a limited number of TPC-DS data into Redis
 def load_tpcds_data_into_redis(redis_client, table_name, tpcds_data_path, limit=1000):
-    # Load limited TPC-DS data from CSV file into a Pandas DataFrame
-    df = pd.read_csv(tpcds_data_path, sep='|', index_col=False, header=None, names=tpcds_columns[table_name], nrows=limit, encoding='latin1')
-    # Convert DataFrame to a dictionary where keys are record IDs
-    data_dict = df.to_dict(orient='index')
-    # Load data into Redis
-    load_data_into_redis(redis_client, table_name, data_dict)
+    with open(tpcds_data_path, 'r', encoding='latin1') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter='|')
+        
+        # Skip header if it exists
+        next(csv_reader, None)
+        
+        # Load a limited number of TPC-DS data from CSV file
+        for row_count, row in enumerate(csv_reader):
+            if row_count >= limit:
+                break
+            
+            # Extract column names and values
+            column_names = tpcds_columns[table_name]
+            record_data = dict(zip(column_names, row))
+            
+            # Load data into Redis
+            load_data_into_redis(redis_client, table_name, row_count, record_data)
 
 # Function to load data into Redis
-def load_data_into_redis(redis_client, table_name, data):
-    for record_id, record_data in data.items():
-        key = f"{table_name}:{record_id}"
-        # Use hmset to set multiple fields for each key
-        redis_client.hmset(key, record_data)
-        print(f"Added {record_id}")
+def load_data_into_redis(redis_client, table_name, record_id, record_data):
+    key = f"{table_name}:{record_id}"
+    
+    # Include all columns in the Redis hash
+    hash_data = {str(k): str(v) for k, v in record_data.items()}
+    
+    # Remove the key used for the Redis hash if it exists
+    hash_data.pop(tpcds_columns[table_name][0], None)
+    
+    # Store the hash data in Redis
+    redis_client.hset(key, mapping=hash_data)
+    print(f"Added {record_id}")
 
 # Example TPC-DS data file paths (replace these with your actual paths)
 tpcds_data_paths = {

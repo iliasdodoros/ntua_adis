@@ -1,6 +1,6 @@
 {
   "tableName": "customer",
-  "schemaName": "schema1",
+  "schemaName": "customer",
   "key": {
     "dataFormat": "raw",
     "fields": [

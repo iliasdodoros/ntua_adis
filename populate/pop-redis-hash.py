@@ -16,8 +16,7 @@ def load_tpcds_data_into_redis(redis_client, table_name, tpcds_data_path):
         # Load a limited number of TPC-DS data into Redis
         for i, row in enumerate(csv_reader):
             row = {k: v for k, v in row.items() if k is not None}
-            row.popitem()
-            print(row)
+
             # Create a key for the Redis hash (using the first column)
             key = f"{table_name}:{i+1}"
 

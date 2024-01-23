@@ -26,7 +26,7 @@ def load_tpcds_data_into_redis(redis_client, table_name, tpcds_data_path, limit=
            
             # Store the hash data in Redis
             redis_client.hset(key, mapping=row)
-            print(f"Added {row[0]}")
+            print(f"Added {key}")
 
 # Example TPC-DS data file paths (replace these with your actual paths)
 tpcds_data_paths = {

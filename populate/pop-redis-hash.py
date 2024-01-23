@@ -4,8 +4,8 @@ import pandas as pd
 # Function to load a limited number of TPC-DS data into Redis
 def load_tpcds_data_into_redis(redis_client, table_name, tpcds_data_path, limit=1000):
     # Load limited TPC-DS data from CSV file into a Pandas DataFrame
-    df = pd.read_csv(tpcds_data_path, sep='|', header=None, names=tpcds_columns[table_name], nrows=limit,encoding='latin1')
-
+    df = pd.read_csv(tpcds_data_path, sep='|', header=None, names=tpcds_columns[table_name], nrows=limit, encoding='latin1')
+    
     # Convert DataFrame to a dictionary where keys are record IDs
     data_dict = df.to_dict(orient='index')
 
@@ -16,7 +16,8 @@ def load_tpcds_data_into_redis(redis_client, table_name, tpcds_data_path, limit=
 def load_data_into_redis(redis_client, table_name, data):
     for record_id, record_data in data.items():
         key = f"{table_name}:{record_id}"
-        redis_client.hset(key, mapping=record_data)
+        # Use hmset to set multiple fields for each key
+        redis_client.hmset(key, record_data)
         print(f"Added {record_id}")
 
 # Example TPC-DS data file paths (replace these with your actual paths)

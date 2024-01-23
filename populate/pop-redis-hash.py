@@ -18,7 +18,7 @@ def load_tpcds_data_into_redis(redis_client, table_name, tpcds_data_path, limit=
                 break
             print(row)
             row = {k: v for k, v in row.items() if k is not None}
-            row[c_last_review_date] = str( row[c_last_review_date])
+            row[17] = str( row[17])
             print(row)
             # Create a key for the Redis hash (using the first column)
             key = f"{table_name}:{i+1}"

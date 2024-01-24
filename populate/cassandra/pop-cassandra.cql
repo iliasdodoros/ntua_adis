@@ -7,7 +7,7 @@ CREATE TABLE tpcds.dbgen_version (
 );
 
 CREATE TABLE tpcds.customer_address (
-    ca_address_sk INT PRIMARY KEY,
+    ca_address_sk INT,
     ca_address_id TEXT,
     ca_street_number TEXT,
     ca_street_name TEXT,
@@ -19,11 +19,12 @@ CREATE TABLE tpcds.customer_address (
     ca_zip TEXT,
     ca_country TEXT,
     ca_gmt_offset DECIMAL,
-    ca_location_type TEXT
+    ca_location_type TEXT,
+     PRIMARY KEY (ca_address_sk)
 );
 
 CREATE TABLE tpcds.customer_demographics (
-    cd_demo_sk INT PRIMARY KEY,
+    cd_demo_sk INT,
     cd_gender TEXT,
     cd_marital_status TEXT,
     cd_education_status TEXT,
@@ -31,11 +32,12 @@ CREATE TABLE tpcds.customer_demographics (
     cd_credit_rating TEXT,
     cd_dep_count INT,
     cd_dep_employed_count INT,
-    cd_dep_college_count INT
+    cd_dep_college_count INT,
+    PRIMARY KEY (cd_demo_sk)
 );
 
 CREATE TABLE tpcds.date_dim (
-    d_date_sk INT PRIMARY KEY,
+    d_date_sk INT,
     d_date_id TEXT,
     d_date DATE,
     d_month_seq INT,
@@ -62,11 +64,12 @@ CREATE TABLE tpcds.date_dim (
     d_current_week TEXT,
     d_current_month TEXT,
     d_current_quarter TEXT,
-    d_current_year TEXT
+    d_current_year TEXT,
+     PRIMARY KEY (d_date_sk)
 );
 
 CREATE TABLE tpcds.warehouse (
-    w_warehouse_sk INT PRIMARY KEY,
+    w_warehouse_sk INT,
     w_warehouse_id TEXT,
     w_warehouse_name TEXT,
     w_warehouse_sq_ft INT,
@@ -79,20 +82,22 @@ CREATE TABLE tpcds.warehouse (
     w_state TEXT,
     w_zip TEXT,
     w_country TEXT,
-    w_gmt_offset DECIMAL
+    w_gmt_offset DECIMAL,
+     PRIMARY KEY (w_warehouse_sk)
 );
 
 CREATE TABLE tpcds.ship_mode (
-    sm_ship_mode_sk INT PRIMARY KEY,
+    sm_ship_mode_sk INT,
     sm_ship_mode_id TEXT,
     sm_type TEXT,
     sm_code TEXT,
     sm_carrier TEXT,
-    sm_contract TEXT
+    sm_contract TEXT,
+     PRIMARY KEY (sm_ship_mode_sk)
 );
 
 CREATE TABLE tpcds.time_dim (
-    t_time_sk INT PRIMARY KEY,
+    t_time_sk INT ,
     t_time_id TEXT,
     t_time INT,
     t_hour INT,
@@ -101,23 +106,26 @@ CREATE TABLE tpcds.time_dim (
     t_am_pm TEXT,
     t_shift TEXT,
     t_sub_shift TEXT,
-    t_meal_time TEXT
+    t_meal_time TEXT,
+    PRIMARY KEY (t_time_sk)
 );
 
 CREATE TABLE tpcds.reason (
-    r_reason_sk INT PRIMARY KEY,
+    r_reason_sk INT ,
     r_reason_id TEXT,
-    r_reason_desc TEXT
+    r_reason_desc TEXT,
+    PRIMARY KEY (r_reason_sk)
 );
 
 CREATE TABLE tpcds.income_band (
-    ib_income_band_sk INT PRIMARY KEY,
+    ib_income_band_sk INT ,
     ib_lower_bound INT,
-    ib_upper_bound INT
+    ib_upper_bound INT,
+    PRIMARY KEY (ib_income_band_sk)
 );
 
 CREATE TABLE tpcds.item (
-    i_item_sk INT PRIMARY KEY,
+    i_item_sk INT ,
     i_item_id TEXT,
     i_rec_start_date DATE,
     i_rec_end_date DATE,
@@ -138,11 +146,12 @@ CREATE TABLE tpcds.item (
     i_units TEXT,
     i_container TEXT,
     i_manager_id INT,
-    i_product_name TEXT
+    i_product_name TEXT,
+    PRIMARY KEY (i_item_sk)
 );
 
 CREATE TABLE tpcds.store (
-    s_store_sk INT PRIMARY KEY,
+    s_store_sk INT ,
     s_store_id TEXT,
     s_rec_start_date DATE,
     s_rec_end_date DATE,
@@ -170,11 +179,12 @@ CREATE TABLE tpcds.store (
     s_zip TEXT,
     s_country VARCHAR,
     s_gmt_offset DECIMAL,
-    s_tax_percentage DECIMAL
+    s_tax_percentage DECIMAL,
+    PRIMARY KEY (s_store_sk)
 );
 
 CREATE TABLE tpcds.call_center (
-    cc_call_center_sk INT PRIMARY KEY,
+    cc_call_center_sk INT ,
     cc_call_center_id TEXT,
     cc_rec_start_date DATE,
     cc_rec_end_date DATE,
@@ -204,11 +214,12 @@ CREATE TABLE tpcds.call_center (
     cc_zip TEXT,
     cc_country VARCHAR,
     cc_gmt_offset DECIMAL,
-    cc_tax_percentage DECIMAL
+    cc_tax_percentage DECIMAL,
+    PRIMARY KEY (cc_call_center_sk)
 );
 
 CREATE TABLE tpcds.customer (
-    c_customer_sk INT PRIMARY KEY,
+    c_customer_sk INT ,
     c_customer_id TEXT,
     c_current_cdemo_sk INT,
     c_current_hdemo_sk INT,
@@ -225,11 +236,12 @@ CREATE TABLE tpcds.customer (
     c_birth_country VARCHAR,
     c_login TEXT,
     c_email_address TEXT,
-    c_last_review_date TEXT
+    c_last_review_date TEXT,
+    PRIMARY KEY (c_customer_sk)
 );
 
 CREATE TABLE tpcds.web_site (
-    web_site_sk INT PRIMARY KEY,
+    web_site_sk INT ,
     web_site_id TEXT,
     web_rec_start_date DATE,
     web_rec_end_date DATE,
@@ -254,13 +266,14 @@ CREATE TABLE tpcds.web_site (
     web_zip TEXT,
     web_country VARCHAR,
     web_gmt_offset DECIMAL,
-    web_tax_percentage DECIMAL
+    web_tax_percentage DECIMAL,
+    PRIMARY KEY (web_site_sk)
 );
 
 CREATE TABLE tpcds.store_returns (
     sr_returned_date_sk INT,
     sr_return_time_sk INT,
-    sr_item_sk INT PRIMARY KEY,
+    sr_item_sk INT ,
     sr_customer_sk INT,
     sr_cdemo_sk INT,
     sr_hdemo_sk INT,
@@ -277,19 +290,21 @@ CREATE TABLE tpcds.store_returns (
     sr_refunded_cash DECIMAL,
     sr_reversed_charge DECIMAL,
     sr_store_credit DECIMAL,
-    sr_net_loss DECIMAL
+    sr_net_loss DECIMAL,
+    PRIMARY KEY (sr_item_sk, sr_ticket_number)
 );
 
 CREATE TABLE tpcds.household_demographics (
-    hd_demo_sk INT PRIMARY KEY,
+    hd_demo_sk INT ,
     hd_income_band_sk INT,
     hd_buy_potential TEXT,
     hd_dep_count INT,
-    hd_vehicle_count INT
+    hd_vehicle_count INT,
+    PRIMARY KEY (hd_demo_sk)
 );
 
 CREATE TABLE tpcds.web_page (
-    wp_web_page_sk INT PRIMARY KEY,
+    wp_web_page_sk INT,
     wp_web_page_id TEXT,
     wp_rec_start_date DATE,
     wp_rec_end_date DATE,
@@ -302,11 +317,12 @@ CREATE TABLE tpcds.web_page (
     wp_char_count INT,
     wp_link_count INT,
     wp_image_count INT,
-    wp_max_ad_count INT
+    wp_max_ad_count INT,
+    PRIMARY KEY (wp_web_page_sk)
 );
 
 CREATE TABLE tpcds.promotion (
-    p_promo_sk INT PRIMARY KEY,
+    p_promo_sk INT,
     p_promo_id TEXT,
     p_start_date_sk INT,
     p_end_date_sk INT,
@@ -324,11 +340,12 @@ CREATE TABLE tpcds.promotion (
     p_channel_demo TEXT,
     p_channel_details VARCHAR,
     p_purpose TEXT,
-    p_discount_active TEXT
+    p_discount_active TEXT,
+    PRIMARY KEY (p_promo_sk)
 );
 
 CREATE TABLE tpcds.catalog_page (
-    cp_catalog_page_sk INT PRIMARY KEY,
+    cp_catalog_page_sk INT ,
     cp_catalog_page_id TEXT,
     cp_start_date_sk INT,
     cp_end_date_sk INT,
@@ -336,7 +353,8 @@ CREATE TABLE tpcds.catalog_page (
     cp_catalog_number INT,
     cp_catalog_page_number INT,
     cp_description VARCHAR,
-    cp_type VARCHAR
+    cp_type VARCHAR,
+    PRIMARY KEY (cp_catalog_page_sk)
 );
 
 CREATE TABLE tpcds.inventory (
@@ -350,7 +368,7 @@ CREATE TABLE tpcds.inventory (
 CREATE TABLE tpcds.catalog_returns (
     cr_returned_date_sk INT,
     cr_returned_time_sk INT,
-    cr_item_sk INT PRIMARY KEY,
+    cr_item_sk INT,
     cr_refunded_customer_sk INT,
     cr_refunded_cdemo_sk INT,
     cr_refunded_hdemo_sk INT,
@@ -374,13 +392,14 @@ CREATE TABLE tpcds.catalog_returns (
     cr_refunded_cash DECIMAL,
     cr_reversed_charge DECIMAL,
     cr_store_credit DECIMAL,
-    cr_net_loss DECIMAL
+    cr_net_loss DECIMAL,
+    PRIMARY KEY (cr_item_sk, cr_order_number)
 );
 
 CREATE TABLE tpcds.web_returns (
     wr_returned_date_sk INT,
     wr_returned_time_sk INT,
-    wr_item_sk INT PRIMARY KEY,
+    wr_item_sk INT ,
     wr_refunded_customer_sk INT,
     wr_refunded_cdemo_sk INT,
     wr_refunded_hdemo_sk INT,
@@ -401,14 +420,15 @@ CREATE TABLE tpcds.web_returns (
     wr_refunded_cash DECIMAL,
     wr_reversed_charge DECIMAL,
     wr_account_credit DECIMAL,
-    wr_net_loss DECIMAL
+    wr_net_loss DECIMAL,
+    PRIMARY KEY (wr_item_sk, wr_order_number)
 );
 
 CREATE TABLE tpcds.web_sales (
     ws_sold_date_sk INT,
     ws_sold_time_sk INT,
     ws_ship_date_sk INT,
-    ws_item_sk INT PRIMARY KEY,
+    ws_item_sk INT,
     ws_bill_customer_sk INT,
     ws_bill_cdemo_sk INT,
     ws_bill_hdemo_sk INT,
@@ -438,7 +458,8 @@ CREATE TABLE tpcds.web_sales (
     ws_net_paid_inc_tax DECIMAL,
     ws_net_paid_inc_ship DECIMAL,
     ws_net_paid_inc_ship_tax DECIMAL,
-    ws_net_profit DECIMAL
+    ws_net_profit DECIMAL,
+    PRIMARY KEY (ws_item_sk, ws_order_number)
 );
 
 CREATE TABLE tpcds.catalog_sales (
@@ -457,7 +478,7 @@ CREATE TABLE tpcds.catalog_sales (
     cs_catalog_page_sk INT,
     cs_ship_mode_sk INT,
     cs_warehouse_sk INT,
-    cs_item_sk INT PRIMARY KEY,
+    cs_item_sk INT ,
     cs_promo_sk INT,
     cs_order_number INT,
     cs_quantity INT,
@@ -475,13 +496,14 @@ CREATE TABLE tpcds.catalog_sales (
     cs_net_paid_inc_tax DECIMAL,
     cs_net_paid_inc_ship DECIMAL,
     cs_net_paid_inc_ship_tax DECIMAL,
-    cs_net_profit DECIMAL
+    cs_net_profit DECIMAL,
+    PRIMARY KEY (cs_item_sk, cs_order_number)
 );
 
 CREATE TABLE tpcds.store_sales (
     ss_sold_date_sk INT,
     ss_sold_time_sk INT,
-    ss_item_sk INT PRIMARY KEY,
+    ss_item_sk INT ,
     ss_customer_sk INT,
     ss_cdemo_sk INT,
     ss_hdemo_sk INT,
@@ -501,7 +523,8 @@ CREATE TABLE tpcds.store_sales (
     ss_coupon_amt DECIMAL,
     ss_net_paid DECIMAL,
     ss_net_paid_inc_tax DECIMAL,
-    ss_net_profit DECIMAL
+    ss_net_profit DECIMAL,
+    PRIMARY KEY (ss_item_sk, ss_ticket_number)
 );
 
 

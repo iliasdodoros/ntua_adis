@@ -1,6 +1,6 @@
 import redis
 import csv
-
+import time
 # Function to load a limited number of TPC-DS data into Redis
 
 
@@ -25,9 +25,11 @@ def load_tpcds_data_into_redis(redis_client, table_name, tpcds_data_path):
 
             # Store the hash data in Redis
             pipe.hset(key, mapping=row)
-            if 1%100000==0:
-                results= pipe.execute()
-        results= pipe.execute()
+            if i % 1000000 == 0:
+                results = pipe.execute()
+                print(f"{i}")
+                time.sleep(20)
+        results = pipe.execute()
         print(results)
         print(f"Added {table_name}")
 

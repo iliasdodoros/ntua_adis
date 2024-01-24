@@ -10,6 +10,7 @@ def load_tpcds_data_into_redis(redis_client, table_name, tpcds_data_path):
         # Create a CSV reader
         header = tpcds_columns[table_name]
         csv_reader = csv.DictReader(csvfile, fieldnames=header, delimiter='|')
+        pipe = redis_client.pipeline()
 
         # Read the header from the TPC-DS column names you provided
         print(f"Adding {table_name}")
@@ -23,7 +24,11 @@ def load_tpcds_data_into_redis(redis_client, table_name, tpcds_data_path):
             # Include all columns in the Redis hash except the key column
 
             # Store the hash data in Redis
-            redis_client.hset(key, mapping=row)
+            pipe.hset(key, mapping=row)
+            if 1%100000==0:
+                results= pipe.execute()
+        results= pipe.execute()
+        print(results)
         print(f"Added {table_name}")
 
 

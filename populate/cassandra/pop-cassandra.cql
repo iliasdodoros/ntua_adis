@@ -1,3 +1,6 @@
+-- Keyspace Creation
+CREATE KEYSPACE IF NOT EXISTS tpcds WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
+
 CREATE TABLE tpcds.dbgen_version (
     dv_version TEXT,
     dv_create_date DATE,

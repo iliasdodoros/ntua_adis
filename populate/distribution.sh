@@ -73,7 +73,7 @@ import_to_cassandra() {
 
 # Create keyspace tpcds and all the tables in Cassandra 
 creation_query=$(cat /home/user/ntua_adis/populate/cassandra/pop-cassandra.cql)
-ssh user@192.168.2.40 '''cqlsh 192.168.2.40 -e "$creation_query"'''
+ssh user@192.168.2.40 "cqlsh 192.168.2.40 -e "$creation_query""
 
 # Iterate over each .dat file in the directory
 for dat_file in "$DAT_FILES_DIR"/*.dat; do

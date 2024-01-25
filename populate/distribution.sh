@@ -66,20 +66,19 @@ import_to_cassandra() {
     local columns="${TABLE_COLUMNS[$table_name]}"
     
     scp $file_path user@192.168.2.40:$file_path 
-    ssh user@192.168.2.40 'cqlsh -e "COPY tpcds.$table_name ($columns) FROM '$file_path' WITH HEADER=false;"' 
+    ssh user@192.168.2.40 "cqlsh -e 'COPY tpcds.$table_name ($columns) FROM $file_path WITH HEADER=false;'"
 
     echo "CQL COPY command generated for $file_path in Cassandra"
 }
 
 # Create keyspace tpcds and all the tables in Cassandra 
-creation_query=${cat cassandra/pop-cassandra.cql} 
-ssh user@192.168.2.40 "cqlsh -e $creation_query "
+creation_query=$(cat cassandra/pop-cassandra.cql)
+ssh user@192.168.2.40 "cqlsh 192.168.2.40 -e $creation_query "
 
 # Iterate over each .dat file in the directory
 for dat_file in "$DAT_FILES_DIR"/*.dat; do
     # Extract table name from the file name
     table_name=$(basename "$dat_file" .dat)
-    echo "$dat_file"
     # Check if the table should go to MongoDB or Redis
     if [[ " ${MONGO_TABLES[@]} " =~ " ${table_name} " ]]; then
         import_to_mongo "$table_name" "$dat_file"

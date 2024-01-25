@@ -7,4 +7,4 @@ file_path="$2"
 columns="$3"
 
 
-mongoimport --host "$MONGO_HOST" --port "$MONGO_PORT" --db "$MONGO_DB_NAME" --collection "$TABLE_NAME" --type csv --fields "$columns" --file "$file_path" --ignoreBlanks
+mongoimport --host "$MONGO_HOST" --port "$MONGO_PORT" --db "$MONGO_DB_NAME" --collection "$table_name" --type csv --fields "$columns" --file "$file_path" --ignoreBlanks

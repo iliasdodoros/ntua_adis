@@ -1,3 +1,4 @@
+
 #!/bin/bash
 declare -A TABLE_COLUMNS=(
     ["dbgen_version"]="dv_version, dv_create_date, dv_create_time, dv_cmdline_args"
@@ -31,9 +32,9 @@ declare -A TABLE_COLUMNS=(
 # Directory containing .dat files
 DAT_FILES_DIR="/home/user/data"
 
-MONGO_TABLES=("store_sales store_returns catalog_sales catalog_returns web_sales web_returns inventory store call_center catalog_page web_site web_page warehouse customer customer_address customer_demographics date_dim household_demographics item income_band promotion reason ship_mode time_dim")
-REDIS_TABLES=("")
-CASSANDRA_TABLES=("")
+MONGO_TABLES=("web_sales web_returns web_site web_page item promotion reason inventory ship_mode")
+REDIS_TABLES=("store_sales store_returns store customer customer_address customer_demographics household_demographics income_band")
+CASSANDRA_TABLES=("catalog_sales catalog_returns call_center catalog_page warehouse date_dim time_dim")
 
 # Function to import data to MongoDB
 import_to_mongo() {

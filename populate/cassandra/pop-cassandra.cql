@@ -1,6 +1,7 @@
 DROP KEYSPACE IF EXISTS tpcds;
 
-CREATE KEYSPACE IF NOT EXISTS tpcds;
+CREATE KEYSPACE IF NOT EXISTS tpcds WITH replication = {'class':'SimpleStrategy', 'replication_factor' : 1};
+;
 
 CREATE TABLE tpcds.dbgen_version (
     dv_version TEXT,

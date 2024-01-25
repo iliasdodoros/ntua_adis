@@ -1,4 +1,4 @@
-DROP KEYSPACE tpcds;
+DROP KEYSPACE IF EXISTS tpcds;
 
 CREATE KEYSPACE IF NOT EXISTS tpcds WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
 

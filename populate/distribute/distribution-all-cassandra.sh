@@ -71,8 +71,8 @@ import_to_cassandra() {
     file_path="$file_path.utf"
 
     scp $file_path user@192.168.2.40:$file_path 
-    ssh user@192.168.2.40 '''cqlsh -e "COPY tpcds.'$table_name' ('$columns') FROM '"'"''$file_path''"'"' WITH DELIMITER='"'"'|'"'"' HEADER=false;"'''
-    rm $filepath
+    ssh user@192.168.2.40 '''cqlsh -e "COPY tpcds.'$table_name' ('$columns') FROM '"'"''$file_path''"'"' WITH DELIMITER='"'"'|'"'"' AND HEADER=false;"'''
+    rm "$filepath"
     echo "Import complete for $file_path in Cassandra"
 }
 

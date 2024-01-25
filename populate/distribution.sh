@@ -66,7 +66,7 @@ import_to_cassandra() {
     local columns="${TABLE_COLUMNS[$table_name]}"
     
     scp $file_path user@192.168.2.40:$file_path 
-    ssh user@192.168.2.40 """cqlsh -e COPY tpcds.$table_name($columns) FROM '$file_path' WITH HEADER=false;"""
+    ssh user@192.168.2.40 '''cqlsh -e "COPY tpcds.$table_name ('$columns') FROM '$file_path' WITH HEADER=false;"'''
 
     echo "Import complete for $file_path in Cassandra"
 }

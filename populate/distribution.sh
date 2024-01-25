@@ -1,5 +1,7 @@
 #!/bin/bash
-
+declare -A TABLE_COLUMNS=(
+    ["customer"]="c_customer_sk,c_customer_id,c_current_cdemo_sk,c_current_hdemo_sk,c_current_addr_sk,c_first_shipto_date_sk,c_first_sales_date_sk,c_salutation,c_first_name,c_last_name,c_preferred_cust_flag,c_birth_day,c_birth_month,c_birth_year,c_birth_country,c_login,c_email_address,c_last_review_date"
+)
 
 # Directory containing .dat files
 DAT_FILES_DIR="/home/user/data"
@@ -7,6 +9,7 @@ DAT_FILES_DIR="/home/user/data"
 MONGO_TABLES=("customer" )
 REDIS_TABLES=("warehouse" )
 CASSANDRA_TABLES=("web_sales")
+
 # Function to import data to MongoDB
 import_to_mongo() {
     local table_name="$1"
@@ -31,12 +34,12 @@ import_to_redis() {
 }
 
 # Function to generate CQL COPY command for Cassandra
-generate_cql_copy_command() {
+import_to_cassandra() {
     local table_name="$1"
-    local columns="${CASSANDRA_TABLES[$table_name]}"
+    local columns="${TABLE_COLUMNS[$table_name]}"
     local file_path="$2"
-
-    echo "COPY tpcds.$table_name ($columns) FROM '$file_path' WITH DELIMITER = '|';" >> import_commands.cql
+    scp 
+    ssh user@192.168.2.40 'cqlsh -e "COPY tpcds.$table_name ($columns) FROM '$file_path';"' 
 
     echo "CQL COPY command generated for $file_path in Cassandra"
 }
@@ -45,17 +48,17 @@ generate_cql_copy_command() {
 for dat_file in "$DAT_FILES_DIR"/*.dat; do
     # Extract table name from the file name
     table_name=$(basename "$dat_file" .dat)
-
-    # Check if the table should go to MongoDB or Redis
-    if [[ " ${MONGO_TABLES[@]} " =~ " ${table_name} " ]]; then
-        import_to_mongo "$table_name" "$dat_file"
-    elif [[ " ${REDIS_TABLES[@]} " =~ " ${table_name} " ]]; then
-        import_to_redis "$table_name"
-    elif [[ " ${CASSANDRA_TABLES[@]} " =~ " ${table_name} " ]]; then
-        generate_cql_copy_command "$table_name" "$dat_file"
-    else
-        echo "Table $table_name not specified for import."
-    fi
+    echo "$dat_file"
+    # # Check if the table should go to MongoDB or Redis
+    # if [[ " ${MONGO_TABLES[@]} " =~ " ${table_name} " ]]; then
+    #     import_to_mongo "$table_name" "$dat_file"
+    # elif [[ " ${REDIS_TABLES[@]} " =~ " ${table_name} " ]]; then
+    #     import_to_redis "$table_name"
+    # elif [[ " ${CASSANDRA_TABLES[@]} " =~ " ${table_name} " ]]; then
+    #     import_to_cassandra "$table_name" "$dat_file"
+    # else
+    #     echo "Table $table_name not specified for import."
+    # fi
 done
 
 echo "Data import complete."

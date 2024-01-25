@@ -1,6 +1,7 @@
 import redis
 import csv
 import time
+import sys
 # Function to load a limited number of TPC-DS data into Redis
 
 
@@ -9,7 +10,7 @@ def load_tpcds_data_into_redis(redis_client, table_name, tpcds_data_path):
     with open(tpcds_data_path, 'r', encoding='latin1') as csvfile:
         # Create a CSV reader
         header = tpcds_columns[table_name]
-        csv_reader = csv.DictReader(csvfile, fieldnames=header, delimiter='|')
+        csv_reader = csv.DictReader(csvfile, fieldnames=header, delimiter=',')
         pipe = redis_client.pipeline()
 
         # Read the header from the TPC-DS column names you provided
@@ -25,10 +26,9 @@ def load_tpcds_data_into_redis(redis_client, table_name, tpcds_data_path):
 
             # Store the hash data in Redis
             pipe.hset(key, mapping=row)
-            if i % 1000000 == 0:
+            if i % 1000000 == 0 and i != 0:
                 results = pipe.execute()
                 print(f"{i}")
-                time.sleep(20)
         results = pipe.execute()
         print(results)
         print(f"Added {table_name}")
@@ -96,5 +96,6 @@ redis_client = redis.StrictRedis(
     host='192.168.2.41', port=6379, decode_responses=True)
 
 # Load a limited number of TPC-DS data into Redis for each table
-for table_name, data_path in tpcds_data_paths.items():
-    load_tpcds_data_into_redis(redis_client, table_name, data_path)
+table_name = sys.argv[1]
+data_path = tpcds_data_paths[table_name]
+load_tpcds_data_into_redis(redis_client, table_name, data_path)

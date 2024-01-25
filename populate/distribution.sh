@@ -43,7 +43,7 @@ import_to_mongo() {
 
     echo "Importing $file_path to MongoDB"
     # Use mongoimport to import the data to MongoDB
-    bash mongodb/pop-mongo.sh "$table_name" "$file_path" "$columns"
+    bash /home/user/ntua_adis/populate/mongodb/pop-mongo.sh "$table_name" "$file_path" "$columns"
 
     echo "Import complete for $file_path in MongoDB"
 }

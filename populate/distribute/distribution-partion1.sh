@@ -33,8 +33,8 @@ declare -A TABLE_COLUMNS=(
 DAT_FILES_DIR="/home/user/data"
 
 MONGO_TABLES=("web_sales web_returns web_site web_page item promotion reason inventory ship_mode")
-REDIS_TABLES=("store_sales store_returns store customer customer_address customer_demographics household_demographics income_band")
-CASSANDRA_TABLES=("catalog_sales catalog_returns call_center catalog_page warehouse date_dim time_dim")
+REDIS_TABLES=("catalog_page store_sales store_returns store customer customer_address customer_demographics household_demographics income_band")
+CASSANDRA_TABLES=("catalog_sales catalog_returns call_center warehouse date_dim time_dim")
 
 # Function to import data to MongoDB
 import_to_mongo() {
@@ -67,12 +67,12 @@ import_to_cassandra() {
     local columns="${TABLE_COLUMNS[$table_name]}"
     
     echo "Removing last | and converting "
-    sed 's/,$//' "$file_path" > "$file_path.temp"
+    sed 's/|$//' "$file_path" > "$file_path.temp"
     iconv -f ISO-8859-1 -t UTF-8 "$file_path.temp" -o "$file_path.utf"
     file_path="$file_path.utf"
 
     scp $file_path user@192.168.2.40:$file_path 
-    ssh user@192.168.2.40 '''cqlsh -e "COPY tpcds.'$table_name' ('$columns') FROM '"'"''$file_path''"'"' WITH DELIMITER='"'"','"'"' AND HEADER=false;"'''
+    ssh user@192.168.2.40 '''cqlsh -e "COPY tpcds.'$table_name' ('$columns') FROM '"'"''$file_path''"'"' WITH DELIMITER='"'"'|'"'"' AND HEADER=false;"'''
     rm "$file_path"
     echo "Import complete for $file_path in Cassandra"
 }

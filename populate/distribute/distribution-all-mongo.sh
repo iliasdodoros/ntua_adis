@@ -66,12 +66,12 @@ import_to_cassandra() {
     local columns="${TABLE_COLUMNS[$table_name]}"
     
     echo "Removing last | and converting "
-    sed 's/,$//' "$file_path" > "$file_path.temp"
+    sed 's/|$//' "$file_path" > "$file_path.temp"
     iconv -f ISO-8859-1 -t UTF-8 "$file_path.temp" -o "$file_path.utf"
     file_path="$file_path.utf"
 
     scp $file_path user@192.168.2.40:$file_path 
-    ssh user@192.168.2.40 '''cqlsh -e "COPY tpcds.'$table_name' ('$columns') FROM '"'"''$file_path''"'"' WITH DELIMITER='"'"','"'"' AND HEADER=false;"'''
+    ssh user@192.168.2.40 '''cqlsh -e "COPY tpcds.'$table_name' ('$columns') FROM '"'"''$file_path''"'"' WITH DELIMITER='"'"'|'"'"' AND HEADER=false;"'''
     rm "$file_path"
     echo "Import complete for $file_path in Cassandra"
 }

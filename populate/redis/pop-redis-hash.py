@@ -10,7 +10,7 @@ def load_tpcds_data_into_redis(redis_client, table_name, tpcds_data_path):
     with open(tpcds_data_path, 'r', encoding='latin1') as csvfile:
         # Create a CSV reader
         header = tpcds_columns[table_name]
-        csv_reader = csv.DictReader(csvfile, fieldnames=header,  delimiter=',')
+        csv_reader = csv.DictReader(csvfile, fieldnames=header,  delimiter='|')
         pipe = redis_client.pipeline()
 
         # Read the header from the TPC-DS column names you provided

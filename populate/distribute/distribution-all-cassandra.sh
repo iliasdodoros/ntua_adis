@@ -31,9 +31,9 @@ declare -A TABLE_COLUMNS=(
 # Directory containing .dat files
 DAT_FILES_DIR="/home/user/data"
 
-MONGO_TABLES=("customer" )
-REDIS_TABLES=("warehouse" )
-CASSANDRA_TABLES=("web_sales")
+MONGO_TABLES=("")
+REDIS_TABLES=("")
+CASSANDRA_TABLES=( "store_sales store_returns catalog_sales catalog_returns web_sales web_returns inventory store call_center catalog_page web_site web_page warehouse customer customer_address customer_demographics date_dim household_demographics item income_band promotion reason ship_mode time_dim")
 
 # Function to import data to MongoDB
 import_to_mongo() {

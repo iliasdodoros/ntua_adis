@@ -1,0 +1,50 @@
+{
+  "tableName": "call_center",
+  "schemaName": "call_center",
+  "key": {
+    "dataFormat": "raw",
+    "fields": [
+      {
+        "name": "redis_key",
+        "type": "VARCHAR(64)",
+        "hidden": "true"
+      }
+    ]
+  },
+  "value": {
+    "dataFormat": "hash",
+    "fields": [
+      { "type": "INTEGER", "mapping": "cc_call_center_sk", "name": "cc_call_center_sk" },
+      { "type": "VARCHAR", "mapping": "cc_call_center_id", "name": "cc_call_center_id" },
+      { "type": "DATE","dataFormat": "iso8601", "mapping": "cc_rec_start_date", "name": "cc_rec_start_date" },
+      { "type": "DATE","dataFormat": "iso8601", "mapping": "cc_rec_end_date", "name": "cc_rec_end_date" },
+      { "type": "INTEGER", "mapping": "cc_closed_date_sk", "name": "cc_closed_date_sk" },
+      { "type": "VARCHAR", "mapping": "cc_open_date_sk", "name": "cc_open_date_sk" },
+      { "type": "VARCHAR", "mapping": "cc_name", "name": "cc_name" },
+      { "type": "VARCHAR", "mapping": "cc_class", "name": "cc_class" },
+      { "type": "INTEGER", "mapping": "cc_employees", "name": "cc_employees" },
+      { "type": "INTEGER", "mapping": "cc_sq_ft", "name": "cc_sq_ft" },
+      { "type": "VARCHAR", "mapping": "cc_hours", "name": "cc_hours" },
+      { "type": "VARCHAR", "mapping": "cc_manager", "name": "cc_manager" },
+      { "type": "INTEGER", "mapping": "cc_mkt_id", "name": "cc_mkt_id" },
+      { "type": "VARCHAR", "mapping": "cc_mkt_class", "name": "cc_mkt_class" },
+      { "type": "VARCHAR", "mapping": "cc_mkt_desc", "name": "cc_mkt_desc" },
+      { "type": "VARCHAR", "mapping": "cc_market_manager", "name": "cc_market_manager" },
+      { "type": "INTEGER", "mapping": "cc_division_id", "name": "cc_division_id" },
+      { "type": "VARCHAR", "mapping": "cc_division_name", "name": "cc_division_name" },
+      { "type": "INTEGER", "mapping": "cc_company_id", "name": "cc_company_id" },
+      { "type": "VARCHAR", "mapping": "cc_company_name", "name": "cc_company_name" },
+      { "type": "VARCHAR", "mapping": "cc_street_number", "name": "cc_street_number" },
+      { "type": "VARCHAR", "mapping": "cc_street_name", "name": "cc_street_name" },
+      { "type": "VARCHAR", "mapping": "cc_street_type", "name": "cc_street_type" },
+      { "type": "VARCHAR", "mapping": "cc_suite_number", "name": "cc_suite_number" },
+      { "type": "VARCHAR", "mapping": "cc_city", "name": "cc_city" },
+      { "type": "VARCHAR", "mapping": "cc_county", "name": "cc_county" },
+      { "type": "VARCHAR", "mapping": "cc_state", "name": "cc_state" },
+      { "type": "VARCHAR", "mapping": "cc_zip", "name": "cc_zip" },
+      { "type": "VARCHAR", "mapping": "cc_country", "name": "cc_country" },
+      { "type": "DOUBLE", "mapping": "cc_gmt_offset", "name": "cc_gmt_offset" },
+      { "type": "DOUBLE", "mapping": "cc_tax_percentage", "name": "cc_tax_percentage" }
+    ]
+  }
+}

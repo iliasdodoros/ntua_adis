@@ -1,0 +1,23 @@
+{
+  "tableName": "inventory",
+  "schemaName": "inventory",
+  "key": {
+    "dataFormat": "raw",
+    "fields": [
+      {
+        "name": "redis_key",
+        "type": "VARCHAR(64)",
+        "hidden": "true"
+      }
+    ]
+  },
+  "value": {
+    "dataFormat": "hash",
+    "fields": [
+      { "type": "INTEGER", "mapping": "inv_date_sk", "name": "inv_date_sk" },
+      { "type": "INTEGER", "mapping": "inv_item_sk", "name": "inv_item_sk" },
+      { "type": "INTEGER", "mapping": "inv_warehouse_sk", "name": "inv_warehouse_sk" },
+      { "type": "INTEGER", "mapping": "inv_quantity_on_hand", "name": "inv_quantity_on_hand" }
+    ]
+  }
+}

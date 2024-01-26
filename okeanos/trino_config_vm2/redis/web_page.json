@@ -1,0 +1,33 @@
+{
+  "tableName": "web_page",
+  "schemaName": "web_page",
+  "key": {
+    "dataFormat": "raw",
+    "fields": [
+      {
+        "name": "redis_key",
+        "type": "VARCHAR(64)",
+        "hidden": "true"
+      }
+    ]
+  },
+  "value": {
+    "dataFormat": "hash",
+    "fields": [
+      { "type": "INTEGER", "mapping": "wp_web_page_sk", "name": "wp_web_page_sk" },
+      { "type": "VARCHAR", "mapping": "wp_web_page_id", "name": "wp_web_page_id" },
+      { "type": "DATE", "dataFormat": "iso8601", "mapping": "wp_rec_start_date", "name": "wp_rec_start_date" },
+      { "type": "DATE", "dataFormat": "iso8601", "mapping": "wp_rec_end_date", "name": "wp_rec_end_date" },
+      { "type": "INTEGER", "mapping": "wp_creation_date_sk", "name": "wp_creation_date_sk" },
+      { "type": "INTEGER", "mapping": "wp_access_date_sk", "name": "wp_access_date_sk" },
+      { "type": "VARCHAR", "mapping": "wp_autogen_flag", "name": "wp_autogen_flag" },
+      { "type": "INTEGER", "mapping": "wp_customer_sk", "name": "wp_customer_sk" },
+      { "type": "VARCHAR", "mapping": "wp_url", "name": "wp_url" },
+      { "type": "VARCHAR", "mapping": "wp_type", "name": "wp_type" },
+      { "type": "INTEGER", "mapping": "wp_char_count", "name": "wp_char_count" },
+      { "type": "INTEGER", "mapping": "wp_link_count", "name": "wp_link_count" },
+      { "type": "INTEGER", "mapping": "wp_image_count", "name": "wp_image_count" },
+      { "type": "INTEGER", "mapping": "wp_max_ad_count", "name": "wp_max_ad_count" }
+    ]
+  }
+}

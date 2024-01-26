@@ -1,0 +1,47 @@
+{
+  "tableName": "date_dim",
+  "schemaName": "date_dim",
+  "key": {
+    "dataFormat": "raw",
+    "fields": [
+      {
+        "name": "redis_key",
+        "type": "VARCHAR(64)",
+        "hidden": "true"
+      }
+    ]
+  },
+  "value": {
+    "dataFormat": "hash",
+    "fields": [
+      { "type": "INTEGER", "mapping": "d_date_sk", "name": "d_date_sk" },
+      { "type": "VARCHAR", "mapping": "d_date_id", "name": "d_date_id" },
+      { "type": "DATE","dataFormat": "iso8601", "mapping": "d_date", "name": "d_date" },
+      { "type": "INTEGER", "mapping": "d_month_seq", "name": "d_month_seq" },
+      { "type": "INTEGER", "mapping": "d_week_seq", "name": "d_week_seq" },
+      { "type": "INTEGER", "mapping": "d_quarter_seq", "name": "d_quarter_seq" },
+      { "type": "INTEGER", "mapping": "d_year", "name": "d_year" },
+      { "type": "INTEGER", "mapping": "d_dow", "name": "d_dow" },
+      { "type": "INTEGER", "mapping": "d_moy", "name": "d_moy" },
+      { "type": "INTEGER", "mapping": "d_dom", "name": "d_dom" },
+      { "type": "INTEGER", "mapping": "d_qoy", "name": "d_qoy" },
+      { "type": "INTEGER", "mapping": "d_fy_year", "name": "d_fy_year" },
+      { "type": "INTEGER", "mapping": "d_fy_quarter_seq", "name": "d_fy_quarter_seq" },
+      { "type": "INTEGER", "mapping": "d_fy_week_seq", "name": "d_fy_week_seq" },
+      { "type": "VARCHAR", "mapping": "d_day_name", "name": "d_day_name" },
+      { "type": "VARCHAR", "mapping": "d_quarter_name", "name": "d_quarter_name" },
+      { "type": "VARCHAR", "mapping": "d_holiday", "name": "d_holiday" },
+      { "type": "VARCHAR", "mapping": "d_weekend", "name": "d_weekend" },
+      { "type": "VARCHAR", "mapping": "d_following_holiday", "name": "d_following_holiday" },
+      { "type": "INTEGER", "mapping": "d_first_dom", "name": "d_first_dom" },
+      { "type": "INTEGER", "mapping": "d_last_dom", "name": "d_last_dom" },
+      { "type": "INTEGER", "mapping": "d_same_day_ly", "name": "d_same_day_ly" },
+      { "type": "INTEGER", "mapping": "d_same_day_lq", "name": "d_same_day_lq" },
+      { "type": "VARCHAR", "mapping": "d_current_day", "name": "d_current_day" },
+      { "type": "VARCHAR", "mapping": "d_current_week", "name": "d_current_week" },
+      { "type": "VARCHAR", "mapping": "d_current_month", "name": "d_current_month" },
+      { "type": "VARCHAR", "mapping": "d_current_quarter", "name": "d_current_quarter" },
+      { "type": "VARCHAR", "mapping": "d_current_year", "name": "d_current_year" }
+    ]
+  }
+}

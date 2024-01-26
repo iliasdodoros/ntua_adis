@@ -1,0 +1,39 @@
+{
+  "tableName": "store_returns",
+  "schemaName": "store_returns",
+  "key": {
+    "dataFormat": "raw",
+    "fields": [
+      {
+        "name": "redis_key",
+        "type": "VARCHAR(64)",
+        "hidden": "true"
+      }
+    ]
+  },
+  "value": {
+    "dataFormat": "hash",
+    "fields": [
+      { "type": "VARCHAR", "mapping": "sr_returned_date_sk", "name": "sr_returned_date_sk" },
+      { "type": "VARCHAR", "mapping": "sr_return_time_sk", "name": "sr_return_time_sk" },
+      { "type": "INTEGER", "mapping": "sr_item_sk", "name": "sr_item_sk" },
+      { "type": "INTEGER", "mapping": "sr_customer_sk", "name": "sr_customer_sk" },
+      { "type": "INTEGER", "mapping": "sr_cdemo_sk", "name": "sr_cdemo_sk" },
+      { "type": "INTEGER", "mapping": "sr_hdemo_sk", "name": "sr_hdemo_sk" },
+      { "type": "INTEGER", "mapping": "sr_addr_sk", "name": "sr_addr_sk" },
+      { "type": "INTEGER", "mapping": "sr_store_sk", "name": "sr_store_sk" },
+      { "type": "INTEGER", "mapping": "sr_reason_sk", "name": "sr_reason_sk" },
+      { "type": "INTEGER", "mapping": "sr_ticket_number", "name": "sr_ticket_number" },
+      { "type": "INTEGER", "mapping": "sr_return_quantity", "name": "sr_return_quantity" },
+      { "type": "DOUBLE", "mapping": "sr_return_amt", "name": "sr_return_amt" },
+      { "type": "DOUBLE", "mapping": "sr_return_tax", "name": "sr_return_tax" },
+      { "type": "DOUBLE", "mapping": "sr_return_amt_inc_tax", "name": "sr_return_amt_inc_tax" },
+      { "type": "DOUBLE", "mapping": "sr_fee", "name": "sr_fee" },
+      { "type": "DOUBLE", "mapping": "sr_return_ship_cost", "name": "sr_return_ship_cost" },
+      { "type": "DOUBLE", "mapping": "sr_refunded_cash", "name": "sr_refunded_cash" },
+      { "type": "DOUBLE", "mapping": "sr_reversed_charge", "name": "sr_reversed_charge" },
+      { "type": "DOUBLE", "mapping": "sr_store_credit", "name": "sr_store_credit" },
+      { "type": "DOUBLE", "mapping": "sr_net_loss", "name": "sr_net_loss" }
+    ]
+  }
+}

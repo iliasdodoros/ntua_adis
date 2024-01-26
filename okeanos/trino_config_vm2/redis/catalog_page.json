@@ -1,0 +1,28 @@
+{
+  "tableName": "catalog_page",
+  "schemaName": "catalog_page",
+  "key": {
+    "dataFormat": "raw",
+    "fields": [
+      {
+        "name": "redis_key",
+        "type": "VARCHAR(64)",
+        "hidden": "true"
+      }
+    ]
+  },
+  "value": {
+    "dataFormat": "hash",
+    "fields": [
+      { "type": "INTEGER", "mapping": "cp_catalog_page_sk", "name": "cp_catalog_page_sk" },
+      { "type": "VARCHAR", "mapping": "cp_catalog_page_id", "name": "cp_catalog_page_id" },
+      { "type": "INTEGER", "mapping": "cp_start_date_sk", "name": "cp_start_date_sk" },
+      { "type": "INTEGER", "mapping": "cp_end_date_sk", "name": "cp_end_date_sk" },
+      { "type": "VARCHAR", "mapping": "cp_department", "name": "cp_department" },
+      { "type": "INTEGER", "mapping": "cp_catalog_number", "name": "cp_catalog_number" },
+      { "type": "INTEGER", "mapping": "cp_catalog_page_number", "name": "cp_catalog_page_number" },
+      { "type": "VARCHAR", "mapping": "cp_description", "name": "cp_description" },
+      { "type": "VARCHAR", "mapping": "cp_type", "name": "cp_type" }
+    ]
+  }
+}

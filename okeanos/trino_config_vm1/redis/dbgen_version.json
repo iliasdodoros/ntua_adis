@@ -1,0 +1,23 @@
+{
+  "tableName": "dbgen_version",
+  "schemaName": "dbgen_version",
+  "key": {
+    "dataFormat": "raw",
+    "fields": [
+      {
+        "name": "redis_key",
+        "type": "VARCHAR(64)",
+        "hidden": "true"
+      }
+    ]
+  },
+  "value": {
+    "dataFormat": "hash",
+    "fields": [
+      { "type": "VARCHAR", "mapping": "dv_version", "name": "dv_version" },
+      { "type": "DATE","dataFormat": "iso8601", "mapping": "dv_create_date", "name": "dv_create_date" },
+      { "type": "TIME", "mapping": "dv_create_time", "name": "dv_create_time" },
+      { "type": "VARCHAR", "mapping": "dv_cmdline_args", "name": "dv_cmdline_args" }
+    ]
+  }
+}

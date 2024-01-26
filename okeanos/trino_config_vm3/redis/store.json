@@ -1,0 +1,48 @@
+{
+  "tableName": "store",
+  "schemaName": "store",
+  "key": {
+    "dataFormat": "raw",
+    "fields": [
+      {
+        "name": "redis_key",
+        "type": "VARCHAR(64)",
+        "hidden": "true"
+      }
+    ]
+  },
+  "value": {
+    "dataFormat": "hash",
+    "fields": [
+      { "type": "INTEGER", "mapping": "s_store_sk", "name": "s_store_sk" },
+      { "type": "VARCHAR", "mapping": "s_store_id", "name": "s_store_id" },
+      { "type": "DATE","dataFormat": "iso8601", "mapping": "s_rec_start_date", "name": "s_rec_start_date" },
+      { "type": "DATE","dataFormat": "iso8601", "mapping": "s_rec_end_date", "name": "s_rec_end_date" },
+      { "type": "INTEGER", "mapping": "s_closed_date_sk", "name": "s_closed_date_sk" },
+      { "type": "VARCHAR", "mapping": "s_store_name", "name": "s_store_name" },
+      { "type": "INTEGER", "mapping": "s_number_employees", "name": "s_number_employees" },
+      { "type": "INTEGER", "mapping": "s_floor_space", "name": "s_floor_space" },
+      { "type": "VARCHAR", "mapping": "s_hours", "name": "s_hours" },
+      { "type": "VARCHAR", "mapping": "s_manager", "name": "s_manager" },
+      { "type": "INTEGER", "mapping": "s_market_id", "name": "s_market_id" },
+      { "type": "VARCHAR", "mapping": "s_geography_class", "name": "s_geography_class" },
+      { "type": "VARCHAR", "mapping": "s_market_desc", "name": "s_market_desc" },
+      { "type": "VARCHAR", "mapping": "s_market_manager", "name": "s_market_manager" },
+      { "type": "INTEGER", "mapping": "s_division_id", "name": "s_division_id" },
+      { "type": "VARCHAR", "mapping": "s_division_name", "name": "s_division_name" },
+      { "type": "INTEGER", "mapping": "s_company_id", "name": "s_company_id" },
+      { "type": "VARCHAR", "mapping": "s_company_name", "name": "s_company_name" },
+      { "type": "VARCHAR", "mapping": "s_street_number", "name": "s_street_number" },
+      { "type": "VARCHAR", "mapping": "s_street_name", "name": "s_street_name" },
+      { "type": "VARCHAR", "mapping": "s_street_type", "name": "s_street_type" },
+      { "type": "VARCHAR", "mapping": "s_suite_number", "name": "s_suite_number" },
+      { "type": "VARCHAR", "mapping": "s_city", "name": "s_city" },
+      { "type": "VARCHAR", "mapping": "s_county", "name": "s_county" },
+      { "type": "VARCHAR", "mapping": "s_state", "name": "s_state" },
+      { "type": "VARCHAR", "mapping": "s_zip", "name": "s_zip" },
+      { "type": "VARCHAR", "mapping": "s_country", "name": "s_country" },
+      { "type": "DOUBLE", "mapping": "s_gmt_offset", "name": "s_gmt_offset" },
+      { "type": "DOUBLE", "mapping": "s_tax_precentage", "name": "s_tax_precentage" }
+    ]
+  }
+}

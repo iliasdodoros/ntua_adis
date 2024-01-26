@@ -1,0 +1,22 @@
+{
+  "tableName": "income_band",
+  "schemaName": "income_band",
+  "key": {
+    "dataFormat": "raw",
+    "fields": [
+      {
+        "name": "redis_key",
+        "type": "VARCHAR(64)",
+        "hidden": "true"
+      }
+    ]
+  },
+  "value": {
+    "dataFormat": "hash",
+    "fields": [
+      { "type": "INTEGER", "mapping": "ib_income_band_sk", "name": "ib_income_band_sk" },
+      { "type": "INTEGER", "mapping": "ib_lower_bound", "name": "ib_lower_bound" },
+      { "type": "INTEGER", "mapping": "ib_upper_bound", "name": "ib_upper_bound" }
+    ]
+  }
+}

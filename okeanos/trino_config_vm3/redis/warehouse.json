@@ -1,0 +1,33 @@
+{
+  "tableName": "warehouse",
+  "schemaName": "warehouse",
+  "key": {
+    "dataFormat": "raw",
+    "fields": [
+      {
+        "name": "redis_key",
+        "type": "VARCHAR(64)",
+        "hidden": "true"
+      }
+    ]
+  },
+  "value": {
+    "dataFormat": "hash",
+    "fields": [
+      { "type": "INTEGER", "mapping": "w_warehouse_sk", "name": "w_warehouse_sk" },
+      { "type": "VARCHAR", "mapping": "w_warehouse_id", "name": "w_warehouse_id" },
+      { "type": "VARCHAR", "mapping": "w_warehouse_name", "name": "w_warehouse_name" },
+      { "type": "INTEGER", "mapping": "w_warehouse_sq_ft", "name": "w_warehouse_sq_ft" },
+      { "type": "VARCHAR", "mapping": "w_street_number", "name": "w_street_number" },
+      { "type": "VARCHAR", "mapping": "w_street_name", "name": "w_street_name" },
+      { "type": "VARCHAR", "mapping": "w_street_type", "name": "w_street_type" },
+      { "type": "VARCHAR", "mapping": "w_suite_number", "name": "w_suite_number" },
+      { "type": "VARCHAR", "mapping": "w_city", "name": "w_city" },
+      { "type": "VARCHAR", "mapping": "w_county", "name": "w_county" },
+      { "type": "VARCHAR", "mapping": "w_state", "name": "w_state" },
+      { "type": "VARCHAR", "mapping": "w_zip", "name": "w_zip" },
+      { "type": "VARCHAR", "mapping": "w_country", "name": "w_country" },
+      { "type": "DOUBLE", "mapping": "w_gmt_offset", "name": "w_gmt_offset" }
+    ]
+  }
+}

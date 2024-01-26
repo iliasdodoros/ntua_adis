@@ -6,5 +6,6 @@ table_name="$1"
 file_path="$2"
 columns="$3"
 
+python3 /home/user/ntua_adis/populate/mongodb/format_mongo.py $file_path
 
-mongoimport --host "$MONGO_HOST" --port "$MONGO_PORT" --db "$MONGO_DB_NAME" --collection "$table_name" --type csv --fields "$columns" --file "$file_path" --ignoreBlanks
+mongoimport --host "$MONGO_HOST" --port "$MONGO_PORT" --db "$MONGO_DB_NAME" --collection "$table_name" --type csv --fields "$columns" --file "$file_path.csv" --ignoreBlanks

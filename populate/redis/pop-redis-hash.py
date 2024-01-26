@@ -30,7 +30,6 @@ def load_tpcds_data_into_redis(redis_client, table_name, tpcds_data_path):
                 results = pipe.execute()
                 print(f"{i}")
         results = pipe.execute()
-        print(results)
         print(f"Added {table_name}")
 
 

@@ -1,0 +1,45 @@
+{
+  "tableName": "web_site",
+  "schemaName": "web_site",
+  "key": {
+    "dataFormat": "raw",
+    "fields": [
+      {
+        "name": "redis_key",
+        "type": "VARCHAR(64)",
+        "hidden": "true"
+      }
+    ]
+  },
+  "value": {
+    "dataFormat": "hash",
+    "fields": [
+      { "type": "INTEGER", "mapping": "web_site_sk", "name": "web_site_sk" },
+      { "type": "VARCHAR", "mapping": "web_site_id", "name": "web_site_id" },
+      { "type": "DATE","dataFormat": "iso8601", "mapping": "web_rec_start_date", "name": "web_rec_start_date" },
+      { "type": "DATE","dataFormat": "iso8601", "mapping": "web_rec_end_date", "name": "web_rec_end_date" },
+      { "type": "VARCHAR", "mapping": "web_name", "name": "web_name" },
+      { "type": "VARCHAR", "mapping": "web_open_date_sk", "name": "web_open_date_sk" },
+      { "type": "VARCHAR", "mapping": "web_close_date_sk", "name": "web_close_date_sk" },
+      { "type": "VARCHAR", "mapping": "web_class", "name": "web_class" },
+      { "type": "VARCHAR", "mapping": "web_manager", "name": "web_manager" },
+      { "type": "INTEGER", "mapping": "web_mkt_id", "name": "web_mkt_id" },
+      { "type": "VARCHAR", "mapping": "web_mkt_class", "name": "web_mkt_class" },
+      { "type": "VARCHAR", "mapping": "web_mkt_desc", "name": "web_mkt_desc" },
+      { "type": "VARCHAR", "mapping": "web_market_manager", "name": "web_market_manager" },
+      { "type": "VARCHAR", "mapping": "web_company_id", "name": "web_company_id" },
+      { "type": "VARCHAR", "mapping": "web_company_name", "name": "web_company_name" },
+      { "type": "VARCHAR", "mapping": "web_street_number", "name": "web_street_number" },
+      { "type": "VARCHAR", "mapping": "web_street_name", "name": "web_street_name" },
+      { "type": "VARCHAR", "mapping": "web_street_type", "name": "web_street_type" },
+      { "type": "VARCHAR", "mapping": "web_suite_number", "name": "web_suite_number" },
+      { "type": "VARCHAR", "mapping": "web_city", "name": "web_city" },
+      { "type": "VARCHAR", "mapping": "web_county", "name": "web_county" },
+      { "type": "VARCHAR", "mapping": "web_state", "name": "web_state" },
+      { "type": "VARCHAR", "mapping": "web_zip", "name": "web_zip" },
+      { "type": "VARCHAR", "mapping": "web_country", "name": "web_country" },
+      { "type": "DOUBLE", "mapping": "web_gmt_offset", "name": "web_gmt_offset" },
+      { "type": "DOUBLE", "mapping": "web_tax_percentage", "name": "web_tax_percentage" }
+    ]
+  }
+}

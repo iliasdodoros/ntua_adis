@@ -1,0 +1,32 @@
+{
+  "tableName": "customer_address",
+  "schemaName": "customer_address",
+  "key": {
+    "dataFormat": "raw",
+    "fields": [
+      {
+        "name": "redis_key",
+        "type": "VARCHAR(64)",
+        "hidden": "true"
+      }
+    ]
+  },
+  "value": {
+    "dataFormat": "hash",
+    "fields": [
+      { "type": "INTEGER", "mapping": "ca_address_sk", "name": "ca_address_sk" },
+      { "type": "VARCHAR", "mapping": "ca_address_id", "name": "ca_address_id" },
+      { "type": "VARCHAR", "mapping": "ca_street_number", "name": "ca_street_number" },
+      { "type": "VARCHAR", "mapping": "ca_street_name", "name": "ca_street_name" },
+      { "type": "VARCHAR", "mapping": "ca_street_type", "name": "ca_street_type" },
+      { "type": "VARCHAR", "mapping": "ca_suite_number", "name": "ca_suite_number" },
+      { "type": "VARCHAR", "mapping": "ca_city", "name": "ca_city" },
+      { "type": "VARCHAR", "mapping": "ca_county", "name": "ca_county" },
+      { "type": "VARCHAR", "mapping": "ca_state", "name": "ca_state" },
+      { "type": "VARCHAR", "mapping": "ca_zip", "name": "ca_zip" },
+      { "type": "VARCHAR", "mapping": "ca_country", "name": "ca_country" },
+      { "type": "DOUBLE", "mapping": "ca_gmt_offset", "name": "ca_gmt_offset" },
+      { "type": "VARCHAR", "mapping": "ca_location_type", "name": "ca_location_type" }
+    ]
+  }
+}

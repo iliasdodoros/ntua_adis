@@ -1,0 +1,22 @@
+{
+  "tableName": "reason",
+  "schemaName": "reason",
+  "key": {
+    "dataFormat": "raw",
+    "fields": [
+      {
+        "name": "redis_key",
+        "type": "VARCHAR(64)",
+        "hidden": "true"
+      }
+    ]
+  },
+  "value": {
+    "dataFormat": "hash",
+    "fields": [
+      { "type": "INTEGER", "mapping": "r_reason_sk", "name": "r_reason_sk" },
+      { "type": "VARCHAR", "mapping": "r_reason_id", "name": "r_reason_id" },
+      { "type": "VARCHAR", "mapping": "r_reason_desc", "name": "r_reason_desc" }
+    ]
+  }
+}

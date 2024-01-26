@@ -1,0 +1,41 @@
+{
+  "tableName": "item",
+  "schemaName": "item",
+  "key": {
+    "dataFormat": "raw",
+    "fields": [
+      {
+        "name": "redis_key",
+        "type": "VARCHAR(64)",
+        "hidden": "true"
+      }
+    ]
+  },
+  "value": {
+    "dataFormat": "hash",
+    "fields": [
+      { "type": "INTEGER", "mapping": "i_item_sk", "name": "i_item_sk" },
+      { "type": "VARCHAR", "mapping": "i_item_id", "name": "i_item_id" },
+      { "type": "DATE","dataFormat": "iso8601", "mapping": "i_rec_start_date", "name": "i_rec_start_date" },
+      { "type": "DATE","dataFormat": "iso8601", "mapping": "i_rec_end_date", "name": "i_rec_end_date" },
+      { "type": "VARCHAR", "mapping": "i_item_desc", "name": "i_item_desc" },
+      { "type": "DOUBLE", "mapping": "i_current_price", "name": "i_current_price" },
+      { "type": "DOUBLE", "mapping": "i_wholesale_cost", "name": "i_wholesale_cost" },
+      { "type": "INTEGER", "mapping": "i_brand_id", "name": "i_brand_id" },
+      { "type": "VARCHAR", "mapping": "i_brand", "name": "i_brand" },
+      { "type": "INTEGER", "mapping": "i_class_id", "name": "i_class_id" },
+      { "type": "VARCHAR", "mapping": "i_class", "name": "i_class" },
+      { "type": "INTEGER", "mapping": "i_category_id", "name": "i_category_id" },
+      { "type": "VARCHAR", "mapping": "i_category", "name": "i_category" },
+      { "type": "INTEGER", "mapping": "i_manufact_id", "name": "i_manufact_id" },
+      { "type": "VARCHAR", "mapping": "i_manufact", "name": "i_manufact" },
+      { "type": "VARCHAR", "mapping": "i_size", "name": "i_size" },
+      { "type": "VARCHAR", "mapping": "i_formulation", "name": "i_formulation" },
+      { "type": "VARCHAR", "mapping": "i_color", "name": "i_color" },
+      { "type": "VARCHAR", "mapping": "i_units", "name": "i_units" },
+      { "type": "VARCHAR", "mapping": "i_container", "name": "i_container" },
+      { "type": "INTEGER", "mapping": "i_manager_id", "name": "i_manager_id" },
+      { "type": "VARCHAR", "mapping": "i_product_name", "name": "i_product_name" }
+    ]
+  }
+}

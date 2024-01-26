@@ -1,0 +1,46 @@
+{
+  "tableName": "catalog_returns",
+  "schemaName": "catalog_returns",
+  "key": {
+    "dataFormat": "raw",
+    "fields": [
+      {
+        "name": "redis_key",
+        "type": "VARCHAR(64)",
+        "hidden": "true"
+      }
+    ]
+  },
+  "value": {
+    "dataFormat": "hash",
+    "fields": [
+      { "type": "INTEGER", "mapping": "cr_returned_date_sk", "name": "cr_returned_date_sk" },
+      { "type": "INTEGER", "mapping": "cr_returned_time_sk", "name": "cr_returned_time_sk" },
+      { "type": "INTEGER", "mapping": "cr_item_sk", "name": "cr_item_sk" },
+      { "type": "INTEGER", "mapping": "cr_refunded_customer_sk", "name": "cr_refunded_customer_sk" },
+      { "type": "INTEGER", "mapping": "cr_refunded_cdemo_sk", "name": "cr_refunded_cdemo_sk" },
+      { "type": "INTEGER", "mapping": "cr_refunded_hdemo_sk", "name": "cr_refunded_hdemo_sk" },
+      { "type": "INTEGER", "mapping": "cr_refunded_addr_sk", "name": "cr_refunded_addr_sk" },
+      { "type": "INTEGER", "mapping": "cr_returning_customer_sk", "name": "cr_returning_customer_sk" },
+      { "type": "INTEGER", "mapping": "cr_returning_cdemo_sk", "name": "cr_returning_cdemo_sk" },
+      { "type": "INTEGER", "mapping": "cr_returning_hdemo_sk", "name": "cr_returning_hdemo_sk" },
+      { "type": "INTEGER", "mapping": "cr_returning_addr_sk", "name": "cr_returning_addr_sk" },
+      { "type": "INTEGER", "mapping": "cr_call_center_sk", "name": "cr_call_center_sk" },
+      { "type": "INTEGER", "mapping": "cr_catalog_page_sk", "name": "cr_catalog_page_sk" },
+      { "type": "INTEGER", "mapping": "cr_ship_mode_sk", "name": "cr_ship_mode_sk" },
+      { "type": "INTEGER", "mapping": "cr_warehouse_sk", "name": "cr_warehouse_sk" },
+      { "type": "INTEGER", "mapping": "cr_reason_sk", "name": "cr_reason_sk" },
+      { "type": "INTEGER", "mapping": "cr_order_number", "name": "cr_order_number" },
+      { "type": "INTEGER", "mapping": "cr_return_quantity", "name": "cr_return_quantity" },
+      { "type": "DOUBLE", "mapping": "cr_return_amount", "name": "cr_return_amount" },
+      { "type": "DOUBLE", "mapping": "cr_return_tax", "name": "cr_return_tax" },
+      { "type": "DOUBLE", "mapping": "cr_return_amt_inc_tax", "name": "cr_return_amt_inc_tax" },
+      { "type": "DOUBLE", "mapping": "cr_fee", "name": "cr_fee" },
+      { "type": "DOUBLE", "mapping": "cr_return_ship_cost", "name": "cr_return_ship_cost" },
+      { "type": "DOUBLE", "mapping": "cr_refunded_cash", "name": "cr_refunded_cash" },
+      { "type": "DOUBLE", "mapping": "cr_reversed_charge", "name": "cr_reversed_charge" },
+      { "type": "DOUBLE", "mapping": "cr_store_credit", "name": "cr_store_credit" },
+      { "type": "DOUBLE", "mapping": "cr_net_loss", "name": "cr_net_loss" }
+    ]
+  }
+}

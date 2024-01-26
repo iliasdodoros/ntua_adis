@@ -1,0 +1,37 @@
+{
+  "tableName": "customer",
+  "schemaName": "customer",
+  "key": {
+    "dataFormat": "raw",
+    "fields": [
+      {
+        "name": "redis_key",
+        "type": "VARCHAR(64)",
+        "hidden": "true"
+      }
+    ]
+  },
+  "value": {
+    "dataFormat": "hash",
+    "fields": [
+      { "type": "INTEGER", "mapping": "c_customer_sk", "name": "c_customer_sk" },
+      { "type": "VARCHAR", "mapping": "c_customer_id", "name": "c_customer_id" },
+      { "type": "INTEGER", "mapping": "c_current_cdemo_sk", "name": "c_current_cdemo_sk" },
+      { "type": "INTEGER", "mapping": "c_current_hdemo_sk", "name": "c_current_hdemo_sk" },
+      { "type": "INTEGER", "mapping": "c_current_addr_sk", "name": "c_current_addr_sk" },
+      { "type": "INTEGER", "mapping": "c_first_shipto_date_sk", "name": "c_first_shipto_date_sk" },
+      { "type": "INTEGER", "mapping": "c_first_sales_date_sk", "name": "c_first_sales_date_sk" },
+      { "type": "VARCHAR", "mapping": "c_salutation", "name": "c_salutation" },
+      { "type": "VARCHAR", "mapping": "c_first_name", "name": "c_first_name" },
+      { "type": "VARCHAR", "mapping": "c_last_name", "name": "c_last_name" },
+      { "type": "VARCHAR", "mapping": "c_preferred_cust_flag", "name": "c_preferred_cust_flag" },
+      { "type": "INTEGER", "mapping": "c_birth_day", "name": "c_birth_day" },
+      { "type": "INTEGER", "mapping": "c_birth_month", "name": "c_birth_month" },
+      { "type": "INTEGER", "mapping": "c_birth_year", "name": "c_birth_year" },
+      { "type": "VARCHAR", "mapping": "c_birth_country", "name": "c_birth_country" },
+      { "type": "VARCHAR", "mapping": "c_login", "name": "c_login" },
+      { "type": "VARCHAR", "mapping": "c_email_address", "name": "c_email_address" },
+      { "type": "VARCHAR", "mapping": "c_last_review_date", "name": "c_last_review_date" }
+    ]
+  }
+}

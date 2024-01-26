@@ -1,0 +1,42 @@
+{
+  "tableName": "store_sales",
+  "schemaName": "store_sales",
+  "key": {
+    "dataFormat": "raw",
+    "fields": [
+      {
+        "name": "redis_key",
+        "type": "VARCHAR(64)",
+        "hidden": "true"
+      }
+    ]
+  },
+  "value": {
+    "dataFormat": "hash",
+    "fields": [
+      { "type": "INTEGER", "mapping": "ss_sold_date_sk", "name": "ss_sold_date_sk" },
+      { "type": "INTEGER", "mapping": "ss_sold_time_sk", "name": "ss_sold_time_sk" },
+      { "type": "INTEGER", "mapping": "ss_item_sk", "name": "ss_item_sk" },
+      { "type": "INTEGER", "mapping": "ss_customer_sk", "name": "ss_customer_sk" },
+      { "type": "INTEGER", "mapping": "ss_cdemo_sk", "name": "ss_cdemo_sk" },
+      { "type": "INTEGER", "mapping": "ss_hdemo_sk", "name": "ss_hdemo_sk" },
+      { "type": "INTEGER", "mapping": "ss_addr_sk", "name": "ss_addr_sk" },
+      { "type": "INTEGER", "mapping": "ss_store_sk", "name": "ss_store_sk" },
+      { "type": "INTEGER", "mapping": "ss_promo_sk", "name": "ss_promo_sk" },
+      { "type": "INTEGER", "mapping": "ss_ticket_number", "name": "ss_ticket_number" },
+      { "type": "INTEGER", "mapping": "ss_quantity", "name": "ss_quantity" },
+      { "type": "DOUBLE", "mapping": "ss_wholesale_cost", "name": "ss_wholesale_cost" },
+      { "type": "DOUBLE", "mapping": "ss_list_price", "name": "ss_list_price" },
+      { "type": "DOUBLE", "mapping": "ss_sales_price", "name": "ss_sales_price" },
+      { "type": "DOUBLE", "mapping": "ss_ext_discount_amt", "name": "ss_ext_discount_amt" },
+      { "type": "DOUBLE", "mapping": "ss_ext_sales_price", "name": "ss_ext_sales_price" },
+      { "type": "DOUBLE", "mapping": "ss_ext_wholesale_cost", "name": "ss_ext_wholesale_cost" },
+      { "type": "DOUBLE", "mapping": "ss_ext_list_price", "name": "ss_ext_list_price" },
+      { "type": "DOUBLE", "mapping": "ss_ext_tax", "name": "ss_ext_tax" },
+      { "type": "DOUBLE", "mapping": "ss_coupon_amt", "name": "ss_coupon_amt" },
+      { "type": "DOUBLE", "mapping": "ss_net_paid", "name": "ss_net_paid" },
+      { "type": "DOUBLE", "mapping": "ss_net_paid_inc_tax", "name": "ss_net_paid_inc_tax" },
+      { "type": "DOUBLE", "mapping": "ss_net_profit", "name": "ss_net_profit" }
+    ]
+  }
+}

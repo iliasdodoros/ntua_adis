@@ -1,0 +1,53 @@
+{
+  "tableName": "catalog_sales",
+  "schemaName": "catalog_sales",
+  "key": {
+    "dataFormat": "raw",
+    "fields": [
+      {
+        "name": "redis_key",
+        "type": "VARCHAR(64)",
+        "hidden": "true"
+      }
+    ]
+  },
+  "value": {
+    "dataFormat": "hash",
+    "fields": [
+      { "type": "INTEGER", "mapping": "cs_sold_date_sk", "name": "cs_sold_date_sk" },
+      { "type": "INTEGER", "mapping": "cs_sold_time_sk", "name": "cs_sold_time_sk" },
+      { "type": "INTEGER", "mapping": "cs_ship_date_sk", "name": "cs_ship_date_sk" },
+      { "type": "INTEGER", "mapping": "cs_item_sk", "name": "cs_item_sk" },
+      { "type": "INTEGER", "mapping": "cs_bill_customer_sk", "name": "cs_bill_customer_sk" },
+      { "type": "INTEGER", "mapping": "cs_bill_cdemo_sk", "name": "cs_bill_cdemo_sk" },
+      { "type": "INTEGER", "mapping": "cs_bill_hdemo_sk", "name": "cs_bill_hdemo_sk" },
+      { "type": "INTEGER", "mapping": "cs_bill_addr_sk", "name": "cs_bill_addr_sk" },
+      { "type": "INTEGER", "mapping": "cs_ship_customer_sk", "name": "cs_ship_customer_sk" },
+      { "type": "INTEGER", "mapping": "cs_ship_cdemo_sk", "name": "cs_ship_cdemo_sk" },
+      { "type": "INTEGER", "mapping": "cs_ship_hdemo_sk", "name": "cs_ship_hdemo_sk" },
+      { "type": "INTEGER", "mapping": "cs_ship_addr_sk", "name": "cs_ship_addr_sk" },
+      { "type": "INTEGER", "mapping": "cs_call_center_sk", "name": "cs_call_center_sk" },
+      { "type": "INTEGER", "mapping": "cs_catalog_page_sk", "name": "cs_catalog_page_sk" },
+      { "type": "INTEGER", "mapping": "cs_ship_mode_sk", "name": "cs_ship_mode_sk" },
+      { "type": "INTEGER", "mapping": "cs_warehouse_sk", "name": "cs_warehouse_sk" },
+      { "type": "INTEGER", "mapping": "cs_promo_sk", "name": "cs_promo_sk" },
+      { "type": "INTEGER", "mapping": "cs_order_number", "name": "cs_order_number" },
+      { "type": "INTEGER", "mapping": "cs_quantity", "name": "cs_quantity" },
+      { "type": "DOUBLE", "mapping": "cs_wholesale_cost", "name": "cs_wholesale_cost" },
+      { "type": "DOUBLE", "mapping": "cs_list_price", "name": "cs_list_price" },
+      { "type": "DOUBLE", "mapping": "cs_sales_price", "name": "cs_sales_price" },
+      { "type": "DOUBLE", "mapping": "cs_ext_discount_amt", "name": "cs_ext_discount_amt" },
+      { "type": "DOUBLE", "mapping": "cs_ext_sales_price", "name": "cs_ext_sales_price" },
+      { "type": "DOUBLE", "mapping": "cs_ext_wholesale_cost", "name": "cs_ext_wholesale_cost" },
+      { "type": "DOUBLE", "mapping": "cs_ext_list_price", "name": "cs_ext_list_price" },
+      { "type": "DOUBLE", "mapping": "cs_ext_tax", "name": "cs_ext_tax" },
+      { "type": "DOUBLE", "mapping": "cs_coupon_amt", "name": "cs_coupon_amt" },
+      { "type": "DOUBLE", "mapping": "cs_ext_ship_cost", "name": "cs_ext_ship_cost" },
+      { "type": "DOUBLE", "mapping": "cs_net_paid", "name": "cs_net_paid" },
+      { "type": "DOUBLE", "mapping": "cs_net_paid_inc_tax", "name": "cs_net_paid_inc_tax" },
+      { "type": "DOUBLE", "mapping": "cs_net_paid_inc_ship", "name": "cs_net_paid_inc_ship" },
+      { "type": "DOUBLE", "mapping": "cs_net_paid_inc_ship_tax", "name": "cs_net_paid_inc_ship_tax" },
+      { "type": "DOUBLE", "mapping": "cs_net_profit", "name": "cs_net_profit" }
+    ]
+  }
+}

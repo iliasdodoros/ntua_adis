@@ -1,0 +1,38 @@
+{
+  "tableName": "promotion",
+  "schemaName": "promotion",
+  "key": {
+    "dataFormat": "raw",
+    "fields": [
+      {
+        "name": "redis_key",
+        "type": "VARCHAR(64)",
+        "hidden": "true"
+      }
+    ]
+  },
+  "value": {
+    "dataFormat": "hash",
+    "fields": [
+      { "type": "INTEGER", "mapping": "p_promo_sk", "name": "p_promo_sk" },
+      { "type": "VARCHAR", "mapping": "p_promo_id", "name": "p_promo_id" },
+      { "type": "INTEGER", "mapping": "p_start_date_sk", "name": "p_start_date_sk" },
+      { "type": "INTEGER", "mapping": "p_end_date_sk", "name": "p_end_date_sk" },
+      { "type": "INTEGER", "mapping": "p_item_sk", "name": "p_item_sk" },
+      { "type": "DOUBLE", "mapping": "p_cost", "name": "p_cost" },
+      { "type": "INTEGER", "mapping": "p_response_target", "name": "p_response_target" },
+      { "type": "VARCHAR", "mapping": "p_promo_name", "name": "p_promo_name" },
+      { "type": "VARCHAR", "mapping": "p_channel_dmail", "name": "p_channel_dmail" },
+      { "type": "VARCHAR", "mapping": "p_channel_email", "name": "p_channel_email" },
+      { "type": "VARCHAR", "mapping": "p_channel_catalog", "name": "p_channel_catalog" },
+      { "type": "VARCHAR", "mapping": "p_channel_tv", "name": "p_channel_tv" },
+      { "type": "VARCHAR", "mapping": "p_channel_radio", "name": "p_channel_radio" },
+      { "type": "VARCHAR", "mapping": "p_channel_press", "name": "p_channel_press" },
+      { "type": "VARCHAR", "mapping": "p_channel_event", "name": "p_channel_event" },
+      { "type": "VARCHAR", "mapping": "p_channel_demo", "name": "p_channel_demo" },
+      { "type": "VARCHAR", "mapping": "p_channel_details", "name": "p_channel_details" },
+      { "type": "VARCHAR", "mapping": "p_purpose", "name": "p_purpose" },
+      { "type": "VARCHAR", "mapping": "p_discount_active", "name": "p_discount_active" }
+    ]
+  }
+}

@@ -70,15 +70,15 @@ import_to_cassandra() {
     iconv -f ISO-8859-1 -t UTF-8 "$file_path.temp" -o "$file_path.utf"
     file_path="$file_path.utf"
 
-    scp $file_path user@192.168.2.40:$file_path 
-    ssh user@192.168.2.40 '''cqlsh -e "COPY tpcds.'$table_name' ('$columns') FROM '"'"''$file_path''"'"' WITH DELIMITER='"'"'|'"'"' AND HEADER=false;"'''
+    scp $file_path user@192.168.0.2:$file_path 
+    ssh user@192.168.0.2 '''cqlsh -e "COPY tpcds.'$table_name' ('$columns') FROM '"'"''$file_path''"'"' WITH DELIMITER='"'"'|'"'"' AND HEADER=false;"'''
     rm "$file_path"
     echo "Import complete for $file_path in Cassandra"
 }
 
 # Create keyspace tpcds and all the tables in Cassandra 
 creation_query="$(cat /home/user/ntua_adis/populate/cassandra/pop-cassandra.cql)"
-ssh user@192.168.2.40 '''cqlsh 192.168.2.40 9042 -e "'$creation_query'"'''
+ssh user@192.168.0.2 '''cqlsh 192.168.0.2 9042 -e "'$creation_query'"'''
 
 # Iterate over each .dat file in the directory
 for dat_file in "$DAT_FILES_DIR"/*.dat; do

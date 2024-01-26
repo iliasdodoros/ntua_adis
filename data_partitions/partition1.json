@@ -5,7 +5,7 @@
     "catalog_returns" : "Cassandra",
     "web_sales" : "MongoDB",
     "web_returns" : "MongoDB",
-  //  "inventory" : "Redis",
+    "inventory" : "Redis",
     "store" : "Redis",
     "call_center" : "Cassandra",
     "catalog_page" : "Cassandra",

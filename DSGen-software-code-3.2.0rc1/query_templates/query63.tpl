@@ -62,3 +62,6 @@ order by i_manager_id
         ,sum_sales
 [_LIMITC];
 
+define _END = "";
+define _END = "";
+define _END = "";

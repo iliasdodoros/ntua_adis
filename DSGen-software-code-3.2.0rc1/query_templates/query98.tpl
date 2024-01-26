@@ -68,3 +68,6 @@ order by
         ,i_item_desc
         ,revenueratio;
 
+define _END = "";
+define _END = "";
+define _END = "";

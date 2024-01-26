@@ -86,3 +86,6 @@
        > case when ss2.store_sales > 0 then ss3.store_sales/ss2.store_sales else null end
  order by [AGG];
 
+define _END = "";
+define _END = "";
+define _END = "";

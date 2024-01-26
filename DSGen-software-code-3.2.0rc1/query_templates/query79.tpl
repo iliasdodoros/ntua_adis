@@ -58,3 +58,6 @@
  order by c_last_name,c_first_name,substr(s_city,1,30), profit
 [_LIMITC];
 
+define _END = "";
+define _END = "";
+define _END = "";

@@ -66,3 +66,6 @@ and     hd_buy_potential like '[BUY_POTENTIAL]%'
 and     ca_gmt_offset           = [GMT]
 group by cc_call_center_id,cc_name,cc_manager,cd_marital_status,cd_education_status
 order by sum(cr_net_loss) desc;
+define _END = "";
+define _END = "";
+define _END = "";

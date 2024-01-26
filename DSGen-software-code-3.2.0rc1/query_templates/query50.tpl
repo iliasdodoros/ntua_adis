@@ -94,3 +94,6 @@ order by s_store_name
         ,s_zip
 [_LIMITC];
 
+define _END = "";
+define _END = "";
+define _END = "";

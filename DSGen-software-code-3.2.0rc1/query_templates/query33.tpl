@@ -111,3 +111,6 @@ where i_category in ('[CATEGORY]'))
  group by i_manufact_id
  order by total_sales
 [_LIMITC];
+define _END = "";
+define _END = "";
+define _END = "";

@@ -50,3 +50,6 @@ where ss_sold_time_sk = time_dim.t_time_sk
     and store.s_store_name = 'ese'
 order by count(*)
 [_LIMITC];
+define _END = "";
+define _END = "";
+define _END = "";

@@ -52,3 +52,6 @@ define DMS = random(1176,1224,uniform);
                        ,i_category)
 order by qoh, i_product_name, i_brand, i_class, i_category
 [_LIMITC];
+define _END = "";
+define _END = "";
+define _END = "";

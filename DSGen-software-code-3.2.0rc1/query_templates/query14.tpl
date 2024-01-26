@@ -245,3 +245,6 @@ with  cross_items as
  order by this_year.channel, this_year.i_brand_id, this_year.i_class_id, this_year.i_category_id
  [_LIMITC];
 
+define _END = "";
+define _END = "";
+define _END = "";

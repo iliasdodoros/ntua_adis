@@ -78,3 +78,6 @@ where web_cumulative > store_cumulative
 order by item_sk
         ,d_date
 [_LIMITC];
+define _END = "";
+define _END = "";
+define _END = "";

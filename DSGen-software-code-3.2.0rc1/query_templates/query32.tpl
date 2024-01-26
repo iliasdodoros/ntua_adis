@@ -63,3 +63,6 @@ and cs_ext_discount_amt
       ) 
 [_LIMITC]; 
 
+define _END = "";
+define _END = "";
+define _END = "";

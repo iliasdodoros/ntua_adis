@@ -61,3 +61,6 @@
     w_state,i_item_id
  order by w_state,i_item_id
 [_LIMITC];
+define _END = "";
+define _END = "";
+define _END = "";

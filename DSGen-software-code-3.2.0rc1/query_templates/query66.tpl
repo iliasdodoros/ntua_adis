@@ -259,3 +259,6 @@
  order by w_warehouse_name
  [_LIMITC];
 
+define _END = "";
+define _END = "";
+define _END = "";

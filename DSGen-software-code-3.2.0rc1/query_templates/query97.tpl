@@ -60,3 +60,6 @@ group by cs_bill_customer_sk
 from ssci full outer join csci on (ssci.customer_sk=csci.customer_sk
                                and ssci.item_sk = csci.item_sk)
 [_LIMITC];
+define _END = "";
+define _END = "";
+define _END = "";

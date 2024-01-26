@@ -75,3 +75,6 @@
       and cnt between 15 and 20
     order by c_last_name,c_first_name,c_salutation,c_preferred_cust_flag desc, ss_ticket_number;
 
+define _END = "";
+define _END = "";
+define _END = "";

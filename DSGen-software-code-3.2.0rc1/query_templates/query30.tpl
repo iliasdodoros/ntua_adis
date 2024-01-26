@@ -64,3 +64,6 @@
                   ,c_birth_day,c_birth_month,c_birth_year,c_birth_country,c_login,c_email_address
                   ,c_last_review_date_sk,ctr_total_return
 [_LIMITC];
+define _END = "";
+define _END = "";
+define _END = "";

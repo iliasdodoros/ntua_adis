@@ -65,3 +65,6 @@ and not exists(select *
 order by count(distinct ws_order_number)
 [_LIMITC];
 
+define _END = "";
+define _END = "";
+define _END = "";

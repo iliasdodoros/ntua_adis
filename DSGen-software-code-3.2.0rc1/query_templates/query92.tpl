@@ -66,3 +66,6 @@ and ws_ext_discount_amt
 order by sum(ws_ext_discount_amt)
 [_LIMITC]; 
 
+define _END = "";
+define _END = "";
+define _END = "";

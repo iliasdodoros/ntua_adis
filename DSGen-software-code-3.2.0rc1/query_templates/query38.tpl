@@ -56,3 +56,6 @@ define _LIMIT=100;
 ) hot_cust
 [_LIMITC];
 
+define _END = "";
+define _END = "";
+define _END = "";

@@ -60,3 +60,6 @@
        i_item_sk = sc.ss_item_sk
  order by s_store_name, i_item_desc
 [_LIMITC];
+define _END = "";
+define _END = "";
+define _END = "";

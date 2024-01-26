@@ -62,3 +62,6 @@ order by avg_quarterly_sales,
 	 i_manufact_id
 [_LIMITC];
 
+define _END = "";
+define _END = "";
+define _END = "";

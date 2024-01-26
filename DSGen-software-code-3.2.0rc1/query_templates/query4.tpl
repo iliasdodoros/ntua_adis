@@ -152,3 +152,6 @@ union all
          ,t_s_secyear.customer_last_name
          ,[SELECTONE]
 [_LIMITC];
+define _END = "";
+define _END = "";
+define _END = "";

@@ -60,3 +60,6 @@ and s_state = '[STATE]'
 and ctr1.ctr_customer_sk = c_customer_sk
 order by c_customer_id
 [_LIMITC];
+define _END = "";
+define _END = "";
+define _END = "";

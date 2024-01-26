@@ -51,3 +51,6 @@ define _LIMIT=100;
       group by ss_customer_sk
       order by sumsales, ss_customer_sk
 [_LIMITC];
+define _END = "";
+define _END = "";
+define _END = "";

@@ -106,3 +106,6 @@ where i_color in ('[COLOR.1]','[COLOR.2]','[COLOR.3]'))
  [_LIMITC];
  
 
+define _END = "";
+define _END = "";
+define _END = "";

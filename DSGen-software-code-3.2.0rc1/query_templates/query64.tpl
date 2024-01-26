@@ -155,3 +155,6 @@ order by cs1.product_name
        ,cs2.cnt
        ,cs1.s1
        ,cs2.s1;
+define _END = "";
+define _END = "";
+define _END = "";

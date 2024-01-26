@@ -81,3 +81,6 @@ from
 order by promotions, total
 [_LIMITC];
 
+define _END = "";
+define _END = "";
+define _END = "";

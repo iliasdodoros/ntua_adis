@@ -62,3 +62,6 @@ ORDER BY channel, col_name, d_year, d_qoy, i_category
  
  
 
+define _END = "";
+define _END = "";
+define _END = "";

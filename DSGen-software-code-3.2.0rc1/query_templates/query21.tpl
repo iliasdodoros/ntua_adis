@@ -63,3 +63,6 @@
  order by w_warehouse_name
          ,i_item_id
  [_LIMITC];
+define _END = "";
+define _END = "";
+define _END = "";

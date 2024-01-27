@@ -23,6 +23,7 @@ done
 mkdir -p "$OUT_DIR"
 
 for sql_file in "$QUERIES_DIR"/*.sql; do
+    echo $sql_file
     OUT_FILE="$OUT_DIR/$(basename "$sql_file")"
     echo $OUT_FILE
     # Copy the original file to a new file in the modified directory

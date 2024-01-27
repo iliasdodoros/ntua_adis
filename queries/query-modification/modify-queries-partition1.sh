@@ -21,7 +21,7 @@ for table in "${CASSANDRA_TABLES[@]}"; do
 done
 
 mkdir -p "$OUT_DIR"
-
+rm -r "$OUT_DIR/*"
 for sql_file in "$QUERIES_DIR"/*.sql; do
     echo $sql_file
     OUT_FILE="$OUT_DIR/$(basename "$sql_file")"

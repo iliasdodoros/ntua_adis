@@ -9,15 +9,15 @@ CASSANDRA_TABLES=("catalog_sales" "catalog_returns" "call_center" "warehouse" "d
 declare -A TABLE_MAPPING
 
 for table in "${MONGO_TABLES[@]}"; do
-    TABLE_MAPPING["$table"]="mongodb.tpcds.$table"
+    TABLE_MAPPING["$table"]=mongodb.tpcds.$table
 done
 
 for table in "${REDIS_TABLES[@]}"; do
-    TABLE_MAPPING["$table"]="redis.$table.$table"
+    TABLE_MAPPING["$table"]=redis.$table.$table
 done
 
 for table in "${CASSANDRA_TABLES[@]}"; do
-    TABLE_MAPPING["$table"]="cassandra.tpcds.$table"
+    TABLE_MAPPING["$table"]=cassandra.tpcds.$table
 done
 
 mkdir -p "$OUT_DIR"

@@ -1,6 +1,6 @@
 #!/bin/bash
-QUERIES_DIR="/home/user/ntua-adis/queries/original-queries"
-OUT_DIR="/home/user/ntua-adis/queries/modified-queries"
+QUERIES_DIR="/home/user/ntua_adis/queries/original-queries"
+OUT_DIR="/home/user/ntua_adis/queries/modified-queries"
 
 MONGO_TABLES=("web_sales" "web_returns" "web_site" "web_page" "item" "promotion" "reason" "inventory" "ship_mode")
 REDIS_TABLES=("catalog_page" "store_sales" "store_returns" "store" "customer" "customer_address" "customer_demographics" "household_demographics" "income_band")

@@ -35,6 +35,6 @@ for sql_file in "$QUERIES_DIR"/*.sql; do
 
         echo "$TABLE_OLD -> $TABLE_NEW"
         # sed -i '' "s/$TABLE_OLD/$TABLE_NEW/g" $OUT_FILE
-        sed -i "s/\<$TABLE_OLD\>/u$TABLE_NEW/' $OUT_FILE
+        sed -i "s/\<$TABLE_OLD\>/$TABLE_NEW/g' $OUT_FILE
     done
 done

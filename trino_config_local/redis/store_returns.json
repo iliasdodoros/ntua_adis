@@ -14,8 +14,8 @@
   "value": {
     "dataFormat": "hash",
     "fields": [
-      { "type": "VARCHAR", "mapping": "sr_returned_date_sk", "name": "sr_returned_date_sk" },
-      { "type": "VARCHAR", "mapping": "sr_return_time_sk", "name": "sr_return_time_sk" },
+      { "type": "INTEGER", "mapping": "sr_returned_date_sk", "name": "sr_returned_date_sk" },
+      { "type": "INTEGER", "mapping": "sr_return_time_sk", "name": "sr_return_time_sk" },
       { "type": "INTEGER", "mapping": "sr_item_sk", "name": "sr_item_sk" },
       { "type": "INTEGER", "mapping": "sr_customer_sk", "name": "sr_customer_sk" },
       { "type": "INTEGER", "mapping": "sr_cdemo_sk", "name": "sr_cdemo_sk" },

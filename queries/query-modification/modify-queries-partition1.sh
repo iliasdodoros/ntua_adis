@@ -34,6 +34,6 @@ for sql_file in "$QUERIES_DIR"/*.sql; do
         TABLE_NEW="${TABLE_MAPPING[$table]}"
 
         echo "$TABLE_OLD -> $TABLE_NEW"
-        sed -i '' "s/[[:<:]]$TABLE_OLD[[:>:]]/$TABLE_NEW/g" $OUT_FILE
+        sed -i $OUT_FILE "s/[[:<:]]$TABLE_OLD[[:>:]]/$TABLE_NEW/g" $OUT_FILE
     done
 done

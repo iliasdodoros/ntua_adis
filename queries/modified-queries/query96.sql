@@ -12,5 +12,3 @@ where ss_sold_time_sk = cassandra.tpcds.time_dim.t_time_sk
     and mongodb.tpcds.store.s_store_name = 'ese'
 order by count(*)
 limit 100;
-
-

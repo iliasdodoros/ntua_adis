@@ -3,7 +3,7 @@ with frequent_ss_items as
  (select substr(i_item_desc,1,30) itemdesc,i_item_sk item_sk,d_date solddate,count(*) cnt
   from mongodb.tpcds.store_sales
       ,cassandra.tpcds.date_dim 
-      ,mongodb.tpcds.item
+      ,redis.item.item
   where ss_sold_date_sk = d_date_sk
     and ss_item_sk = i_item_sk 
     and d_year in (1999,1999+1,1999+2,1999+3)
@@ -52,7 +52,7 @@ with frequent_ss_items as
  (select substr(i_item_desc,1,30) itemdesc,i_item_sk item_sk,d_date solddate,count(*) cnt
   from mongodb.tpcds.store_sales
       ,cassandra.tpcds.date_dim
-      ,mongodb.tpcds.item
+      ,redis.item.item
   where ss_sold_date_sk = d_date_sk
     and ss_item_sk = i_item_sk
     and d_year in (1999,1999 + 1,1999 + 2,1999 + 3)

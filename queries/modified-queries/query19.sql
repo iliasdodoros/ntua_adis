@@ -1,7 +1,7 @@
 
 select  i_brand_id brand_id, i_brand brand, i_manufact_id, i_manufact,
  	sum(ss_ext_sales_price) ext_price
- from cassandra.tpcds.date_dim, mongodb.tpcds.store_sales, mongodb.tpcds.item,redis.customer.customer,redis.customer_address.customer_address,mongodb.tpcds.store
+ from cassandra.tpcds.date_dim, mongodb.tpcds.store_sales, redis.item.item,redis.customer.customer,redis.customer_address.customer_address,mongodb.tpcds.store
  where d_date_sk = ss_sold_date_sk
    and ss_item_sk = i_item_sk
    and i_manager_id=7

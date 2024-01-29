@@ -5,7 +5,7 @@ with inv as
  from(select w_warehouse_name,w_warehouse_sk,i_item_sk,d_moy
             ,stddev_samp(inv_quantity_on_hand) stdev,avg(inv_quantity_on_hand) mean
       from mongodb.tpcds.inventory
-          ,mongodb.tpcds.item
+          ,redis.item.item
           ,cassandra.tpcds.warehouse
           ,cassandra.tpcds.date_dim
       where inv_item_sk = i_item_sk
@@ -30,7 +30,7 @@ with inv as
  from(select w_warehouse_name,w_warehouse_sk,i_item_sk,d_moy
             ,stddev_samp(inv_quantity_on_hand) stdev,avg(inv_quantity_on_hand) mean
       from mongodb.tpcds.inventory
-          ,mongodb.tpcds.item
+          ,redis.item.item
           ,cassandra.tpcds.warehouse
           ,cassandra.tpcds.date_dim
       where inv_item_sk = i_item_sk

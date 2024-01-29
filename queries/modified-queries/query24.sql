@@ -14,7 +14,7 @@ with ssales as
 from mongodb.tpcds.store_sales
     ,mongodb.tpcds.store_returns
     ,mongodb.tpcds.store
-    ,mongodb.tpcds.item
+    ,redis.item.item
     ,redis.customer.customer
     ,redis.customer_address.customer_address
 where ss_ticket_number = sr_ticket_number
@@ -66,7 +66,7 @@ with ssales as
 from mongodb.tpcds.store_sales
     ,mongodb.tpcds.store_returns
     ,mongodb.tpcds.store
-    ,mongodb.tpcds.item
+    ,redis.item.item
     ,redis.customer.customer
     ,redis.customer_address.customer_address
 where ss_ticket_number = sr_ticket_number

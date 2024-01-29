@@ -22,7 +22,7 @@ from (select i_category
             from mongodb.tpcds.store_sales
                 ,cassandra.tpcds.date_dim
                 ,mongodb.tpcds.store
-                ,mongodb.tpcds.item
+                ,redis.item.item
        where  ss_sold_date_sk=d_date_sk
           and ss_item_sk=i_item_sk
           and ss_store_sk = s_store_sk

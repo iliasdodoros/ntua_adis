@@ -9,7 +9,7 @@ select i_item_id
           (partition by i_class) as revenueratio
 from	
 	mongodb.tpcds.store_sales
-    	,mongodb.tpcds.item 
+    	,redis.item.item 
     	,cassandra.tpcds.date_dim
 where 
 	ss_item_sk = i_item_sk 

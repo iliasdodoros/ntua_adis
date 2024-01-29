@@ -15,7 +15,7 @@ select
    ,cassandra.tpcds.date_dim             d2
    ,cassandra.tpcds.date_dim             d3
    ,mongodb.tpcds.store
-   ,mongodb.tpcds.item
+   ,redis.item.item
  where
      d1.d_moy               = 4 
  and d1.d_year              = 1999

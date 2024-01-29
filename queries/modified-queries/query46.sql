@@ -16,11 +16,11 @@ select  c_last_name
     and mongodb.tpcds.store_sales.ss_store_sk = mongodb.tpcds.store.s_store_sk  
     and mongodb.tpcds.store_sales.ss_hdemo_sk = redis.household_demographics.household_demographics.hd_demo_sk
     and mongodb.tpcds.store_sales.ss_addr_sk = redis.customer_address.customer_address.ca_address_sk
-    and (redis.household_demographics.household_demographics.hd_dep_count = 9 or
-         redis.household_demographics.household_demographics.hd_vehicle_count= 0)
+    and (redis.household_demographics.household_demographics.hd_dep_count = 4 or
+         redis.household_demographics.household_demographics.hd_vehicle_count= 3)
     and cassandra.tpcds.date_dim.d_dow in (6,0)
     and cassandra.tpcds.date_dim.d_year in (1999,1999+1,1999+2) 
-    and mongodb.tpcds.store.s_city in ('Oak Grove','Fairview','Midway','Five Points','Fairview') 
+    and mongodb.tpcds.store.s_city in ('Fairview','Midway','Oak Grove','Midway','Fairview') 
     group by ss_ticket_number,ss_customer_sk,ss_addr_sk,ca_city) dn,redis.customer.customer,redis.customer_address.customer_address current_addr
     where ss_customer_sk = c_customer_sk
       and redis.customer.customer.c_current_addr_sk = current_addr.ca_address_sk

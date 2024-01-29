@@ -11,15 +11,15 @@ select
  from
     mongodb.tpcds.store_sales
    ,cassandra.tpcds.date_dim       d1
-   ,mongodb.tpcds.item
+   ,redis.item.item
    ,mongodb.tpcds.store
  where
-    d1.d_year = 2001 
+    d1.d_year = 2000 
  and d1.d_date_sk = ss_sold_date_sk
  and i_item_sk  = ss_item_sk 
  and s_store_sk  = ss_store_sk
- and s_state in ('TN','SD','SD','TN',
-                 'SD','SD','SD','SD')
+ and s_state in ('TN','TN','TN','TN',
+                 'TN','TN','TN','TN')
  group by rollup(i_category,i_class)
  order by
    lochierarchy desc

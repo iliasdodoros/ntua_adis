@@ -3,7 +3,7 @@ select
    sum(ws_ext_discount_amt)  as "Excess Discount Amount" 
 from 
     mongodb.tpcds.web_sales 
-   ,mongodb.tpcds.item 
+   ,redis.item.item 
    ,cassandra.tpcds.date_dim
 where
 i_manufact_id = 269

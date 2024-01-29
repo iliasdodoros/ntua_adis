@@ -1,20 +1,20 @@
 
-select  channel, mongodb.tpcds.item, return_ratio, return_rank, currency_rank from
+select  channel, redis.item.item, return_ratio, return_rank, currency_rank from
  (select
  'web' as channel
- ,web.mongodb.tpcds.item
+ ,web.redis.item.item
  ,web.return_ratio
  ,web.return_rank
  ,web.currency_rank
  from (
  	select 
- 	 mongodb.tpcds.item
+ 	 redis.item.item
  	,return_ratio
  	,currency_ratio
  	,rank() over (order by return_ratio) as return_rank
  	,rank() over (order by currency_ratio) as currency_rank
  	from
- 	(	select ws.ws_item_sk as mongodb.tpcds.item
+ 	(	select ws.ws_item_sk as redis.item.item
  		,(cast(sum(coalesce(wr.wr_return_quantity,0)) as decimal(15,4))/
  		cast(sum(coalesce(ws.ws_quantity,0)) as decimal(15,4) )) as return_ratio
  		,(cast(sum(coalesce(wr.wr_return_amt,0)) as decimal(15,4))/
@@ -44,20 +44,20 @@ select  channel, mongodb.tpcds.item, return_ratio, return_rank, currency_rank fr
  union
  select 
  'catalog' as channel
- ,catalog.mongodb.tpcds.item
+ ,catalog.redis.item.item
  ,catalog.return_ratio
  ,catalog.return_rank
  ,catalog.currency_rank
  from (
  	select 
- 	 mongodb.tpcds.item
+ 	 redis.item.item
  	,return_ratio
  	,currency_ratio
  	,rank() over (order by return_ratio) as return_rank
  	,rank() over (order by currency_ratio) as currency_rank
  	from
  	(	select 
- 		cs.cs_item_sk as mongodb.tpcds.item
+ 		cs.cs_item_sk as redis.item.item
  		,(cast(sum(coalesce(cr.cr_return_quantity,0)) as decimal(15,4))/
  		cast(sum(coalesce(cs.cs_quantity,0)) as decimal(15,4) )) as return_ratio
  		,(cast(sum(coalesce(cr.cr_return_amount,0)) as decimal(15,4))/
@@ -87,19 +87,19 @@ select  channel, mongodb.tpcds.item, return_ratio, return_rank, currency_rank fr
  union
  select 
  'mongodb.tpcds.store' as channel
- ,mongodb.tpcds.store.mongodb.tpcds.item
+ ,mongodb.tpcds.store.redis.item.item
  ,mongodb.tpcds.store.return_ratio
  ,mongodb.tpcds.store.return_rank
  ,mongodb.tpcds.store.currency_rank
  from (
  	select 
- 	 mongodb.tpcds.item
+ 	 redis.item.item
  	,return_ratio
  	,currency_ratio
  	,rank() over (order by return_ratio) as return_rank
  	,rank() over (order by currency_ratio) as currency_rank
  	from
- 	(	select sts.ss_item_sk as mongodb.tpcds.item
+ 	(	select sts.ss_item_sk as redis.item.item
  		,(cast(sum(coalesce(sr.sr_return_quantity,0)) as decimal(15,4))/cast(sum(coalesce(sts.ss_quantity,0)) as decimal(15,4) )) as return_ratio
  		,(cast(sum(coalesce(sr.sr_return_amt,0)) as decimal(15,4))/cast(sum(coalesce(sts.ss_net_paid,0)) as decimal(15,4) )) as currency_ratio
  		from 

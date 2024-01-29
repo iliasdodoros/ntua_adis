@@ -11,7 +11,7 @@ select
  from
     mongodb.tpcds.web_sales
    ,cassandra.tpcds.date_dim       d1
-   ,mongodb.tpcds.item
+   ,redis.item.item
  where
     d1.d_month_seq between 1212 and 1212+11
  and d1.d_date_sk = ws_sold_date_sk

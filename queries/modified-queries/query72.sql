@@ -8,7 +8,7 @@ select  i_item_desc
 from cassandra.tpcds.catalog_sales
 join mongodb.tpcds.inventory on (cs_item_sk = inv_item_sk)
 join cassandra.tpcds.warehouse on (w_warehouse_sk=inv_warehouse_sk)
-join mongodb.tpcds.item on (i_item_sk = cs_item_sk)
+join redis.item.item on (i_item_sk = cs_item_sk)
 join redis.customer_demographics.customer_demographics on (cs_bill_cdemo_sk = cd_demo_sk)
 join redis.household_demographics.household_demographics on (cs_bill_hdemo_sk = hd_demo_sk)
 join cassandra.tpcds.date_dim d1 on (cs_sold_date_sk = d1.d_date_sk)

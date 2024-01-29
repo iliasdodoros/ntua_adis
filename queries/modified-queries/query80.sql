@@ -8,11 +8,11 @@ with ssr as
          (ss_item_sk = sr_item_sk and ss_ticket_number = sr_ticket_number),
      cassandra.tpcds.date_dim,
      mongodb.tpcds.store,
-     mongodb.tpcds.item,
+     redis.item.item,
      redis.promotion.promotion
  where ss_sold_date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date) 
-                  and (cast('1998-08-04' as date) +  interval '30' day)
+                  and (cast('1998-08-04' as date) +  30 days)
        and ss_store_sk = s_store_sk
        and ss_item_sk = i_item_sk
        and i_current_price > 50
@@ -29,11 +29,11 @@ with ssr as
          (cs_item_sk = cr_item_sk and cs_order_number = cr_order_number),
      cassandra.tpcds.date_dim,
      cassandra.tpcds.catalog_page,
-     mongodb.tpcds.item,
+     redis.item.item,
      redis.promotion.promotion
  where cs_sold_date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date)
-                  and (cast('1998-08-04' as date) +  interval '30' day)
+                  and (cast('1998-08-04' as date) +  30 days)
         and cs_catalog_page_sk = cp_catalog_page_sk
        and cs_item_sk = i_item_sk
        and i_current_price > 50
@@ -50,11 +50,11 @@ group by cp_catalog_page_id)
          (ws_item_sk = wr_item_sk and ws_order_number = wr_order_number),
      cassandra.tpcds.date_dim,
      mongodb.tpcds.web_site,
-     mongodb.tpcds.item,
+     redis.item.item,
      redis.promotion.promotion
  where ws_sold_date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date)
-                  and (cast('1998-08-04' as date) +  interval '30' day)
+                  and (cast('1998-08-04' as date) +  30 days)
         and ws_web_site_sk = web_site_sk
        and ws_item_sk = i_item_sk
        and i_current_price > 50

@@ -11,7 +11,7 @@ select  i_item_id,
         avg( cast(c_birth_year as decimal(12,2))) agg6,
         avg( cast(cd1.cd_dep_count as decimal(12,2))) agg7
  from cassandra.tpcds.catalog_sales, redis.customer_demographics.customer_demographics cd1, 
-      redis.customer_demographics.customer_demographics cd2, redis.customer.customer, redis.customer_address.customer_address, cassandra.tpcds.date_dim, mongodb.tpcds.item
+      redis.customer_demographics.customer_demographics cd2, redis.customer.customer, redis.customer_address.customer_address, cassandra.tpcds.date_dim, redis.item.item
  where cs_sold_date_sk = d_date_sk and
        cs_item_sk = i_item_sk and
        cs_bill_cdemo_sk = cd1.cd_demo_sk and

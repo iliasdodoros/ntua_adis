@@ -13,7 +13,7 @@ with my_customers as (
                  ws_item_sk item_sk
           from   mongodb.tpcds.web_sales
          ) cs_or_ws_sales,
-         mongodb.tpcds.item,
+         redis.item.item,
          cassandra.tpcds.date_dim,
          redis.customer.customer
  where   sold_date_sk = d_date_sk

@@ -3,7 +3,7 @@ select  *
 from (select i_manager_id
              ,sum(ss_sales_price) sum_sales
              ,avg(sum(ss_sales_price)) over (partition by i_manager_id) avg_monthly_sales
-      from mongodb.tpcds.item
+      from redis.item.item
           ,mongodb.tpcds.store_sales
           ,cassandra.tpcds.date_dim
           ,mongodb.tpcds.store

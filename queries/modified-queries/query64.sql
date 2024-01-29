@@ -45,7 +45,7 @@ cross_sales as
         ,redis.customer_address.customer_address ad2
         ,redis.income_band.income_band ib1
         ,redis.income_band.income_band ib2
-        ,mongodb.tpcds.item
+        ,redis.item.item
   WHERE  ss_store_sk = s_store_sk AND
          ss_sold_date_sk = d1.d_date_sk AND
          ss_customer_sk = c_customer_sk AND

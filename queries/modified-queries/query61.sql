@@ -8,7 +8,7 @@ from
         ,cassandra.tpcds.date_dim
         ,redis.customer.customer
         ,redis.customer_address.customer_address 
-        ,mongodb.tpcds.item
+        ,redis.item.item
    where ss_sold_date_sk = d_date_sk
    and   ss_store_sk = s_store_sk
    and   ss_promo_sk = p_promo_sk
@@ -27,7 +27,7 @@ from
         ,cassandra.tpcds.date_dim
         ,redis.customer.customer
         ,redis.customer_address.customer_address
-        ,mongodb.tpcds.item
+        ,redis.item.item
    where ss_sold_date_sk = d_date_sk
    and   ss_store_sk = s_store_sk
    and   ss_customer_sk= c_customer_sk

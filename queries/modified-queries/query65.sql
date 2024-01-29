@@ -6,7 +6,7 @@ select
 	i_current_price,
 	i_wholesale_cost,
 	i_brand
- from mongodb.tpcds.store, mongodb.tpcds.item,
+ from mongodb.tpcds.store, redis.item.item,
      (select ss_store_sk, avg(revenue) as ave
  	from
  	    (select  ss_store_sk, ss_item_sk, 

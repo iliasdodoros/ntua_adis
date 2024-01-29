@@ -3,7 +3,7 @@ with sr_items as
  (select i_item_id item_id,
         sum(sr_return_quantity) sr_item_qty
  from mongodb.tpcds.store_returns,
-      mongodb.tpcds.item,
+      redis.item.item,
       cassandra.tpcds.date_dim
  where sr_item_sk = i_item_sk
  and   d_date    in 
@@ -19,7 +19,7 @@ with sr_items as
  (select i_item_id item_id,
         sum(cr_return_quantity) cr_item_qty
  from cassandra.tpcds.catalog_returns,
-      mongodb.tpcds.item,
+      redis.item.item,
       cassandra.tpcds.date_dim
  where cr_item_sk = i_item_sk
  and   d_date    in 
@@ -35,7 +35,7 @@ with sr_items as
  (select i_item_id item_id,
         sum(wr_return_quantity) wr_item_qty
  from mongodb.tpcds.web_returns,
-      mongodb.tpcds.item,
+      redis.item.item,
       cassandra.tpcds.date_dim
  where wr_item_sk = i_item_sk
  and   d_date    in 

@@ -20,7 +20,7 @@ select  i_item_id
      ,cassandra.tpcds.date_dim d2
      ,cassandra.tpcds.date_dim d3
      ,mongodb.tpcds.store
-     ,mongodb.tpcds.item
+     ,redis.item.item
  where d1.d_quarter_name = '1998Q1'
    and d1.d_date_sk = ss_sold_date_sk
    and i_item_sk = ss_item_sk

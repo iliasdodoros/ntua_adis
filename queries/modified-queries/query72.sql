@@ -14,7 +14,7 @@ join redis.household_demographics.household_demographics on (cs_bill_hdemo_sk = 
 join cassandra.tpcds.date_dim d1 on (cs_sold_date_sk = d1.d_date_sk)
 join cassandra.tpcds.date_dim d2 on (inv_date_sk = d2.d_date_sk)
 join cassandra.tpcds.date_dim d3 on (cs_ship_date_sk = d3.d_date_sk)
-left outer join mongodb.tpcds.promotion on (cs_promo_sk=p_promo_sk)
+left outer join redis.promotion.promotion on (cs_promo_sk=p_promo_sk)
 left outer join cassandra.tpcds.catalog_returns on (cr_item_sk = cs_item_sk and cr_order_number = cs_order_number)
 where d1.d_week_seq = d2.d_week_seq
   and inv_quantity_on_hand < cs_quantity 

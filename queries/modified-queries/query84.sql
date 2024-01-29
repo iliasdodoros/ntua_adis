@@ -6,7 +6,7 @@ select  c_customer_id as customer_id
      ,redis.customer_demographics.customer_demographics
      ,redis.household_demographics.household_demographics
      ,redis.income_band.income_band
-     ,redis.store_returns.store_returns
+     ,mongodb.tpcds.store_returns
  where ca_city	        =  'Hopewell'
    and c_current_addr_sk = ca_address_sk
    and ib_lower_bound   >=  32287

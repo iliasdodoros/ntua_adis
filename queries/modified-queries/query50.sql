@@ -19,9 +19,9 @@ select
                  (sr_returned_date_sk - ss_sold_date_sk <= 120) then 1 else 0 end)  as "91-120 days" 
   ,sum(case when (sr_returned_date_sk - ss_sold_date_sk  > 120) then 1 else 0 end)  as ">120 days" 
 from
-   redis.store_sales.store_sales
-  ,redis.store_returns.store_returns
-  ,redis.store.store
+   mongodb.tpcds.store_sales
+  ,mongodb.tpcds.store_returns
+  ,mongodb.tpcds.store
   ,cassandra.tpcds.date_dim d1
   ,cassandra.tpcds.date_dim d2
 where

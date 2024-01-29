@@ -11,7 +11,7 @@ with year_total as (
        ,sum(((ss_ext_list_price-ss_ext_wholesale_cost-ss_ext_discount_amt)+ss_ext_sales_price)/2) year_total
        ,'s' sale_type
  from redis.customer.customer
-     ,redis.store_sales.store_sales
+     ,mongodb.tpcds.store_sales
      ,cassandra.tpcds.date_dim
  where c_customer_sk = ss_customer_sk
    and ss_sold_date_sk = d_date_sk

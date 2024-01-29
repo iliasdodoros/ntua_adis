@@ -2,7 +2,7 @@
 with ss as (
  select i_item_id,sum(ss_ext_sales_price) total_sales
  from
- 	redis.store_sales.store_sales,
+ 	mongodb.tpcds.store_sales,
  	cassandra.tpcds.date_dim,
          redis.customer_address.customer_address,
          mongodb.tpcds.item

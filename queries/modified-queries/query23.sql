@@ -1,7 +1,7 @@
 
 with frequent_ss_items as 
  (select substr(i_item_desc,1,30) itemdesc,i_item_sk item_sk,d_date solddate,count(*) cnt
-  from redis.store_sales.store_sales
+  from mongodb.tpcds.store_sales
       ,cassandra.tpcds.date_dim 
       ,mongodb.tpcds.item
   where ss_sold_date_sk = d_date_sk
@@ -12,7 +12,7 @@ with frequent_ss_items as
  max_store_sales as
  (select max(csales) tpcds_cmax 
   from (select c_customer_sk,sum(ss_quantity*ss_sales_price) csales
-        from redis.store_sales.store_sales
+        from mongodb.tpcds.store_sales
             ,redis.customer.customer
             ,cassandra.tpcds.date_dim 
         where ss_customer_sk = c_customer_sk
@@ -21,7 +21,7 @@ with frequent_ss_items as
         group by c_customer_sk)),
  best_ss_customer as
  (select c_customer_sk,sum(ss_quantity*ss_sales_price) ssales
-  from redis.store_sales.store_sales
+  from mongodb.tpcds.store_sales
       ,redis.customer.customer
   where ss_customer_sk = c_customer_sk
   group by c_customer_sk
@@ -50,7 +50,7 @@ from
  limit 100;
 with frequent_ss_items as
  (select substr(i_item_desc,1,30) itemdesc,i_item_sk item_sk,d_date solddate,count(*) cnt
-  from redis.store_sales.store_sales
+  from mongodb.tpcds.store_sales
       ,cassandra.tpcds.date_dim
       ,mongodb.tpcds.item
   where ss_sold_date_sk = d_date_sk
@@ -61,7 +61,7 @@ with frequent_ss_items as
  max_store_sales as
  (select max(csales) tpcds_cmax
   from (select c_customer_sk,sum(ss_quantity*ss_sales_price) csales
-        from redis.store_sales.store_sales
+        from mongodb.tpcds.store_sales
             ,redis.customer.customer
             ,cassandra.tpcds.date_dim 
         where ss_customer_sk = c_customer_sk
@@ -70,7 +70,7 @@ with frequent_ss_items as
         group by c_customer_sk)),
  best_ss_customer as
  (select c_customer_sk,sum(ss_quantity*ss_sales_price) ssales
-  from redis.store_sales.store_sales
+  from mongodb.tpcds.store_sales
       ,redis.customer.customer
   where ss_customer_sk = c_customer_sk
   group by c_customer_sk

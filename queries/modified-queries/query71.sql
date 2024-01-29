@@ -23,7 +23,7 @@ select i_brand_id brand_id, i_brand brand,t_hour,t_minute,
                         ss_sold_date_sk as sold_date_sk,
                         ss_item_sk as sold_item_sk,
                         ss_sold_time_sk as time_sk
-                 from redis.store_sales.store_sales,cassandra.tpcds.date_dim
+                 from mongodb.tpcds.store_sales,cassandra.tpcds.date_dim
                  where d_date_sk = ss_sold_date_sk
                    and d_moy=12
                    and d_year=2000

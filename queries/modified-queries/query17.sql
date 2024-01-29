@@ -13,13 +13,13 @@ select  i_item_id
        ,count(cs_quantity) as catalog_sales_quantitycount ,avg(cs_quantity) as catalog_sales_quantityave
        ,stddev_samp(cs_quantity) as catalog_sales_quantitystdev
        ,stddev_samp(cs_quantity)/avg(cs_quantity) as catalog_sales_quantitycov
- from redis.store_sales.store_sales
-     ,redis.store_returns.store_returns
+ from mongodb.tpcds.store_sales
+     ,mongodb.tpcds.store_returns
      ,cassandra.tpcds.catalog_sales
      ,cassandra.tpcds.date_dim d1
      ,cassandra.tpcds.date_dim d2
      ,cassandra.tpcds.date_dim d3
-     ,redis.store.store
+     ,mongodb.tpcds.store
      ,mongodb.tpcds.item
  where d1.d_quarter_name = '1998Q1'
    and d1.d_date_sk = ss_sold_date_sk

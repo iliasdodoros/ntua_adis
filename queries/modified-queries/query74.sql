@@ -7,7 +7,7 @@ with year_total as (
        ,max(ss_net_paid) year_total
        ,'s' sale_type
  from redis.customer.customer
-     ,redis.store_sales.store_sales
+     ,mongodb.tpcds.store_sales
      ,cassandra.tpcds.date_dim
  where c_customer_sk = ss_customer_sk
    and ss_sold_date_sk = d_date_sk

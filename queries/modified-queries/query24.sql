@@ -11,9 +11,9 @@ with ssales as
       ,i_units
       ,i_size
       ,sum(ss_sales_price) netpaid
-from redis.store_sales.store_sales
-    ,redis.store_returns.store_returns
-    ,redis.store.store
+from mongodb.tpcds.store_sales
+    ,mongodb.tpcds.store_returns
+    ,mongodb.tpcds.store
     ,mongodb.tpcds.item
     ,redis.customer.customer
     ,redis.customer_address.customer_address
@@ -63,9 +63,9 @@ with ssales as
       ,i_units
       ,i_size
       ,sum(ss_sales_price) netpaid
-from redis.store_sales.store_sales
-    ,redis.store_returns.store_returns
-    ,redis.store.store
+from mongodb.tpcds.store_sales
+    ,mongodb.tpcds.store_returns
+    ,mongodb.tpcds.store
     ,mongodb.tpcds.item
     ,redis.customer.customer
     ,redis.customer_address.customer_address

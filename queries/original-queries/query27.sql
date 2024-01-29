@@ -11,10 +11,10 @@ select  i_item_id,
        ss_store_sk = s_store_sk and
        ss_cdemo_sk = cd_demo_sk and
        cd_gender = 'M' and
-       cd_marital_status = 'M' and
-       cd_education_status = '4 yr Degree' and
+       cd_marital_status = 'S' and
+       cd_education_status = 'College' and
        d_year = 2002 and
-       s_state in ('SD','TN', 'AL', 'TN', 'SD', 'SD')
+       s_state in ('TN','SD', 'SD', 'TN', 'SD', 'SD')
  group by rollup (i_item_id, s_state)
  order by i_item_id
          ,s_state

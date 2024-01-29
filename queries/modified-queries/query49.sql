@@ -86,11 +86,11 @@ select  channel, mongodb.tpcds.item, return_ratio, return_rank, currency_rank fr
  )
  union
  select 
- 'redis.store.store' as channel
- ,redis.store.store.mongodb.tpcds.item
- ,redis.store.store.return_ratio
- ,redis.store.store.return_rank
- ,redis.store.store.currency_rank
+ 'mongodb.tpcds.store' as channel
+ ,mongodb.tpcds.store.mongodb.tpcds.item
+ ,mongodb.tpcds.store.return_ratio
+ ,mongodb.tpcds.store.return_rank
+ ,mongodb.tpcds.store.currency_rank
  from (
  	select 
  	 mongodb.tpcds.item
@@ -103,7 +103,7 @@ select  channel, mongodb.tpcds.item, return_ratio, return_rank, currency_rank fr
  		,(cast(sum(coalesce(sr.sr_return_quantity,0)) as decimal(15,4))/cast(sum(coalesce(sts.ss_quantity,0)) as decimal(15,4) )) as return_ratio
  		,(cast(sum(coalesce(sr.sr_return_amt,0)) as decimal(15,4))/cast(sum(coalesce(sts.ss_net_paid,0)) as decimal(15,4) )) as currency_ratio
  		from 
- 		redis.store_sales.store_sales sts left outer join redis.store_returns.store_returns sr
+ 		mongodb.tpcds.store_sales sts left outer join mongodb.tpcds.store_returns sr
  			on (sts.ss_ticket_number = sr.sr_ticket_number and sts.ss_item_sk = sr.sr_item_sk)
                 ,cassandra.tpcds.date_dim
  		where 
@@ -116,11 +116,11 @@ select  channel, mongodb.tpcds.item, return_ratio, return_rank, currency_rank fr
                          and d_moy = 12
  		group by sts.ss_item_sk
  	) in_store
- ) redis.store.store
+ ) mongodb.tpcds.store
  where  (
- redis.store.store.return_rank <= 10
+ mongodb.tpcds.store.return_rank <= 10
  or 
- redis.store.store.currency_rank <= 10
+ mongodb.tpcds.store.currency_rank <= 10
  )
  )
  order by 1,4,5,2

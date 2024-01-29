@@ -8,13 +8,13 @@ select
     ,sum(sr_return_quantity) as store_returns_quantity
     ,sum(cs_quantity)        as catalog_sales_quantity
  from
-    redis.store_sales.store_sales
-   ,redis.store_returns.store_returns
+    mongodb.tpcds.store_sales
+   ,mongodb.tpcds.store_returns
    ,cassandra.tpcds.catalog_sales
    ,cassandra.tpcds.date_dim             d1
    ,cassandra.tpcds.date_dim             d2
    ,cassandra.tpcds.date_dim             d3
-   ,redis.store.store
+   ,mongodb.tpcds.store
    ,mongodb.tpcds.item
  where
      d1.d_moy               = 4 

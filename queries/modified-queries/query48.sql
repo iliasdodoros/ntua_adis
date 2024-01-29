@@ -1,6 +1,6 @@
 
 select sum (ss_quantity)
- from redis.store_sales.store_sales, redis.store.store, redis.customer_demographics.customer_demographics, redis.customer_address.customer_address, cassandra.tpcds.date_dim
+ from mongodb.tpcds.store_sales, mongodb.tpcds.store, redis.customer_demographics.customer_demographics, redis.customer_address.customer_address, cassandra.tpcds.date_dim
  where s_store_sk = ss_store_sk
  and  ss_sold_date_sk = d_date_sk and d_year = 1998
  and  

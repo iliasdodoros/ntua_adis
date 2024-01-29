@@ -28,17 +28,17 @@ cross_sales as
      ,sum(ss_wholesale_cost) s1
      ,sum(ss_list_price) s2
      ,sum(ss_coupon_amt) s3
-  FROM   redis.store_sales.store_sales
-        ,redis.store_returns.store_returns
+  FROM   mongodb.tpcds.store_sales
+        ,mongodb.tpcds.store_returns
         ,cs_ui
         ,cassandra.tpcds.date_dim d1
         ,cassandra.tpcds.date_dim d2
         ,cassandra.tpcds.date_dim d3
-        ,redis.store.store
+        ,mongodb.tpcds.store
         ,redis.customer.customer
         ,redis.customer_demographics.customer_demographics cd1
         ,redis.customer_demographics.customer_demographics cd2
-        ,mongodb.tpcds.promotion
+        ,redis.promotion.promotion
         ,redis.household_demographics.household_demographics hd1
         ,redis.household_demographics.household_demographics hd2
         ,redis.customer_address.customer_address ad1

@@ -6,17 +6,17 @@ select
 	i_current_price,
 	i_wholesale_cost,
 	i_brand
- from redis.store.store, mongodb.tpcds.item,
+ from mongodb.tpcds.store, mongodb.tpcds.item,
      (select ss_store_sk, avg(revenue) as ave
  	from
  	    (select  ss_store_sk, ss_item_sk, 
  		     sum(ss_sales_price) as revenue
- 		from redis.store_sales.store_sales, cassandra.tpcds.date_dim
+ 		from mongodb.tpcds.store_sales, cassandra.tpcds.date_dim
  		where ss_sold_date_sk = d_date_sk and d_month_seq between 1212 and 1212+11
  		group by ss_store_sk, ss_item_sk) sa
  	group by ss_store_sk) sb,
      (select  ss_store_sk, ss_item_sk, sum(ss_sales_price) as revenue
- 	from redis.store_sales.store_sales, cassandra.tpcds.date_dim
+ 	from mongodb.tpcds.store_sales, cassandra.tpcds.date_dim
  	where ss_sold_date_sk = d_date_sk and d_month_seq between 1212 and 1212+11
  	group by ss_store_sk, ss_item_sk) sc
  where sb.ss_store_sk = sc.ss_store_sk and 

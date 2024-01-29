@@ -24,7 +24,7 @@ select
   c.c_current_addr_sk = ca.ca_address_sk and
   cd_demo_sk = c.c_current_cdemo_sk and 
   exists (select *
-          from redis.store_sales.store_sales,cassandra.tpcds.date_dim
+          from mongodb.tpcds.store_sales,cassandra.tpcds.date_dim
           where c.c_customer_sk = ss_customer_sk and
                 ss_sold_date_sk = d_date_sk and
                 d_year = 1999 and

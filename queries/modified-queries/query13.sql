@@ -3,8 +3,8 @@ select avg(ss_quantity)
        ,avg(ss_ext_sales_price)
        ,avg(ss_ext_wholesale_cost)
        ,sum(ss_ext_wholesale_cost)
- from redis.store_sales.store_sales
-     ,redis.store.store
+ from mongodb.tpcds.store_sales
+     ,mongodb.tpcds.store
      ,redis.customer_demographics.customer_demographics
      ,redis.household_demographics.household_demographics
      ,redis.customer_address.customer_address

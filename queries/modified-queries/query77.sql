@@ -3,9 +3,9 @@ with ss as
  (select s_store_sk,
          sum(ss_ext_sales_price) as sales,
          sum(ss_net_profit) as profit
- from redis.store_sales.store_sales,
+ from mongodb.tpcds.store_sales,
       cassandra.tpcds.date_dim,
-      redis.store.store
+      mongodb.tpcds.store
  where ss_sold_date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date) 
                   and (cast('1998-08-04' as date) +  30 days) 
@@ -16,9 +16,9 @@ with ss as
  (select s_store_sk,
          sum(sr_return_amt) as returns,
          sum(sr_net_loss) as profit_loss
- from redis.store_returns.store_returns,
+ from mongodb.tpcds.store_returns,
       cassandra.tpcds.date_dim,
-      redis.store.store
+      mongodb.tpcds.store
  where sr_returned_date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date)
                   and (cast('1998-08-04' as date) +  30 days)
@@ -76,7 +76,7 @@ with ss as
         , sum(returns) as returns
         , sum(profit) as profit
  from 
- (select 'redis.store.store channel' as channel
+ (select 'mongodb.tpcds.store channel' as channel
         , ss.s_store_sk as id
         , sales
         , coalesce(returns, 0) as returns

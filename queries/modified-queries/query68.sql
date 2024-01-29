@@ -13,20 +13,20 @@ select  c_last_name
              ,sum(ss_ext_sales_price) extended_price 
              ,sum(ss_ext_list_price) list_price
              ,sum(ss_ext_tax) extended_tax 
-       from redis.store_sales.store_sales
+       from mongodb.tpcds.store_sales
            ,cassandra.tpcds.date_dim
-           ,redis.store.store
+           ,mongodb.tpcds.store
            ,redis.household_demographics.household_demographics
            ,redis.customer_address.customer_address 
-       where redis.store_sales.store_sales.ss_sold_date_sk = cassandra.tpcds.date_dim.d_date_sk
-         and redis.store_sales.store_sales.ss_store_sk = redis.store.store.s_store_sk  
-        and redis.store_sales.store_sales.ss_hdemo_sk = redis.household_demographics.household_demographics.hd_demo_sk
-        and redis.store_sales.store_sales.ss_addr_sk = redis.customer_address.customer_address.ca_address_sk
+       where mongodb.tpcds.store_sales.ss_sold_date_sk = cassandra.tpcds.date_dim.d_date_sk
+         and mongodb.tpcds.store_sales.ss_store_sk = mongodb.tpcds.store.s_store_sk  
+        and mongodb.tpcds.store_sales.ss_hdemo_sk = redis.household_demographics.household_demographics.hd_demo_sk
+        and mongodb.tpcds.store_sales.ss_addr_sk = redis.customer_address.customer_address.ca_address_sk
         and cassandra.tpcds.date_dim.d_dom between 1 and 2 
-        and (redis.household_demographics.household_demographics.hd_dep_count = 3 or
-             redis.household_demographics.household_demographics.hd_vehicle_count= 2)
-        and cassandra.tpcds.date_dim.d_year in (1998,1998+1,1998+2)
-        and redis.store.store.s_city in ('Oak Grove','Fairview')
+        and (redis.household_demographics.household_demographics.hd_dep_count = 9 or
+             redis.household_demographics.household_demographics.hd_vehicle_count= 0)
+        and cassandra.tpcds.date_dim.d_year in (1999,1999+1,1999+2)
+        and mongodb.tpcds.store.s_city in ('Oak Grove','Fairview')
        group by ss_ticket_number
                ,ss_customer_sk
                ,ss_addr_sk,ca_city) dn

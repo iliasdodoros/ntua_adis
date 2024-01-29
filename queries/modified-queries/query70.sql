@@ -9,9 +9,9 @@ select
  	case when grouping(s_county) = 0 then s_state end 
  	order by sum(ss_net_profit) desc) as rank_within_parent
  from
-    redis.store_sales.store_sales
+    mongodb.tpcds.store_sales
    ,cassandra.tpcds.date_dim       d1
-   ,redis.store.store
+   ,mongodb.tpcds.store
  where
     d1.d_month_seq between 1212 and 1212+11
  and d1.d_date_sk = ss_sold_date_sk
@@ -20,7 +20,7 @@ select
              ( select s_state
                from  (select s_state as s_state,
  			    rank() over ( partition by s_state order by sum(ss_net_profit) desc) as ranking
-                      from   redis.store_sales.store_sales, redis.store.store, cassandra.tpcds.date_dim
+                      from   mongodb.tpcds.store_sales, mongodb.tpcds.store, cassandra.tpcds.date_dim
                       where  d_month_seq between 1212 and 1212+11
  			    and d_date_sk = ss_sold_date_sk
  			    and s_store_sk  = ss_store_sk

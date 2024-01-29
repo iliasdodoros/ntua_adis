@@ -1,9 +1,9 @@
 
 select  s_store_name
       ,sum(ss_net_profit)
- from redis.store_sales.store_sales
+ from mongodb.tpcds.store_sales
      ,cassandra.tpcds.date_dim
-     ,redis.store.store,
+     ,mongodb.tpcds.store,
      (select ca_zip
      from (
       SELECT substr(ca_zip,1,5) ca_zip

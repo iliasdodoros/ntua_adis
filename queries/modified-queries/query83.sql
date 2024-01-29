@@ -2,7 +2,7 @@
 with sr_items as
  (select i_item_id item_id,
         sum(sr_return_quantity) sr_item_qty
- from redis.store_returns.store_returns,
+ from mongodb.tpcds.store_returns,
       mongodb.tpcds.item,
       cassandra.tpcds.date_dim
  where sr_item_sk = i_item_sk

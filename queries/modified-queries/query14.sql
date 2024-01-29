@@ -5,7 +5,7 @@ with  cross_items as
  (select iss.i_brand_id brand_id
      ,iss.i_class_id class_id
      ,iss.i_category_id category_id
- from redis.store_sales.store_sales
+ from mongodb.tpcds.store_sales
      ,mongodb.tpcds.item iss
      ,cassandra.tpcds.date_dim d1
  where ss_item_sk = iss.i_item_sk
@@ -39,7 +39,7 @@ with  cross_items as
  (select avg(quantity*list_price) average_sales
   from (select ss_quantity quantity
              ,ss_list_price list_price
-       from redis.store_sales.store_sales
+       from mongodb.tpcds.store_sales
            ,cassandra.tpcds.date_dim
        where ss_sold_date_sk = d_date_sk
          and d_year between 1998 and 1998 + 2
@@ -59,10 +59,10 @@ with  cross_items as
          and d_year between 1998 and 1998 + 2) x)
   select  channel, i_brand_id,i_class_id,i_category_id,sum(sales), sum(number_sales)
  from(
-       select 'redis.store.store' channel, i_brand_id,i_class_id
+       select 'mongodb.tpcds.store' channel, i_brand_id,i_class_id
              ,i_category_id,sum(ss_quantity*ss_list_price) sales
              , count(*) number_sales
-       from redis.store_sales.store_sales
+       from mongodb.tpcds.store_sales
            ,mongodb.tpcds.item
            ,cassandra.tpcds.date_dim
        where ss_item_sk in (select ss_item_sk from cross_items)
@@ -106,7 +106,7 @@ with  cross_items as
  (select iss.i_brand_id brand_id
      ,iss.i_class_id class_id
      ,iss.i_category_id category_id
- from redis.store_sales.store_sales
+ from mongodb.tpcds.store_sales
      ,mongodb.tpcds.item iss
      ,cassandra.tpcds.date_dim d1
  where ss_item_sk = iss.i_item_sk
@@ -140,7 +140,7 @@ with  cross_items as
 (select avg(quantity*list_price) average_sales
   from (select ss_quantity quantity
              ,ss_list_price list_price
-       from redis.store_sales.store_sales
+       from mongodb.tpcds.store_sales
            ,cassandra.tpcds.date_dim
        where ss_sold_date_sk = d_date_sk
          and d_year between 1998 and 1998 + 2
@@ -171,9 +171,9 @@ with  cross_items as
                            ,last_year.sales ly_sales
                            ,last_year.number_sales ly_number_sales 
  from
- (select 'redis.store.store' channel, i_brand_id,i_class_id,i_category_id
+ (select 'mongodb.tpcds.store' channel, i_brand_id,i_class_id,i_category_id
         ,sum(ss_quantity*ss_list_price) sales, count(*) number_sales
- from redis.store_sales.store_sales 
+ from mongodb.tpcds.store_sales 
      ,mongodb.tpcds.item
      ,cassandra.tpcds.date_dim
  where ss_item_sk in (select ss_item_sk from cross_items)
@@ -186,9 +186,9 @@ with  cross_items as
                        and d_dom = 16)
  group by i_brand_id,i_class_id,i_category_id
  having sum(ss_quantity*ss_list_price) > (select average_sales from avg_sales)) this_year,
- (select 'redis.store.store' channel, i_brand_id,i_class_id
+ (select 'mongodb.tpcds.store' channel, i_brand_id,i_class_id
         ,i_category_id, sum(ss_quantity*ss_list_price) sales, count(*) number_sales
- from redis.store_sales.store_sales
+ from mongodb.tpcds.store_sales
      ,mongodb.tpcds.item
      ,cassandra.tpcds.date_dim
  where ss_item_sk in (select ss_item_sk from cross_items)

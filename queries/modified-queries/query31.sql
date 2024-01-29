@@ -1,7 +1,7 @@
 
 with ss as
- (select ca_county,d_qoy, d_year,sum(ss_ext_sales_price) as redis.store_sales.store_sales
- from redis.store_sales.store_sales,cassandra.tpcds.date_dim,redis.customer_address.customer_address
+ (select ca_county,d_qoy, d_year,sum(ss_ext_sales_price) as mongodb.tpcds.store_sales
+ from mongodb.tpcds.store_sales,cassandra.tpcds.date_dim,redis.customer_address.customer_address
  where ss_sold_date_sk = d_date_sk
   and ss_addr_sk=ca_address_sk
  group by ca_county,d_qoy, d_year),
@@ -15,9 +15,9 @@ with ss as
         ss1.ca_county
        ,ss1.d_year
        ,ws2.mongodb.tpcds.web_sales/ws1.mongodb.tpcds.web_sales web_q1_q2_increase
-       ,ss2.redis.store_sales.store_sales/ss1.redis.store_sales.store_sales store_q1_q2_increase
+       ,ss2.mongodb.tpcds.store_sales/ss1.mongodb.tpcds.store_sales store_q1_q2_increase
        ,ws3.mongodb.tpcds.web_sales/ws2.mongodb.tpcds.web_sales web_q2_q3_increase
-       ,ss3.redis.store_sales.store_sales/ss2.redis.store_sales.store_sales store_q2_q3_increase
+       ,ss3.mongodb.tpcds.store_sales/ss2.mongodb.tpcds.store_sales store_q2_q3_increase
  from
         ss ss1
        ,ss ss2
@@ -44,9 +44,9 @@ with ss as
     and ws3.d_qoy = 3
     and ws3.d_year =2000
     and case when ws1.mongodb.tpcds.web_sales > 0 then ws2.mongodb.tpcds.web_sales/ws1.mongodb.tpcds.web_sales else null end 
-       > case when ss1.redis.store_sales.store_sales > 0 then ss2.redis.store_sales.store_sales/ss1.redis.store_sales.store_sales else null end
+       > case when ss1.mongodb.tpcds.store_sales > 0 then ss2.mongodb.tpcds.store_sales/ss1.mongodb.tpcds.store_sales else null end
     and case when ws2.mongodb.tpcds.web_sales > 0 then ws3.mongodb.tpcds.web_sales/ws2.mongodb.tpcds.web_sales else null end
-       > case when ss2.redis.store_sales.store_sales > 0 then ss3.redis.store_sales.store_sales/ss2.redis.store_sales.store_sales else null end
+       > case when ss2.mongodb.tpcds.store_sales > 0 then ss3.mongodb.tpcds.store_sales/ss2.mongodb.tpcds.store_sales else null end
  order by ss1.d_year;
 
 

@@ -27,9 +27,9 @@ WITH all_sales AS (
              ,i_manufact_id
              ,ss_quantity - COALESCE(sr_return_quantity,0) AS sales_cnt
              ,ss_ext_sales_price - COALESCE(sr_return_amt,0.0) AS sales_amt
-       FROM redis.store_sales.store_sales JOIN mongodb.tpcds.item ON i_item_sk=ss_item_sk
+       FROM mongodb.tpcds.store_sales JOIN mongodb.tpcds.item ON i_item_sk=ss_item_sk
                         JOIN cassandra.tpcds.date_dim ON d_date_sk=ss_sold_date_sk
-                        LEFT JOIN redis.store_returns.store_returns ON (ss_ticket_number=sr_ticket_number 
+                        LEFT JOIN mongodb.tpcds.store_returns ON (ss_ticket_number=sr_ticket_number 
                                                 AND ss_item_sk=sr_item_sk)
        WHERE i_category='Sports'
        UNION

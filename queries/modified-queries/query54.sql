@@ -28,9 +28,9 @@ with my_customers as (
  select c_customer_sk,
         sum(ss_ext_sales_price) as revenue
  from   my_customers,
-        redis.store_sales.store_sales,
+        mongodb.tpcds.store_sales,
         redis.customer_address.customer_address,
-        redis.store.store,
+        mongodb.tpcds.store,
         cassandra.tpcds.date_dim
  where  c_current_addr_sk = ca_address_sk
         and ca_county = s_county

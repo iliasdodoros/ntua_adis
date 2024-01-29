@@ -2,7 +2,7 @@
 select  a.ca_state state, count(*) cnt
  from redis.customer_address.customer_address a
      ,redis.customer.customer c
-     ,redis.store_sales.store_sales s
+     ,mongodb.tpcds.store_sales s
      ,cassandra.tpcds.date_dim d
      ,mongodb.tpcds.item i
  where       a.ca_address_sk = c.c_current_addr_sk

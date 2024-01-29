@@ -19,9 +19,9 @@ from (select i_category
                   ,d_moy
                   ,s_store_id
                   ,sum(coalesce(ss_sales_price*ss_quantity,0)) sumsales
-            from redis.store_sales.store_sales
+            from mongodb.tpcds.store_sales
                 ,cassandra.tpcds.date_dim
-                ,redis.store.store
+                ,mongodb.tpcds.store
                 ,mongodb.tpcds.item
        where  ss_sold_date_sk=d_date_sk
           and ss_item_sk=i_item_sk

@@ -8,10 +8,10 @@ select c_last_name
    (select ss_ticket_number
           ,ss_customer_sk
           ,count(*) cnt
-    from redis.store_sales.store_sales,cassandra.tpcds.date_dim,redis.store.store,redis.household_demographics.household_demographics
-    where redis.store_sales.store_sales.ss_sold_date_sk = cassandra.tpcds.date_dim.d_date_sk
-    and redis.store_sales.store_sales.ss_store_sk = redis.store.store.s_store_sk  
-    and redis.store_sales.store_sales.ss_hdemo_sk = redis.household_demographics.household_demographics.hd_demo_sk
+    from mongodb.tpcds.store_sales,cassandra.tpcds.date_dim,mongodb.tpcds.store,redis.household_demographics.household_demographics
+    where mongodb.tpcds.store_sales.ss_sold_date_sk = cassandra.tpcds.date_dim.d_date_sk
+    and mongodb.tpcds.store_sales.ss_store_sk = mongodb.tpcds.store.s_store_sk  
+    and mongodb.tpcds.store_sales.ss_hdemo_sk = redis.household_demographics.household_demographics.hd_demo_sk
     and (cassandra.tpcds.date_dim.d_dom between 1 and 3 or cassandra.tpcds.date_dim.d_dom between 25 and 28)
     and (redis.household_demographics.household_demographics.hd_buy_potential = '>10000' or
          redis.household_demographics.household_demographics.hd_buy_potential = 'Unknown')
@@ -21,7 +21,7 @@ select c_last_name
 	else null 
 	end)  > 1.2
     and cassandra.tpcds.date_dim.d_year in (1999,1999+1,1999+2)
-    and redis.store.store.s_county in ('Ziebach County','Williamson County','Walker County','Ziebach County',
+    and mongodb.tpcds.store.s_county in ('Williamson County','Ziebach County','Ziebach County','Williamson County',
                            'Ziebach County','Ziebach County','Ziebach County','Ziebach County')
     group by ss_ticket_number,ss_customer_sk) dn,redis.customer.customer
     where ss_customer_sk = c_customer_sk

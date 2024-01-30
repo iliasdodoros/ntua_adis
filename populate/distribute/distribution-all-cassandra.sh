@@ -34,7 +34,7 @@ DAT_FILES_DIR="/home/user/data"
 
 MONGO_TABLES=("")
 REDIS_TABLES=("")
-CASSANDRA_TABLES=("web_sales web_returns web_site web_page catalog_sales catalog_page catalog_returns call_center warehouse date_dim time_dim store_sales store_returns store  inventory ship_mode promotion item reason customer customer_address customer_demographics household_demographics income_band")
+CASSANDRA_TABLES=("web_sales web_returns web_site web_page catalog_sales catalog_page catalog_returns call_center warehouse date_dim time_dim store_sales store_returns store ship_mode promotion item reason customer customer_address customer_demographics household_demographics income_band")
 
 # Function to import data to MongoDB
 import_to_mongo() {

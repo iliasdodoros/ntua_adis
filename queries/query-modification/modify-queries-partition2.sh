@@ -2,9 +2,9 @@
 QUERIES_DIR="/home/user/ntua_adis/queries/original-queries"
 OUT_DIR="/home/user/ntua_adis/queries/modified-queries"
 
-MONGO_TABLES=("web_sales" "web_returns" "web_site" "web_page" "store_sales" "store_returns" "store" "inventory" "ship_mode")
-REDIS_TABLES=("promotion" "item" "reason" "customer" "customer_address" "customer_demographics" "household_demographics" "income_band")
-CASSANDRA_TABLES=("catalog_sales" "catalog_page" "catalog_returns" "call_center" "warehouse" "date_dim" "time_dim")
+MONGO_TABLES=("web_sales" "store_sales" "catalog_sales" "time_dim" "customer_demographics" "inventory")
+REDIS_TABLES=("warehouse" "store" "promotion" "item" "reason" "customer" "call_center" "web_page" "web_site" "ship_mode" "income_band")
+CASSANDRA_TABLES=("store_returns" "web_returns" "customer_address" "household_demographics" "catalog_page" "catalog_returns" "date_dim")
 
 declare -A TABLE_MAPPING
 

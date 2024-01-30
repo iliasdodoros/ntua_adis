@@ -1,11 +1,11 @@
 
 select  c_customer_id as customer_id
        , coalesce(c_last_name,'') || ', ' || coalesce(c_first_name,'') as customername
- from redis.customer.customer
-     ,redis.customer_address.customer_address
-     ,redis.customer_demographics.customer_demographics
-     ,redis.household_demographics.household_demographics
-     ,redis.income_band.income_band
+ from mongodb.tpcds.customer
+     ,mongodb.tpcds.customer_address
+     ,mongodb.tpcds.customer_demographics
+     ,mongodb.tpcds.household_demographics
+     ,mongodb.tpcds.income_band
      ,mongodb.tpcds.store_returns
  where ca_city	        =  'Hopewell'
    and c_current_addr_sk = ca_address_sk

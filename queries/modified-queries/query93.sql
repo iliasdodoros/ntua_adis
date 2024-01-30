@@ -8,7 +8,7 @@ select  ss_customer_sk
                                                             else (ss_quantity*ss_sales_price) end act_sales
             from mongodb.tpcds.store_sales left outer join mongodb.tpcds.store_returns on (sr_item_sk = ss_item_sk
                                                                and sr_ticket_number = ss_ticket_number)
-                ,redis.reason.reason
+                ,mongodb.tpcds.reason
             where sr_reason_sk = r_reason_sk
               and r_reason_desc = 'Did not like the warranty') t
       group by ss_customer_sk

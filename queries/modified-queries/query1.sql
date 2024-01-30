@@ -4,7 +4,7 @@ with customer_total_return as
 ,sr_store_sk as ctr_store_sk
 ,sum(SR_FEE) as ctr_total_return
 from mongodb.tpcds.store_returns
-,cassandra.tpcds.date_dim
+,mongodb.tpcds.date_dim
 where sr_returned_date_sk = d_date_sk
 and d_year =2000
 group by sr_customer_sk
@@ -12,7 +12,7 @@ group by sr_customer_sk
  select  c_customer_id
 from customer_total_return ctr1
 ,mongodb.tpcds.store
-,redis.customer.customer
+,mongodb.tpcds.customer
 where ctr1.ctr_total_return > (select avg(ctr_total_return)*1.2
 from customer_total_return ctr2
 where ctr1.ctr_store_sk = ctr2.ctr_store_sk)

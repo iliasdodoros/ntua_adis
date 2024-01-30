@@ -6,16 +6,16 @@ with my_customers as (
         ( select cs_sold_date_sk sold_date_sk,
                  cs_bill_customer_sk customer_sk,
                  cs_item_sk item_sk
-          from   cassandra.tpcds.catalog_sales
+          from   mongodb.tpcds.catalog_sales
           union all
           select ws_sold_date_sk sold_date_sk,
                  ws_bill_customer_sk customer_sk,
                  ws_item_sk item_sk
           from   mongodb.tpcds.web_sales
          ) cs_or_ws_sales,
-         redis.item.item,
-         cassandra.tpcds.date_dim,
-         redis.customer.customer
+         mongodb.tpcds.item,
+         mongodb.tpcds.date_dim,
+         mongodb.tpcds.customer
  where   sold_date_sk = d_date_sk
          and item_sk = i_item_sk
          and i_category = 'Jewelry'
@@ -29,18 +29,18 @@ with my_customers as (
         sum(ss_ext_sales_price) as revenue
  from   my_customers,
         mongodb.tpcds.store_sales,
-        redis.customer_address.customer_address,
+        mongodb.tpcds.customer_address,
         mongodb.tpcds.store,
-        cassandra.tpcds.date_dim
+        mongodb.tpcds.date_dim
  where  c_current_addr_sk = ca_address_sk
         and ca_county = s_county
         and ca_state = s_state
         and ss_sold_date_sk = d_date_sk
         and c_customer_sk = ss_customer_sk
         and d_month_seq between (select distinct d_month_seq+1
-                                 from   cassandra.tpcds.date_dim where d_year = 1999 and d_moy = 3)
+                                 from   mongodb.tpcds.date_dim where d_year = 1999 and d_moy = 3)
                            and  (select distinct d_month_seq+3
-                                 from   cassandra.tpcds.date_dim where d_year = 1999 and d_moy = 3)
+                                 from   mongodb.tpcds.date_dim where d_year = 1999 and d_moy = 3)
  group by c_customer_sk
  )
  , segments as

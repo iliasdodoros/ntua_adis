@@ -5,10 +5,10 @@ select avg(ss_quantity)
        ,sum(ss_ext_wholesale_cost)
  from mongodb.tpcds.store_sales
      ,mongodb.tpcds.store
-     ,redis.customer_demographics.customer_demographics
-     ,redis.household_demographics.household_demographics
-     ,redis.customer_address.customer_address
-     ,cassandra.tpcds.date_dim
+     ,mongodb.tpcds.customer_demographics
+     ,mongodb.tpcds.household_demographics
+     ,mongodb.tpcds.customer_address
+     ,mongodb.tpcds.date_dim
  where s_store_sk = ss_store_sk
  and  ss_sold_date_sk = d_date_sk and d_year = 2001
  and((ss_hdemo_sk=hd_demo_sk

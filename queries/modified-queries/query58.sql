@@ -3,27 +3,27 @@ with ss_items as
  (select i_item_id item_id
         ,sum(ss_ext_sales_price) ss_item_rev 
  from mongodb.tpcds.store_sales
-     ,redis.item.item
-     ,cassandra.tpcds.date_dim
+     ,mongodb.tpcds.item
+     ,mongodb.tpcds.date_dim
  where ss_item_sk = i_item_sk
    and d_date in (select d_date
-                  from cassandra.tpcds.date_dim
+                  from mongodb.tpcds.date_dim
                   where d_week_seq = (select d_week_seq 
-                                      from cassandra.tpcds.date_dim
+                                      from mongodb.tpcds.date_dim
                                       where d_date = '1998-02-19'))
    and ss_sold_date_sk   = d_date_sk
  group by i_item_id),
  cs_items as
  (select i_item_id item_id
         ,sum(cs_ext_sales_price) cs_item_rev
-  from cassandra.tpcds.catalog_sales
-      ,redis.item.item
-      ,cassandra.tpcds.date_dim
+  from mongodb.tpcds.catalog_sales
+      ,mongodb.tpcds.item
+      ,mongodb.tpcds.date_dim
  where cs_item_sk = i_item_sk
   and  d_date in (select d_date
-                  from cassandra.tpcds.date_dim
+                  from mongodb.tpcds.date_dim
                   where d_week_seq = (select d_week_seq 
-                                      from cassandra.tpcds.date_dim
+                                      from mongodb.tpcds.date_dim
                                       where d_date = '1998-02-19'))
   and  cs_sold_date_sk = d_date_sk
  group by i_item_id),
@@ -31,13 +31,13 @@ with ss_items as
  (select i_item_id item_id
         ,sum(ws_ext_sales_price) ws_item_rev
   from mongodb.tpcds.web_sales
-      ,redis.item.item
-      ,cassandra.tpcds.date_dim
+      ,mongodb.tpcds.item
+      ,mongodb.tpcds.date_dim
  where ws_item_sk = i_item_sk
   and  d_date in (select d_date
-                  from cassandra.tpcds.date_dim
+                  from mongodb.tpcds.date_dim
                   where d_week_seq =(select d_week_seq 
-                                     from cassandra.tpcds.date_dim
+                                     from mongodb.tpcds.date_dim
                                      where d_date = '1998-02-19'))
   and ws_sold_date_sk   = d_date_sk
  group by i_item_id)

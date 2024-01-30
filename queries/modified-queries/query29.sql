@@ -10,12 +10,12 @@ select
  from
     mongodb.tpcds.store_sales
    ,mongodb.tpcds.store_returns
-   ,cassandra.tpcds.catalog_sales
-   ,cassandra.tpcds.date_dim             d1
-   ,cassandra.tpcds.date_dim             d2
-   ,cassandra.tpcds.date_dim             d3
+   ,mongodb.tpcds.catalog_sales
+   ,mongodb.tpcds.date_dim             d1
+   ,mongodb.tpcds.date_dim             d2
+   ,mongodb.tpcds.date_dim             d3
    ,mongodb.tpcds.store
-   ,redis.item.item
+   ,mongodb.tpcds.item
  where
      d1.d_moy               = 4 
  and d1.d_year              = 1999

@@ -4,14 +4,14 @@ with ss as (
           i_manufact_id,sum(ss_ext_sales_price) total_sales
  from
  	mongodb.tpcds.store_sales,
- 	cassandra.tpcds.date_dim,
-         redis.customer_address.customer_address,
-         redis.item.item
+ 	mongodb.tpcds.date_dim,
+         mongodb.tpcds.customer_address,
+         mongodb.tpcds.item
  where
          i_manufact_id in (select
   i_manufact_id
 from
- redis.item.item
+ mongodb.tpcds.item
 where i_category in ('Books'))
  and     ss_item_sk              = i_item_sk
  and     ss_sold_date_sk         = d_date_sk
@@ -24,15 +24,15 @@ where i_category in ('Books'))
  select
           i_manufact_id,sum(cs_ext_sales_price) total_sales
  from
- 	cassandra.tpcds.catalog_sales,
- 	cassandra.tpcds.date_dim,
-         redis.customer_address.customer_address,
-         redis.item.item
+ 	mongodb.tpcds.catalog_sales,
+ 	mongodb.tpcds.date_dim,
+         mongodb.tpcds.customer_address,
+         mongodb.tpcds.item
  where
          i_manufact_id               in (select
   i_manufact_id
 from
- redis.item.item
+ mongodb.tpcds.item
 where i_category in ('Books'))
  and     cs_item_sk              = i_item_sk
  and     cs_sold_date_sk         = d_date_sk
@@ -46,14 +46,14 @@ where i_category in ('Books'))
           i_manufact_id,sum(ws_ext_sales_price) total_sales
  from
  	mongodb.tpcds.web_sales,
- 	cassandra.tpcds.date_dim,
-         redis.customer_address.customer_address,
-         redis.item.item
+ 	mongodb.tpcds.date_dim,
+         mongodb.tpcds.customer_address,
+         mongodb.tpcds.item
  where
          i_manufact_id               in (select
   i_manufact_id
 from
- redis.item.item
+ mongodb.tpcds.item
 where i_category in ('Books'))
  and     ws_item_sk              = i_item_sk
  and     ws_sold_date_sk         = d_date_sk

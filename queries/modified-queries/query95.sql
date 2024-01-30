@@ -10,8 +10,8 @@ with ws_wh as
   ,sum(ws_net_profit) as "total net profit"
 from
    mongodb.tpcds.web_sales ws1
-  ,cassandra.tpcds.date_dim
-  ,redis.customer_address.customer_address
+  ,mongodb.tpcds.date_dim
+  ,mongodb.tpcds.customer_address
   ,mongodb.tpcds.web_site
 where
     d_date between '1999-5-01' and 

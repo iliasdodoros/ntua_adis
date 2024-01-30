@@ -4,10 +4,10 @@ select
   ,sum(cs_ext_ship_cost) as "total shipping cost"
   ,sum(cs_net_profit) as "total net profit"
 from
-   cassandra.tpcds.catalog_sales cs1
-  ,cassandra.tpcds.date_dim
-  ,redis.customer_address.customer_address
-  ,cassandra.tpcds.call_center
+   mongodb.tpcds.catalog_sales cs1
+  ,mongodb.tpcds.date_dim
+  ,mongodb.tpcds.customer_address
+  ,mongodb.tpcds.call_center
 where
     d_date between '1999-2-01' and 
            (cast('1999-2-01' as date) + 60 days)
@@ -19,11 +19,11 @@ and cc_county in ('Williamson County','Williamson County','Williamson County','W
                   'Williamson County'
 )
 and exists (select *
-            from cassandra.tpcds.catalog_sales cs2
+            from mongodb.tpcds.catalog_sales cs2
             where cs1.cs_order_number = cs2.cs_order_number
               and cs1.cs_warehouse_sk <> cs2.cs_warehouse_sk)
 and not exists(select *
-               from cassandra.tpcds.catalog_returns cr1
+               from mongodb.tpcds.catalog_returns cr1
                where cs1.cs_order_number = cr1.cr_order_number)
 order by count(distinct cs_order_number)
 limit 100;

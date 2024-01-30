@@ -2,8 +2,8 @@
 with cs_ui as
  (select cs_item_sk
         ,sum(cs_ext_list_price) as sale,sum(cr_refunded_cash+cr_reversed_charge+cr_store_credit) as refund
-  from cassandra.tpcds.catalog_sales
-      ,cassandra.tpcds.catalog_returns
+  from mongodb.tpcds.catalog_sales
+      ,mongodb.tpcds.catalog_returns
   where cs_item_sk = cr_item_sk
     and cs_order_number = cr_order_number
   group by cs_item_sk
@@ -31,21 +31,21 @@ cross_sales as
   FROM   mongodb.tpcds.store_sales
         ,mongodb.tpcds.store_returns
         ,cs_ui
-        ,cassandra.tpcds.date_dim d1
-        ,cassandra.tpcds.date_dim d2
-        ,cassandra.tpcds.date_dim d3
+        ,mongodb.tpcds.date_dim d1
+        ,mongodb.tpcds.date_dim d2
+        ,mongodb.tpcds.date_dim d3
         ,mongodb.tpcds.store
-        ,redis.customer.customer
-        ,redis.customer_demographics.customer_demographics cd1
-        ,redis.customer_demographics.customer_demographics cd2
-        ,redis.promotion.promotion
-        ,redis.household_demographics.household_demographics hd1
-        ,redis.household_demographics.household_demographics hd2
-        ,redis.customer_address.customer_address ad1
-        ,redis.customer_address.customer_address ad2
-        ,redis.income_band.income_band ib1
-        ,redis.income_band.income_band ib2
-        ,redis.item.item
+        ,mongodb.tpcds.customer
+        ,mongodb.tpcds.customer_demographics cd1
+        ,mongodb.tpcds.customer_demographics cd2
+        ,mongodb.tpcds.promotion
+        ,mongodb.tpcds.household_demographics hd1
+        ,mongodb.tpcds.household_demographics hd2
+        ,mongodb.tpcds.customer_address ad1
+        ,mongodb.tpcds.customer_address ad2
+        ,mongodb.tpcds.income_band ib1
+        ,mongodb.tpcds.income_band ib2
+        ,mongodb.tpcds.item
   WHERE  ss_store_sk = s_store_sk AND
          ss_sold_date_sk = d1.d_date_sk AND
          ss_customer_sk = c_customer_sk AND

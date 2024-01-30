@@ -4,7 +4,7 @@ with ss as
          sum(ss_ext_sales_price) as sales,
          sum(ss_net_profit) as profit
  from mongodb.tpcds.store_sales,
-      cassandra.tpcds.date_dim,
+      mongodb.tpcds.date_dim,
       mongodb.tpcds.store
  where ss_sold_date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date) 
@@ -17,7 +17,7 @@ with ss as
          sum(sr_return_amt) as returns,
          sum(sr_net_loss) as profit_loss
  from mongodb.tpcds.store_returns,
-      cassandra.tpcds.date_dim,
+      mongodb.tpcds.date_dim,
       mongodb.tpcds.store
  where sr_returned_date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date)
@@ -28,8 +28,8 @@ with ss as
  (select cs_call_center_sk,
         sum(cs_ext_sales_price) as sales,
         sum(cs_net_profit) as profit
- from cassandra.tpcds.catalog_sales,
-      cassandra.tpcds.date_dim
+ from mongodb.tpcds.catalog_sales,
+      mongodb.tpcds.date_dim
  where cs_sold_date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date)
                   and (cast('1998-08-04' as date) +  30 days)
@@ -39,8 +39,8 @@ with ss as
  (select cr_call_center_sk,
          sum(cr_return_amount) as returns,
          sum(cr_net_loss) as profit_loss
- from cassandra.tpcds.catalog_returns,
-      cassandra.tpcds.date_dim
+ from mongodb.tpcds.catalog_returns,
+      mongodb.tpcds.date_dim
  where cr_returned_date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date)
                   and (cast('1998-08-04' as date) +  30 days)
@@ -51,7 +51,7 @@ with ss as
         sum(ws_ext_sales_price) as sales,
         sum(ws_net_profit) as profit
  from mongodb.tpcds.web_sales,
-      cassandra.tpcds.date_dim,
+      mongodb.tpcds.date_dim,
       mongodb.tpcds.web_page
  where ws_sold_date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date)
@@ -63,7 +63,7 @@ with ss as
         sum(wr_return_amt) as returns,
         sum(wr_net_loss) as profit_loss
  from mongodb.tpcds.web_returns,
-      cassandra.tpcds.date_dim,
+      mongodb.tpcds.date_dim,
       mongodb.tpcds.web_page
  where wr_returned_date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date)

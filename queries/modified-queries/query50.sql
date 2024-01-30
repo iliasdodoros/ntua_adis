@@ -22,8 +22,8 @@ from
    mongodb.tpcds.store_sales
   ,mongodb.tpcds.store_returns
   ,mongodb.tpcds.store
-  ,cassandra.tpcds.date_dim d1
-  ,cassandra.tpcds.date_dim d2
+  ,mongodb.tpcds.date_dim d1
+  ,mongodb.tpcds.date_dim d2
 where
     d2.d_year = 2000
 and d2.d_moy  = 9

@@ -20,9 +20,9 @@ from (select i_category
                   ,s_store_id
                   ,sum(coalesce(ss_sales_price*ss_quantity,0)) sumsales
             from mongodb.tpcds.store_sales
-                ,cassandra.tpcds.date_dim
+                ,mongodb.tpcds.date_dim
                 ,mongodb.tpcds.store
-                ,redis.item.item
+                ,mongodb.tpcds.item
        where  ss_sold_date_sk=d_date_sk
           and ss_item_sk=i_item_sk
           and ss_store_sk = s_store_sk

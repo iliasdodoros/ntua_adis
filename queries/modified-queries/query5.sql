@@ -22,7 +22,7 @@ with ssr as
            sr_net_loss as net_loss
     from mongodb.tpcds.store_returns
    ) salesreturns,
-     cassandra.tpcds.date_dim,
+     mongodb.tpcds.date_dim,
      mongodb.tpcds.store
  where date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date) 
@@ -43,7 +43,7 @@ with ssr as
             cs_net_profit as profit,
             cast(0 as decimal(7,2)) as return_amt,
             cast(0 as decimal(7,2)) as net_loss
-    from cassandra.tpcds.catalog_sales
+    from mongodb.tpcds.catalog_sales
     union all
     select cr_catalog_page_sk as page_sk,
            cr_returned_date_sk as date_sk,
@@ -51,10 +51,10 @@ with ssr as
            cast(0 as decimal(7,2)) as profit,
            cr_return_amount as return_amt,
            cr_net_loss as net_loss
-    from cassandra.tpcds.catalog_returns
+    from mongodb.tpcds.catalog_returns
    ) salesreturns,
-     cassandra.tpcds.date_dim,
-     cassandra.tpcds.catalog_page
+     mongodb.tpcds.date_dim,
+     mongodb.tpcds.catalog_page
  where date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date)
                   and (cast('1998-08-04' as date) +  14 days)
@@ -86,7 +86,7 @@ with ssr as
          ( wr_item_sk = ws_item_sk
            and wr_order_number = ws_order_number)
    ) salesreturns,
-     cassandra.tpcds.date_dim,
+     mongodb.tpcds.date_dim,
      mongodb.tpcds.web_site
  where date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date)
@@ -107,7 +107,7 @@ with ssr as
  from   ssr
  union all
  select 'catalog channel' as channel
-        , 'cassandra.tpcds.catalog_page' || cp_catalog_page_id as id
+        , 'mongodb.tpcds.catalog_page' || cp_catalog_page_id as id
         , sales
         , returns
         , (profit - profit_loss) as profit

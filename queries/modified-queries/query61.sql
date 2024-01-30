@@ -4,11 +4,11 @@ from
   (select sum(ss_ext_sales_price) promotions
    from  mongodb.tpcds.store_sales
         ,mongodb.tpcds.store
-        ,redis.promotion.promotion
-        ,cassandra.tpcds.date_dim
-        ,redis.customer.customer
-        ,redis.customer_address.customer_address 
-        ,redis.item.item
+        ,mongodb.tpcds.promotion
+        ,mongodb.tpcds.date_dim
+        ,mongodb.tpcds.customer
+        ,mongodb.tpcds.customer_address 
+        ,mongodb.tpcds.item
    where ss_sold_date_sk = d_date_sk
    and   ss_store_sk = s_store_sk
    and   ss_promo_sk = p_promo_sk
@@ -24,10 +24,10 @@ from
   (select sum(ss_ext_sales_price) total
    from  mongodb.tpcds.store_sales
         ,mongodb.tpcds.store
-        ,cassandra.tpcds.date_dim
-        ,redis.customer.customer
-        ,redis.customer_address.customer_address
-        ,redis.item.item
+        ,mongodb.tpcds.date_dim
+        ,mongodb.tpcds.customer
+        ,mongodb.tpcds.customer_address
+        ,mongodb.tpcds.item
    where ss_sold_date_sk = d_date_sk
    and   ss_store_sk = s_store_sk
    and   ss_customer_sk= c_customer_sk

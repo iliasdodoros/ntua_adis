@@ -44,7 +44,7 @@ select case when (select count(*)
             else (select avg(ss_net_paid)
                   from mongodb.tpcds.store_sales
                   where ss_quantity between 81 and 100) end bucket5
-from redis.reason.reason
+from mongodb.tpcds.reason
 where r_reason_sk = 1
 ;
 

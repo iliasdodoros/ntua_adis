@@ -9,14 +9,14 @@ select  i_item_id
           (partition by i_class) as revenueratio
 from	
 	mongodb.tpcds.web_sales
-    	,redis.item.item 
-    	,cassandra.tpcds.date_dim
+    	,mongodb.tpcds.item 
+    	,mongodb.tpcds.date_dim
 where 
 	ws_item_sk = i_item_sk 
   	and i_category in ('Jewelry', 'Sports', 'Books')
   	and ws_sold_date_sk = d_date_sk
 	and d_date between cast('2001-01-12' as date) 
-				and (cast('2001-01-12' as date) + interval '30' day)
+				and (cast('2001-01-12' as date) + 30 days)
 group by 
 	i_item_id
         ,i_item_desc 

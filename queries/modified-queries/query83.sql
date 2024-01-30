@@ -2,48 +2,48 @@
 with sr_items as
  (select i_item_id item_id,
         sum(sr_return_quantity) sr_item_qty
- from mongodb.tpcds.store_returns,
-      mongodb.tpcds.item,
-      mongodb.tpcds.date_dim
+ from cassandra.tpcds.store_returns,
+      redis.item.item,
+      cassandra.tpcds.date_dim
  where sr_item_sk = i_item_sk
  and   d_date    in 
 	(select d_date
-	from mongodb.tpcds.date_dim
+	from cassandra.tpcds.date_dim
 	where d_week_seq in 
 		(select d_week_seq
-		from mongodb.tpcds.date_dim
+		from cassandra.tpcds.date_dim
 	  where d_date in ('1998-01-02','1998-10-15','1998-11-10')))
  and   sr_returned_date_sk   = d_date_sk
  group by i_item_id),
  cr_items as
  (select i_item_id item_id,
         sum(cr_return_quantity) cr_item_qty
- from mongodb.tpcds.catalog_returns,
-      mongodb.tpcds.item,
-      mongodb.tpcds.date_dim
+ from cassandra.tpcds.catalog_returns,
+      redis.item.item,
+      cassandra.tpcds.date_dim
  where cr_item_sk = i_item_sk
  and   d_date    in 
 	(select d_date
-	from mongodb.tpcds.date_dim
+	from cassandra.tpcds.date_dim
 	where d_week_seq in 
 		(select d_week_seq
-		from mongodb.tpcds.date_dim
+		from cassandra.tpcds.date_dim
 	  where d_date in ('1998-01-02','1998-10-15','1998-11-10')))
  and   cr_returned_date_sk   = d_date_sk
  group by i_item_id),
  wr_items as
  (select i_item_id item_id,
         sum(wr_return_quantity) wr_item_qty
- from mongodb.tpcds.web_returns,
-      mongodb.tpcds.item,
-      mongodb.tpcds.date_dim
+ from cassandra.tpcds.web_returns,
+      redis.item.item,
+      cassandra.tpcds.date_dim
  where wr_item_sk = i_item_sk
  and   d_date    in 
 	(select d_date
-	from mongodb.tpcds.date_dim
+	from cassandra.tpcds.date_dim
 	where d_week_seq in 
 		(select d_week_seq
-		from mongodb.tpcds.date_dim
+		from cassandra.tpcds.date_dim
 		where d_date in ('1998-01-02','1998-10-15','1998-11-10')))
  and   wr_returned_date_sk   = d_date_sk
  group by i_item_id)

@@ -24,8 +24,8 @@ from(select *
                                                     and ss_hdemo_sk is null
                                                   group by ss_store_sk))V2)V21
      where rnk  < 11) descending,
-mongodb.tpcds.item i1,
-mongodb.tpcds.item i2
+redis.item.item i1,
+redis.item.item i2
 where asceding.rnk = descending.rnk 
   and i1.i_item_sk=asceding.item_sk
   and i2.i_item_sk=descending.item_sk

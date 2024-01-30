@@ -2,8 +2,8 @@
 with frequent_ss_items as 
  (select substr(i_item_desc,1,30) itemdesc,i_item_sk item_sk,d_date solddate,count(*) cnt
   from mongodb.tpcds.store_sales
-      ,mongodb.tpcds.date_dim 
-      ,mongodb.tpcds.item
+      ,cassandra.tpcds.date_dim 
+      ,redis.item.item
   where ss_sold_date_sk = d_date_sk
     and ss_item_sk = i_item_sk 
     and d_year in (1999,1999+1,1999+2,1999+3)
@@ -13,8 +13,8 @@ with frequent_ss_items as
  (select max(csales) tpcds_cmax 
   from (select c_customer_sk,sum(ss_quantity*ss_sales_price) csales
         from mongodb.tpcds.store_sales
-            ,mongodb.tpcds.customer
-            ,mongodb.tpcds.date_dim 
+            ,redis.customer.customer
+            ,cassandra.tpcds.date_dim 
         where ss_customer_sk = c_customer_sk
          and ss_sold_date_sk = d_date_sk
          and d_year in (1999,1999+1,1999+2,1999+3) 
@@ -22,7 +22,7 @@ with frequent_ss_items as
  best_ss_customer as
  (select c_customer_sk,sum(ss_quantity*ss_sales_price) ssales
   from mongodb.tpcds.store_sales
-      ,mongodb.tpcds.customer
+      ,redis.customer.customer
   where ss_customer_sk = c_customer_sk
   group by c_customer_sk
   having sum(ss_quantity*ss_sales_price) > (95/100.0) * (select
@@ -32,7 +32,7 @@ from
   select  sum(sales)
  from (select cs_quantity*cs_list_price sales
        from mongodb.tpcds.catalog_sales
-           ,mongodb.tpcds.date_dim 
+           ,cassandra.tpcds.date_dim 
        where d_year = 1999 
          and d_moy = 1 
          and cs_sold_date_sk = d_date_sk 
@@ -41,7 +41,7 @@ from
       union all
       select ws_quantity*ws_list_price sales
        from mongodb.tpcds.web_sales 
-           ,mongodb.tpcds.date_dim 
+           ,cassandra.tpcds.date_dim 
        where d_year = 1999 
          and d_moy = 1 
          and ws_sold_date_sk = d_date_sk 
@@ -51,8 +51,8 @@ from
 with frequent_ss_items as
  (select substr(i_item_desc,1,30) itemdesc,i_item_sk item_sk,d_date solddate,count(*) cnt
   from mongodb.tpcds.store_sales
-      ,mongodb.tpcds.date_dim
-      ,mongodb.tpcds.item
+      ,cassandra.tpcds.date_dim
+      ,redis.item.item
   where ss_sold_date_sk = d_date_sk
     and ss_item_sk = i_item_sk
     and d_year in (1999,1999 + 1,1999 + 2,1999 + 3)
@@ -62,8 +62,8 @@ with frequent_ss_items as
  (select max(csales) tpcds_cmax
   from (select c_customer_sk,sum(ss_quantity*ss_sales_price) csales
         from mongodb.tpcds.store_sales
-            ,mongodb.tpcds.customer
-            ,mongodb.tpcds.date_dim 
+            ,redis.customer.customer
+            ,cassandra.tpcds.date_dim 
         where ss_customer_sk = c_customer_sk
          and ss_sold_date_sk = d_date_sk
          and d_year in (1999,1999+1,1999+2,1999+3)
@@ -71,7 +71,7 @@ with frequent_ss_items as
  best_ss_customer as
  (select c_customer_sk,sum(ss_quantity*ss_sales_price) ssales
   from mongodb.tpcds.store_sales
-      ,mongodb.tpcds.customer
+      ,redis.customer.customer
   where ss_customer_sk = c_customer_sk
   group by c_customer_sk
   having sum(ss_quantity*ss_sales_price) > (95/100.0) * (select
@@ -80,8 +80,8 @@ with frequent_ss_items as
   select  c_last_name,c_first_name,sales
  from (select c_last_name,c_first_name,sum(cs_quantity*cs_list_price) sales
         from mongodb.tpcds.catalog_sales
-            ,mongodb.tpcds.customer
-            ,mongodb.tpcds.date_dim 
+            ,redis.customer.customer
+            ,cassandra.tpcds.date_dim 
         where d_year = 1999 
          and d_moy = 1 
          and cs_sold_date_sk = d_date_sk 
@@ -92,8 +92,8 @@ with frequent_ss_items as
       union all
       select c_last_name,c_first_name,sum(ws_quantity*ws_list_price) sales
        from mongodb.tpcds.web_sales
-           ,mongodb.tpcds.customer
-           ,mongodb.tpcds.date_dim 
+           ,redis.customer.customer
+           ,cassandra.tpcds.date_dim 
        where d_year = 1999 
          and d_moy = 1 
          and ws_sold_date_sk = d_date_sk 

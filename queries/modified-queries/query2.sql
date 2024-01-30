@@ -19,7 +19,7 @@ with wscs as
         sum(case when (d_day_name='Friday') then sales_price else null end) fri_sales,
         sum(case when (d_day_name='Saturday') then sales_price else null end) sat_sales
  from wscs
-     ,mongodb.tpcds.date_dim
+     ,cassandra.tpcds.date_dim
  where d_date_sk = sold_date_sk
  group by d_week_seq)
  select d_week_seq1
@@ -39,8 +39,8 @@ with wscs as
         ,thu_sales thu_sales1
         ,fri_sales fri_sales1
         ,sat_sales sat_sales1
-  from wswscs,mongodb.tpcds.date_dim 
-  where mongodb.tpcds.date_dim.d_week_seq = wswscs.d_week_seq and
+  from wswscs,cassandra.tpcds.date_dim 
+  where cassandra.tpcds.date_dim.d_week_seq = wswscs.d_week_seq and
         d_year = 2001) y,
  (select wswscs.d_week_seq d_week_seq2
         ,sun_sales sun_sales2
@@ -51,8 +51,8 @@ with wscs as
         ,fri_sales fri_sales2
         ,sat_sales sat_sales2
   from wswscs
-      ,mongodb.tpcds.date_dim 
-  where mongodb.tpcds.date_dim.d_week_seq = wswscs.d_week_seq and
+      ,cassandra.tpcds.date_dim 
+  where cassandra.tpcds.date_dim.d_week_seq = wswscs.d_week_seq and
         d_year = 2001+1) z
  where d_week_seq1=d_week_seq2-53
  order by d_week_seq1;

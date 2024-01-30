@@ -10,9 +10,9 @@ with ws_wh as
   ,sum(ws_net_profit) as "total net profit"
 from
    mongodb.tpcds.web_sales ws1
-  ,mongodb.tpcds.date_dim
-  ,mongodb.tpcds.customer_address
-  ,mongodb.tpcds.web_site
+  ,cassandra.tpcds.date_dim
+  ,cassandra.tpcds.customer_address
+  ,redis.web_site.web_site
 where
     d_date between '1999-5-01' and 
            (cast('1999-5-01' as date) + 60 days)
@@ -24,7 +24,7 @@ and web_company_name = 'pri'
 and ws1.ws_order_number in (select ws_order_number
                             from ws_wh)
 and ws1.ws_order_number in (select wr_order_number
-                            from mongodb.tpcds.web_returns,ws_wh
+                            from cassandra.tpcds.web_returns,ws_wh
                             where wr_order_number = ws_wh.ws_order_number)
 order by count(distinct ws_order_number)
 limit 100;

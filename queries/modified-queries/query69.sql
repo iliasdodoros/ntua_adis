@@ -9,25 +9,25 @@ select
   cd_credit_rating,
   count(*) cnt3
  from
-  mongodb.tpcds.customer c,mongodb.tpcds.customer_address ca,mongodb.tpcds.customer_demographics
+  redis.customer.customer c,cassandra.tpcds.customer_address ca,mongodb.tpcds.customer_demographics
  where
   c.c_current_addr_sk = ca.ca_address_sk and
   ca_state in ('CO','IL','MN') and
   cd_demo_sk = c.c_current_cdemo_sk and 
   exists (select *
-          from mongodb.tpcds.store_sales,mongodb.tpcds.date_dim
+          from mongodb.tpcds.store_sales,cassandra.tpcds.date_dim
           where c.c_customer_sk = ss_customer_sk and
                 ss_sold_date_sk = d_date_sk and
                 d_year = 1999 and
                 d_moy between 1 and 1+2) and
    (not exists (select *
-            from mongodb.tpcds.web_sales,mongodb.tpcds.date_dim
+            from mongodb.tpcds.web_sales,cassandra.tpcds.date_dim
             where c.c_customer_sk = ws_bill_customer_sk and
                   ws_sold_date_sk = d_date_sk and
                   d_year = 1999 and
                   d_moy between 1 and 1+2) and
     not exists (select * 
-            from mongodb.tpcds.catalog_sales,mongodb.tpcds.date_dim
+            from mongodb.tpcds.catalog_sales,cassandra.tpcds.date_dim
             where c.c_customer_sk = cs_ship_customer_sk and
                   cs_sold_date_sk = d_date_sk and
                   d_year = 1999 and

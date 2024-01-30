@@ -5,9 +5,9 @@ select
   ,sum(cs_net_profit) as "total net profit"
 from
    mongodb.tpcds.catalog_sales cs1
-  ,mongodb.tpcds.date_dim
-  ,mongodb.tpcds.customer_address
-  ,mongodb.tpcds.call_center
+  ,cassandra.tpcds.date_dim
+  ,cassandra.tpcds.customer_address
+  ,redis.call_center.call_center
 where
     d_date between '1999-2-01' and 
            (cast('1999-2-01' as date) + 60 days)
@@ -23,7 +23,7 @@ and exists (select *
             where cs1.cs_order_number = cs2.cs_order_number
               and cs1.cs_warehouse_sk <> cs2.cs_warehouse_sk)
 and not exists(select *
-               from mongodb.tpcds.catalog_returns cr1
+               from cassandra.tpcds.catalog_returns cr1
                where cs1.cs_order_number = cr1.cr_order_number)
 order by count(distinct cs_order_number)
 limit 100;

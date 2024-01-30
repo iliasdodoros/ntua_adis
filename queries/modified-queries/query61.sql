@@ -3,12 +3,12 @@ select  promotions,total,cast(promotions as decimal(15,4))/cast(total as decimal
 from
   (select sum(ss_ext_sales_price) promotions
    from  mongodb.tpcds.store_sales
-        ,mongodb.tpcds.store
-        ,mongodb.tpcds.promotion
-        ,mongodb.tpcds.date_dim
-        ,mongodb.tpcds.customer
-        ,mongodb.tpcds.customer_address 
-        ,mongodb.tpcds.item
+        ,redis.store.store
+        ,redis.promotion.promotion
+        ,cassandra.tpcds.date_dim
+        ,redis.customer.customer
+        ,cassandra.tpcds.customer_address 
+        ,redis.item.item
    where ss_sold_date_sk = d_date_sk
    and   ss_store_sk = s_store_sk
    and   ss_promo_sk = p_promo_sk
@@ -23,11 +23,11 @@ from
    and   d_moy  = 11) promotional_sales,
   (select sum(ss_ext_sales_price) total
    from  mongodb.tpcds.store_sales
-        ,mongodb.tpcds.store
-        ,mongodb.tpcds.date_dim
-        ,mongodb.tpcds.customer
-        ,mongodb.tpcds.customer_address
-        ,mongodb.tpcds.item
+        ,redis.store.store
+        ,cassandra.tpcds.date_dim
+        ,redis.customer.customer
+        ,cassandra.tpcds.customer_address
+        ,redis.item.item
    where ss_sold_date_sk = d_date_sk
    and   ss_store_sk = s_store_sk
    and   ss_customer_sk= c_customer_sk

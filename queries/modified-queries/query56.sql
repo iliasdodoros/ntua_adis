@@ -3,12 +3,12 @@ with ss as (
  select i_item_id,sum(ss_ext_sales_price) total_sales
  from
  	mongodb.tpcds.store_sales,
- 	mongodb.tpcds.date_dim,
-         mongodb.tpcds.customer_address,
-         mongodb.tpcds.item
+ 	cassandra.tpcds.date_dim,
+         cassandra.tpcds.customer_address,
+         redis.item.item
  where i_item_id in (select
      i_item_id
-from mongodb.tpcds.item
+from redis.item.item
 where i_color in ('orchid','chiffon','lace'))
  and     ss_item_sk              = i_item_sk
  and     ss_sold_date_sk         = d_date_sk
@@ -21,13 +21,13 @@ where i_color in ('orchid','chiffon','lace'))
  select i_item_id,sum(cs_ext_sales_price) total_sales
  from
  	mongodb.tpcds.catalog_sales,
- 	mongodb.tpcds.date_dim,
-         mongodb.tpcds.customer_address,
-         mongodb.tpcds.item
+ 	cassandra.tpcds.date_dim,
+         cassandra.tpcds.customer_address,
+         redis.item.item
  where
          i_item_id               in (select
   i_item_id
-from mongodb.tpcds.item
+from redis.item.item
 where i_color in ('orchid','chiffon','lace'))
  and     cs_item_sk              = i_item_sk
  and     cs_sold_date_sk         = d_date_sk
@@ -40,13 +40,13 @@ where i_color in ('orchid','chiffon','lace'))
  select i_item_id,sum(ws_ext_sales_price) total_sales
  from
  	mongodb.tpcds.web_sales,
- 	mongodb.tpcds.date_dim,
-         mongodb.tpcds.customer_address,
-         mongodb.tpcds.item
+ 	cassandra.tpcds.date_dim,
+         cassandra.tpcds.customer_address,
+         redis.item.item
  where
          i_item_id               in (select
   i_item_id
-from mongodb.tpcds.item
+from redis.item.item
 where i_color in ('orchid','chiffon','lace'))
  and     ws_item_sk              = i_item_sk
  and     ws_sold_date_sk         = d_date_sk

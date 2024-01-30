@@ -1,12 +1,12 @@
 
 select  c_customer_id as customer_id
        , coalesce(c_last_name,'') || ', ' || coalesce(c_first_name,'') as customername
- from mongodb.tpcds.customer
-     ,mongodb.tpcds.customer_address
+ from redis.customer.customer
+     ,cassandra.tpcds.customer_address
      ,mongodb.tpcds.customer_demographics
-     ,mongodb.tpcds.household_demographics
-     ,mongodb.tpcds.income_band
-     ,mongodb.tpcds.store_returns
+     ,cassandra.tpcds.household_demographics
+     ,redis.income_band.income_band
+     ,cassandra.tpcds.store_returns
  where ca_city	        =  'Hopewell'
    and c_current_addr_sk = ca_address_sk
    and ib_lower_bound   >=  32287

@@ -2,9 +2,9 @@
 select  ca_zip
        ,sum(cs_sales_price)
  from mongodb.tpcds.catalog_sales
-     ,mongodb.tpcds.customer
-     ,mongodb.tpcds.customer_address
-     ,mongodb.tpcds.date_dim
+     ,redis.customer.customer
+     ,cassandra.tpcds.customer_address
+     ,cassandra.tpcds.date_dim
  where cs_bill_customer_sk = c_customer_sk
  	and c_current_addr_sk = ca_address_sk 
  	and ( substr(ca_zip,1,5) in ('85669', '86197','88274','83405','86475',

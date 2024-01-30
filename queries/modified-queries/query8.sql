@@ -2,12 +2,12 @@
 select  s_store_name
       ,sum(ss_net_profit)
  from mongodb.tpcds.store_sales
-     ,mongodb.tpcds.date_dim
-     ,mongodb.tpcds.store,
+     ,cassandra.tpcds.date_dim
+     ,redis.store.store,
      (select ca_zip
      from (
       SELECT substr(ca_zip,1,5) ca_zip
-      FROM mongodb.tpcds.customer_address
+      FROM cassandra.tpcds.customer_address
       WHERE substr(ca_zip,1,5) IN (
                           '89436','30868','65085','22977','83927','77557',
                           '58429','40697','80614','10502','32779',
@@ -92,7 +92,7 @@ select  s_store_name
      intersect
       select ca_zip
       from (SELECT substr(ca_zip,1,5) ca_zip,count(*) cnt
-            FROM mongodb.tpcds.customer_address, mongodb.tpcds.customer
+            FROM cassandra.tpcds.customer_address, redis.customer.customer
             WHERE ca_address_sk = c_current_addr_sk and
                   c_preferred_cust_flag='Y'
             group by ca_zip

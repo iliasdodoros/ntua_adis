@@ -9,9 +9,9 @@ select  *
                       then inv_quantity_on_hand 
                       else 0 end) as inv_after
    from mongodb.tpcds.inventory
-       ,mongodb.tpcds.warehouse
-       ,mongodb.tpcds.item
-       ,mongodb.tpcds.date_dim
+       ,redis.warehouse.warehouse
+       ,redis.item.item
+       ,cassandra.tpcds.date_dim
    where i_current_price between 0.99 and 1.49
      and i_item_sk          = inv_item_sk
      and inv_warehouse_sk   = w_warehouse_sk

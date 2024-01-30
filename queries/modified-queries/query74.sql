@@ -6,9 +6,9 @@ with year_total as (
        ,d_year as year
        ,max(ss_net_paid) year_total
        ,'s' sale_type
- from mongodb.tpcds.customer
+ from redis.customer.customer
      ,mongodb.tpcds.store_sales
-     ,mongodb.tpcds.date_dim
+     ,cassandra.tpcds.date_dim
  where c_customer_sk = ss_customer_sk
    and ss_sold_date_sk = d_date_sk
    and d_year in (2001,2001+1)
@@ -23,9 +23,9 @@ with year_total as (
        ,d_year as year
        ,max(ws_net_paid) year_total
        ,'w' sale_type
- from mongodb.tpcds.customer
+ from redis.customer.customer
      ,mongodb.tpcds.web_sales
-     ,mongodb.tpcds.date_dim
+     ,cassandra.tpcds.date_dim
  where c_customer_sk = ws_bill_customer_sk
    and ws_sold_date_sk = d_date_sk
    and d_year in (2001,2001+1)

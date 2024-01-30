@@ -3,8 +3,8 @@ select
    sum(ws_ext_discount_amt)  as "Excess Discount Amount" 
 from 
     mongodb.tpcds.web_sales 
-   ,mongodb.tpcds.item 
-   ,mongodb.tpcds.date_dim
+   ,redis.item.item 
+   ,cassandra.tpcds.date_dim
 where
 i_manufact_id = 269
 and i_item_sk = ws_item_sk 
@@ -17,7 +17,7 @@ and ws_ext_discount_amt
             1.3 * avg(ws_ext_discount_amt) 
          FROM 
             mongodb.tpcds.web_sales 
-           ,mongodb.tpcds.date_dim
+           ,cassandra.tpcds.date_dim
          WHERE 
               ws_item_sk = i_item_sk 
           and d_date between '1998-03-18' and

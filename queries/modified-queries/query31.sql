@@ -1,13 +1,13 @@
 
 with ss as
  (select ca_county,d_qoy, d_year,sum(ss_ext_sales_price) as mongodb.tpcds.store_sales
- from mongodb.tpcds.store_sales,mongodb.tpcds.date_dim,mongodb.tpcds.customer_address
+ from mongodb.tpcds.store_sales,cassandra.tpcds.date_dim,cassandra.tpcds.customer_address
  where ss_sold_date_sk = d_date_sk
   and ss_addr_sk=ca_address_sk
  group by ca_county,d_qoy, d_year),
  ws as
  (select ca_county,d_qoy, d_year,sum(ws_ext_sales_price) as mongodb.tpcds.web_sales
- from mongodb.tpcds.web_sales,mongodb.tpcds.date_dim,mongodb.tpcds.customer_address
+ from mongodb.tpcds.web_sales,cassandra.tpcds.date_dim,cassandra.tpcds.customer_address
  where ws_sold_date_sk = d_date_sk
   and ws_bill_addr_sk=ca_address_sk
  group by ca_county,d_qoy, d_year)

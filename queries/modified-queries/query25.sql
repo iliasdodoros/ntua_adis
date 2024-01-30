@@ -9,13 +9,13 @@ select
  ,sum(cs_net_profit) as catalog_sales_profit
  from
  mongodb.tpcds.store_sales
- ,mongodb.tpcds.store_returns
+ ,cassandra.tpcds.store_returns
  ,mongodb.tpcds.catalog_sales
- ,mongodb.tpcds.date_dim d1
- ,mongodb.tpcds.date_dim d2
- ,mongodb.tpcds.date_dim d3
- ,mongodb.tpcds.store
- ,mongodb.tpcds.item
+ ,cassandra.tpcds.date_dim d1
+ ,cassandra.tpcds.date_dim d2
+ ,cassandra.tpcds.date_dim d3
+ ,redis.store.store
+ ,redis.item.item
  where
  d1.d_moy = 4
  and d1.d_year = 2000

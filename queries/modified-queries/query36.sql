@@ -10,9 +10,9 @@ select
  	order by sum(ss_net_profit)/sum(ss_ext_sales_price) asc) as rank_within_parent
  from
     mongodb.tpcds.store_sales
-   ,mongodb.tpcds.date_dim       d1
-   ,mongodb.tpcds.item
-   ,mongodb.tpcds.store
+   ,cassandra.tpcds.date_dim       d1
+   ,redis.item.item
+   ,redis.store.store
  where
     d1.d_year = 2000 
  and d1.d_date_sk = ss_sold_date_sk

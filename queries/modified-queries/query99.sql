@@ -13,10 +13,10 @@ select
   ,sum(case when (cs_ship_date_sk - cs_sold_date_sk  > 120) then 1 else 0 end)  as ">120 days" 
 from
    mongodb.tpcds.catalog_sales
-  ,mongodb.tpcds.warehouse
-  ,mongodb.tpcds.ship_mode
-  ,mongodb.tpcds.call_center
-  ,mongodb.tpcds.date_dim
+  ,redis.warehouse.warehouse
+  ,redis.ship_mode.ship_mode
+  ,redis.call_center.call_center
+  ,cassandra.tpcds.date_dim
 where
     d_month_seq between 1212 and 1212 + 11
 and cs_ship_date_sk   = d_date_sk

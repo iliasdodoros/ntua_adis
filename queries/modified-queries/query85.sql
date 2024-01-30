@@ -3,8 +3,8 @@ select  substr(r_reason_desc,1,20)
        ,avg(ws_quantity)
        ,avg(wr_refunded_cash)
        ,avg(wr_fee)
- from mongodb.tpcds.web_sales, mongodb.tpcds.web_returns, mongodb.tpcds.web_page, mongodb.tpcds.customer_demographics cd1,
-      mongodb.tpcds.customer_demographics cd2, mongodb.tpcds.customer_address, mongodb.tpcds.date_dim, mongodb.tpcds.reason 
+ from mongodb.tpcds.web_sales, cassandra.tpcds.web_returns, redis.web_page.web_page, mongodb.tpcds.customer_demographics cd1,
+      mongodb.tpcds.customer_demographics cd2, cassandra.tpcds.customer_address, cassandra.tpcds.date_dim, redis.reason.reason 
  where ws_web_page_sk = wp_web_page_sk
    and ws_item_sk = wr_item_sk
    and ws_order_number = wr_order_number

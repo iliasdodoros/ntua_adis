@@ -104,10 +104,10 @@ select
  		then ws_net_paid_inc_tax * ws_quantity else 0 end) as dec_net
      from
           mongodb.tpcds.web_sales
-         ,mongodb.tpcds.warehouse
-         ,mongodb.tpcds.date_dim
+         ,redis.warehouse.warehouse
+         ,cassandra.tpcds.date_dim
          ,mongodb.tpcds.time_dim
- 	  ,mongodb.tpcds.ship_mode
+ 	  ,redis.ship_mode.ship_mode
      where
             ws_warehouse_sk =  w_warehouse_sk
         and ws_sold_date_sk = d_date_sk
@@ -184,10 +184,10 @@ select
  		then cs_net_paid_inc_ship_tax * cs_quantity else 0 end) as dec_net
      from
           mongodb.tpcds.catalog_sales
-         ,mongodb.tpcds.warehouse
-         ,mongodb.tpcds.date_dim
+         ,redis.warehouse.warehouse
+         ,cassandra.tpcds.date_dim
          ,mongodb.tpcds.time_dim
- 	 ,mongodb.tpcds.ship_mode
+ 	 ,redis.ship_mode.ship_mode
      where
             cs_warehouse_sk =  w_warehouse_sk
         and cs_sold_date_sk = d_date_sk

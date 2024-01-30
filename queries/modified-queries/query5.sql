@@ -20,10 +20,10 @@ with ssr as
            cast(0 as decimal(7,2)) as profit,
            sr_return_amt as return_amt,
            sr_net_loss as net_loss
-    from mongodb.tpcds.store_returns
+    from cassandra.tpcds.store_returns
    ) salesreturns,
-     mongodb.tpcds.date_dim,
-     mongodb.tpcds.store
+     cassandra.tpcds.date_dim,
+     redis.store.store
  where date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date) 
                   and (cast('1998-08-04' as date) +  14 days)
@@ -51,10 +51,10 @@ with ssr as
            cast(0 as decimal(7,2)) as profit,
            cr_return_amount as return_amt,
            cr_net_loss as net_loss
-    from mongodb.tpcds.catalog_returns
+    from cassandra.tpcds.catalog_returns
    ) salesreturns,
-     mongodb.tpcds.date_dim,
-     mongodb.tpcds.catalog_page
+     cassandra.tpcds.date_dim,
+     cassandra.tpcds.catalog_page
  where date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date)
                   and (cast('1998-08-04' as date) +  14 days)
@@ -82,12 +82,12 @@ with ssr as
            cast(0 as decimal(7,2)) as profit,
            wr_return_amt as return_amt,
            wr_net_loss as net_loss
-    from mongodb.tpcds.web_returns left outer join mongodb.tpcds.web_sales on
+    from cassandra.tpcds.web_returns left outer join mongodb.tpcds.web_sales on
          ( wr_item_sk = ws_item_sk
            and wr_order_number = ws_order_number)
    ) salesreturns,
-     mongodb.tpcds.date_dim,
-     mongodb.tpcds.web_site
+     cassandra.tpcds.date_dim,
+     redis.web_site.web_site
  where date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date)
                   and (cast('1998-08-04' as date) +  14 days)
@@ -99,22 +99,22 @@ with ssr as
         , sum(returns) as returns
         , sum(profit) as profit
  from 
- (select 'mongodb.tpcds.store channel' as channel
-        , 'mongodb.tpcds.store' || s_store_id as id
+ (select 'redis.store.store channel' as channel
+        , 'redis.store.store' || s_store_id as id
         , sales
         , returns
         , (profit - profit_loss) as profit
  from   ssr
  union all
  select 'catalog channel' as channel
-        , 'mongodb.tpcds.catalog_page' || cp_catalog_page_id as id
+        , 'cassandra.tpcds.catalog_page' || cp_catalog_page_id as id
         , sales
         , returns
         , (profit - profit_loss) as profit
  from  csr
  union all
  select 'web channel' as channel
-        , 'mongodb.tpcds.web_site' || web_site_id as id
+        , 'redis.web_site.web_site' || web_site_id as id
         , sales
         , returns
         , (profit - profit_loss) as profit

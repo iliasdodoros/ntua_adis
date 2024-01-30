@@ -20,10 +20,10 @@ select
   ,sum(case when (sr_returned_date_sk - ss_sold_date_sk  > 120) then 1 else 0 end)  as ">120 days" 
 from
    mongodb.tpcds.store_sales
-  ,mongodb.tpcds.store_returns
-  ,mongodb.tpcds.store
-  ,mongodb.tpcds.date_dim d1
-  ,mongodb.tpcds.date_dim d2
+  ,cassandra.tpcds.store_returns
+  ,redis.store.store
+  ,cassandra.tpcds.date_dim d1
+  ,cassandra.tpcds.date_dim d2
 where
     d2.d_year = 2000
 and d2.d_moy  = 9

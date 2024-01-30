@@ -5,13 +5,13 @@ select
         cc_manager Manager,
         sum(cr_net_loss) Returns_Loss
 from
-        mongodb.tpcds.call_center,
-        mongodb.tpcds.catalog_returns,
-        mongodb.tpcds.date_dim,
-        mongodb.tpcds.customer,
-        mongodb.tpcds.customer_address,
+        redis.call_center.call_center,
+        cassandra.tpcds.catalog_returns,
+        cassandra.tpcds.date_dim,
+        redis.customer.customer,
+        cassandra.tpcds.customer_address,
         mongodb.tpcds.customer_demographics,
-        mongodb.tpcds.household_demographics
+        cassandra.tpcds.household_demographics
 where
         cr_call_center_sk       = cc_call_center_sk
 and     cr_returned_date_sk     = d_date_sk

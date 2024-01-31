@@ -9,9 +9,9 @@ select
  	case when grouping(i_class) = 0 then i_category end 
  	order by sum(ws_net_paid) desc) as rank_within_parent
  from
-    mongodb.tpcds.web_sales
+    cassandra.tpcds.web_sales
    ,cassandra.tpcds.date_dim       d1
-   ,redis.item.item
+   ,cassandra.tpcds.item
  where
     d1.d_month_seq between 1212 and 1212+11
  and d1.d_date_sk = ws_sold_date_sk

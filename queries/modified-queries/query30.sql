@@ -16,7 +16,7 @@ with customer_total_return as
        ,c_last_review_date_sk,ctr_total_return
  from customer_total_return ctr1
      ,cassandra.tpcds.customer_address
-     ,redis.customer.customer
+     ,cassandra.tpcds.customer
  where ctr1.ctr_total_return > (select avg(ctr_total_return)*1.2
  			  from customer_total_return ctr2 
                   	  where ctr1.ctr_state = ctr2.ctr_state)

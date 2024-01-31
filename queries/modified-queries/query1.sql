@@ -11,8 +11,8 @@ group by sr_customer_sk
 ,sr_store_sk)
  select  c_customer_id
 from customer_total_return ctr1
-,redis.store.store
-,redis.customer.customer
+,cassandra.tpcds.store
+,cassandra.tpcds.customer
 where ctr1.ctr_total_return > (select avg(ctr_total_return)*1.2
 from customer_total_return ctr2
 where ctr1.ctr_store_sk = ctr2.ctr_store_sk)

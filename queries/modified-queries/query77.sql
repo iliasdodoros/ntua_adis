@@ -3,9 +3,9 @@ with ss as
  (select s_store_sk,
          sum(ss_ext_sales_price) as sales,
          sum(ss_net_profit) as profit
- from mongodb.tpcds.store_sales,
+ from cassandra.tpcds.store_sales,
       cassandra.tpcds.date_dim,
-      redis.store.store
+      cassandra.tpcds.store
  where ss_sold_date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date) 
                   and (cast('1998-08-04' as date) +  30 days) 
@@ -18,7 +18,7 @@ with ss as
          sum(sr_net_loss) as profit_loss
  from cassandra.tpcds.store_returns,
       cassandra.tpcds.date_dim,
-      redis.store.store
+      cassandra.tpcds.store
  where sr_returned_date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date)
                   and (cast('1998-08-04' as date) +  30 days)
@@ -28,7 +28,7 @@ with ss as
  (select cs_call_center_sk,
         sum(cs_ext_sales_price) as sales,
         sum(cs_net_profit) as profit
- from mongodb.tpcds.catalog_sales,
+ from cassandra.tpcds.catalog_sales,
       cassandra.tpcds.date_dim
  where cs_sold_date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date)
@@ -50,9 +50,9 @@ with ss as
  ( select wp_web_page_sk,
         sum(ws_ext_sales_price) as sales,
         sum(ws_net_profit) as profit
- from mongodb.tpcds.web_sales,
+ from cassandra.tpcds.web_sales,
       cassandra.tpcds.date_dim,
-      redis.web_page.web_page
+      cassandra.tpcds.web_page
  where ws_sold_date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date)
                   and (cast('1998-08-04' as date) +  30 days)
@@ -64,7 +64,7 @@ with ss as
         sum(wr_net_loss) as profit_loss
  from cassandra.tpcds.web_returns,
       cassandra.tpcds.date_dim,
-      redis.web_page.web_page
+      cassandra.tpcds.web_page
  where wr_returned_date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date)
                   and (cast('1998-08-04' as date) +  30 days)
@@ -76,7 +76,7 @@ with ss as
         , sum(returns) as returns
         , sum(profit) as profit
  from 
- (select 'redis.store.store channel' as channel
+ (select 'cassandra.tpcds.store channel' as channel
         , ss.s_store_sk as id
         , sales
         , coalesce(returns, 0) as returns

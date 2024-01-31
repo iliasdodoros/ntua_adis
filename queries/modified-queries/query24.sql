@@ -11,11 +11,11 @@ with ssales as
       ,i_units
       ,i_size
       ,sum(ss_sales_price) netpaid
-from mongodb.tpcds.store_sales
+from cassandra.tpcds.store_sales
     ,cassandra.tpcds.store_returns
-    ,redis.store.store
-    ,redis.item.item
-    ,redis.customer.customer
+    ,cassandra.tpcds.store
+    ,cassandra.tpcds.item
+    ,cassandra.tpcds.customer
     ,cassandra.tpcds.customer_address
 where ss_ticket_number = sr_ticket_number
   and ss_item_sk = sr_item_sk
@@ -63,11 +63,11 @@ with ssales as
       ,i_units
       ,i_size
       ,sum(ss_sales_price) netpaid
-from mongodb.tpcds.store_sales
+from cassandra.tpcds.store_sales
     ,cassandra.tpcds.store_returns
-    ,redis.store.store
-    ,redis.item.item
-    ,redis.customer.customer
+    ,cassandra.tpcds.store
+    ,cassandra.tpcds.item
+    ,cassandra.tpcds.customer
     ,cassandra.tpcds.customer_address
 where ss_ticket_number = sr_ticket_number
   and ss_item_sk = sr_item_sk

@@ -1,26 +1,26 @@
 
-select  channel, redis.item.item, return_ratio, return_rank, currency_rank from
+select  channel, cassandra.tpcds.item, return_ratio, return_rank, currency_rank from
  (select
  'web' as channel
- ,web.redis.item.item
+ ,web.cassandra.tpcds.item
  ,web.return_ratio
  ,web.return_rank
  ,web.currency_rank
  from (
  	select 
- 	 redis.item.item
+ 	 cassandra.tpcds.item
  	,return_ratio
  	,currency_ratio
  	,rank() over (order by return_ratio) as return_rank
  	,rank() over (order by currency_ratio) as currency_rank
  	from
- 	(	select ws.ws_item_sk as redis.item.item
+ 	(	select ws.ws_item_sk as cassandra.tpcds.item
  		,(cast(sum(coalesce(wr.wr_return_quantity,0)) as decimal(15,4))/
  		cast(sum(coalesce(ws.ws_quantity,0)) as decimal(15,4) )) as return_ratio
  		,(cast(sum(coalesce(wr.wr_return_amt,0)) as decimal(15,4))/
  		cast(sum(coalesce(ws.ws_net_paid,0)) as decimal(15,4) )) as currency_ratio
  		from 
- 		 mongodb.tpcds.web_sales ws left outer join cassandra.tpcds.web_returns wr 
+ 		 cassandra.tpcds.web_sales ws left outer join cassandra.tpcds.web_returns wr 
  			on (ws.ws_order_number = wr.wr_order_number and 
  			ws.ws_item_sk = wr.wr_item_sk)
                  ,cassandra.tpcds.date_dim
@@ -44,26 +44,26 @@ select  channel, redis.item.item, return_ratio, return_rank, currency_rank from
  union
  select 
  'catalog' as channel
- ,catalog.redis.item.item
+ ,catalog.cassandra.tpcds.item
  ,catalog.return_ratio
  ,catalog.return_rank
  ,catalog.currency_rank
  from (
  	select 
- 	 redis.item.item
+ 	 cassandra.tpcds.item
  	,return_ratio
  	,currency_ratio
  	,rank() over (order by return_ratio) as return_rank
  	,rank() over (order by currency_ratio) as currency_rank
  	from
  	(	select 
- 		cs.cs_item_sk as redis.item.item
+ 		cs.cs_item_sk as cassandra.tpcds.item
  		,(cast(sum(coalesce(cr.cr_return_quantity,0)) as decimal(15,4))/
  		cast(sum(coalesce(cs.cs_quantity,0)) as decimal(15,4) )) as return_ratio
  		,(cast(sum(coalesce(cr.cr_return_amount,0)) as decimal(15,4))/
  		cast(sum(coalesce(cs.cs_net_paid,0)) as decimal(15,4) )) as currency_ratio
  		from 
- 		mongodb.tpcds.catalog_sales cs left outer join cassandra.tpcds.catalog_returns cr
+ 		cassandra.tpcds.catalog_sales cs left outer join cassandra.tpcds.catalog_returns cr
  			on (cs.cs_order_number = cr.cr_order_number and 
  			cs.cs_item_sk = cr.cr_item_sk)
                 ,cassandra.tpcds.date_dim
@@ -86,24 +86,24 @@ select  channel, redis.item.item, return_ratio, return_rank, currency_rank from
  )
  union
  select 
- 'redis.store.store' as channel
- ,redis.store.store.redis.item.item
- ,redis.store.store.return_ratio
- ,redis.store.store.return_rank
- ,redis.store.store.currency_rank
+ 'cassandra.tpcds.store' as channel
+ ,cassandra.tpcds.store.cassandra.tpcds.item
+ ,cassandra.tpcds.store.return_ratio
+ ,cassandra.tpcds.store.return_rank
+ ,cassandra.tpcds.store.currency_rank
  from (
  	select 
- 	 redis.item.item
+ 	 cassandra.tpcds.item
  	,return_ratio
  	,currency_ratio
  	,rank() over (order by return_ratio) as return_rank
  	,rank() over (order by currency_ratio) as currency_rank
  	from
- 	(	select sts.ss_item_sk as redis.item.item
+ 	(	select sts.ss_item_sk as cassandra.tpcds.item
  		,(cast(sum(coalesce(sr.sr_return_quantity,0)) as decimal(15,4))/cast(sum(coalesce(sts.ss_quantity,0)) as decimal(15,4) )) as return_ratio
  		,(cast(sum(coalesce(sr.sr_return_amt,0)) as decimal(15,4))/cast(sum(coalesce(sts.ss_net_paid,0)) as decimal(15,4) )) as currency_ratio
  		from 
- 		mongodb.tpcds.store_sales sts left outer join cassandra.tpcds.store_returns sr
+ 		cassandra.tpcds.store_sales sts left outer join cassandra.tpcds.store_returns sr
  			on (sts.ss_ticket_number = sr.sr_ticket_number and sts.ss_item_sk = sr.sr_item_sk)
                 ,cassandra.tpcds.date_dim
  		where 
@@ -116,11 +116,11 @@ select  channel, redis.item.item, return_ratio, return_rank, currency_rank from
                          and d_moy = 12
  		group by sts.ss_item_sk
  	) in_store
- ) redis.store.store
+ ) cassandra.tpcds.store
  where  (
- redis.store.store.return_rank <= 10
+ cassandra.tpcds.store.return_rank <= 10
  or 
- redis.store.store.currency_rank <= 10
+ cassandra.tpcds.store.currency_rank <= 10
  )
  )
  order by 1,4,5,2

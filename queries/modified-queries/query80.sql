@@ -4,15 +4,15 @@ with ssr as
           sum(ss_ext_sales_price) as sales,
           sum(coalesce(sr_return_amt, 0)) as returns,
           sum(ss_net_profit - coalesce(sr_net_loss, 0)) as profit
-  from mongodb.tpcds.store_sales left outer join cassandra.tpcds.store_returns on
+  from cassandra.tpcds.store_sales left outer join cassandra.tpcds.store_returns on
          (ss_item_sk = sr_item_sk and ss_ticket_number = sr_ticket_number),
      cassandra.tpcds.date_dim,
-     redis.store.store,
-     redis.item.item,
-     redis.promotion.promotion
+     cassandra.tpcds.store,
+     cassandra.tpcds.item,
+     cassandra.tpcds.promotion
  where ss_sold_date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date) 
-                  and (cast('1998-08-04' as date) +  interval '30' day)
+                  and (cast('1998-08-04' as date) +  30 days)
        and ss_store_sk = s_store_sk
        and ss_item_sk = i_item_sk
        and i_current_price > 50
@@ -25,15 +25,15 @@ with ssr as
           sum(cs_ext_sales_price) as sales,
           sum(coalesce(cr_return_amount, 0)) as returns,
           sum(cs_net_profit - coalesce(cr_net_loss, 0)) as profit
-  from mongodb.tpcds.catalog_sales left outer join cassandra.tpcds.catalog_returns on
+  from cassandra.tpcds.catalog_sales left outer join cassandra.tpcds.catalog_returns on
          (cs_item_sk = cr_item_sk and cs_order_number = cr_order_number),
      cassandra.tpcds.date_dim,
      cassandra.tpcds.catalog_page,
-     redis.item.item,
-     redis.promotion.promotion
+     cassandra.tpcds.item,
+     cassandra.tpcds.promotion
  where cs_sold_date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date)
-                  and (cast('1998-08-04' as date) +  interval '30' day)
+                  and (cast('1998-08-04' as date) +  30 days)
         and cs_catalog_page_sk = cp_catalog_page_sk
        and cs_item_sk = i_item_sk
        and i_current_price > 50
@@ -46,15 +46,15 @@ group by cp_catalog_page_id)
           sum(ws_ext_sales_price) as sales,
           sum(coalesce(wr_return_amt, 0)) as returns,
           sum(ws_net_profit - coalesce(wr_net_loss, 0)) as profit
-  from mongodb.tpcds.web_sales left outer join cassandra.tpcds.web_returns on
+  from cassandra.tpcds.web_sales left outer join cassandra.tpcds.web_returns on
          (ws_item_sk = wr_item_sk and ws_order_number = wr_order_number),
      cassandra.tpcds.date_dim,
-     redis.web_site.web_site,
-     redis.item.item,
-     redis.promotion.promotion
+     cassandra.tpcds.web_site,
+     cassandra.tpcds.item,
+     cassandra.tpcds.promotion
  where ws_sold_date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date)
-                  and (cast('1998-08-04' as date) + interval '30' day)
+                  and (cast('1998-08-04' as date) +  30 days)
         and ws_web_site_sk = web_site_sk
        and ws_item_sk = i_item_sk
        and i_current_price > 50
@@ -67,8 +67,8 @@ group by web_site_id)
         , sum(returns) as returns
         , sum(profit) as profit
  from 
- (select 'redis.store.store channel' as channel
-        , 'redis.store.store' || store_id as id
+ (select 'cassandra.tpcds.store channel' as channel
+        , 'cassandra.tpcds.store' || store_id as id
         , sales
         , returns
         , profit
@@ -82,7 +82,7 @@ group by web_site_id)
  from  csr
  union all
  select 'web channel' as channel
-        , 'redis.web_site.web_site' || web_site_id as id
+        , 'cassandra.tpcds.web_site' || web_site_id as id
         , sales
         , returns
         , profit

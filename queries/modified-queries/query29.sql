@@ -8,14 +8,14 @@ select
     ,sum(sr_return_quantity) as store_returns_quantity
     ,sum(cs_quantity)        as catalog_sales_quantity
  from
-    mongodb.tpcds.store_sales
+    cassandra.tpcds.store_sales
    ,cassandra.tpcds.store_returns
-   ,mongodb.tpcds.catalog_sales
+   ,cassandra.tpcds.catalog_sales
    ,cassandra.tpcds.date_dim             d1
    ,cassandra.tpcds.date_dim             d2
    ,cassandra.tpcds.date_dim             d3
-   ,redis.store.store
-   ,redis.item.item
+   ,cassandra.tpcds.store
+   ,cassandra.tpcds.item
  where
      d1.d_moy               = 4 
  and d1.d_year              = 1999

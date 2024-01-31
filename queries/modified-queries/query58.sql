@@ -2,8 +2,8 @@
 with ss_items as
  (select i_item_id item_id
         ,sum(ss_ext_sales_price) ss_item_rev 
- from mongodb.tpcds.store_sales
-     ,redis.item.item
+ from cassandra.tpcds.store_sales
+     ,cassandra.tpcds.item
      ,cassandra.tpcds.date_dim
  where ss_item_sk = i_item_sk
    and d_date in (select d_date
@@ -16,8 +16,8 @@ with ss_items as
  cs_items as
  (select i_item_id item_id
         ,sum(cs_ext_sales_price) cs_item_rev
-  from mongodb.tpcds.catalog_sales
-      ,redis.item.item
+  from cassandra.tpcds.catalog_sales
+      ,cassandra.tpcds.item
       ,cassandra.tpcds.date_dim
  where cs_item_sk = i_item_sk
   and  d_date in (select d_date
@@ -30,8 +30,8 @@ with ss_items as
  ws_items as
  (select i_item_id item_id
         ,sum(ws_ext_sales_price) ws_item_rev
-  from mongodb.tpcds.web_sales
-      ,redis.item.item
+  from cassandra.tpcds.web_sales
+      ,cassandra.tpcds.item
       ,cassandra.tpcds.date_dim
  where ws_item_sk = i_item_sk
   and  d_date in (select d_date

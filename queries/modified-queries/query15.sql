@@ -1,8 +1,8 @@
 
 select  ca_zip
        ,sum(cs_sales_price)
- from mongodb.tpcds.catalog_sales
-     ,redis.customer.customer
+ from cassandra.tpcds.catalog_sales
+     ,cassandra.tpcds.customer
      ,cassandra.tpcds.customer_address
      ,cassandra.tpcds.date_dim
  where cs_bill_customer_sk = c_customer_sk

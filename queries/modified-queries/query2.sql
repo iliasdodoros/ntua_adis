@@ -4,11 +4,11 @@ with wscs as
         ,sales_price
   from (select ws_sold_date_sk sold_date_sk
               ,ws_ext_sales_price sales_price
-        from mongodb.tpcds.web_sales 
+        from cassandra.tpcds.web_sales 
         union all
         select cs_sold_date_sk sold_date_sk
               ,cs_ext_sales_price sales_price
-        from mongodb.tpcds.catalog_sales)),
+        from cassandra.tpcds.catalog_sales)),
  wswscs as 
  (select d_week_seq,
         sum(case when (d_day_name='Sunday') then sales_price else null end) sun_sales,

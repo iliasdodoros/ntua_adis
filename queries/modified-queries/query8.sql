@@ -1,9 +1,9 @@
 
 select  s_store_name
       ,sum(ss_net_profit)
- from mongodb.tpcds.store_sales
+ from cassandra.tpcds.store_sales
      ,cassandra.tpcds.date_dim
-     ,redis.store.store,
+     ,cassandra.tpcds.store,
      (select ca_zip
      from (
       SELECT substr(ca_zip,1,5) ca_zip
@@ -92,7 +92,7 @@ select  s_store_name
      intersect
       select ca_zip
       from (SELECT substr(ca_zip,1,5) ca_zip,count(*) cnt
-            FROM cassandra.tpcds.customer_address, redis.customer.customer
+            FROM cassandra.tpcds.customer_address, cassandra.tpcds.customer
             WHERE ca_address_sk = c_current_addr_sk and
                   c_preferred_cust_flag='Y'
             group by ca_zip

@@ -9,10 +9,10 @@ select
  	case when grouping(i_class) = 0 then i_category end 
  	order by sum(ss_net_profit)/sum(ss_ext_sales_price) asc) as rank_within_parent
  from
-    mongodb.tpcds.store_sales
+    cassandra.tpcds.store_sales
    ,cassandra.tpcds.date_dim       d1
-   ,redis.item.item
-   ,redis.store.store
+   ,cassandra.tpcds.item
+   ,cassandra.tpcds.store
  where
     d1.d_year = 2000 
  and d1.d_date_sk = ss_sold_date_sk

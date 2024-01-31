@@ -4,9 +4,9 @@ with inv as
        ,stdev,mean, case mean when 0 then null else stdev/mean end cov
  from(select w_warehouse_name,w_warehouse_sk,i_item_sk,d_moy
             ,stddev_samp(inv_quantity_on_hand) stdev,avg(inv_quantity_on_hand) mean
-      from mongodb.tpcds.inventory
-          ,redis.item.item
-          ,redis.warehouse.warehouse
+      from cassandra.tpcds.inventory
+          ,cassandra.tpcds.item
+          ,cassandra.tpcds.warehouse
           ,cassandra.tpcds.date_dim
       where inv_item_sk = i_item_sk
         and inv_warehouse_sk = w_warehouse_sk
@@ -29,9 +29,9 @@ with inv as
        ,stdev,mean, case mean when 0 then null else stdev/mean end cov
  from(select w_warehouse_name,w_warehouse_sk,i_item_sk,d_moy
             ,stddev_samp(inv_quantity_on_hand) stdev,avg(inv_quantity_on_hand) mean
-      from mongodb.tpcds.inventory
-          ,redis.item.item
-          ,redis.warehouse.warehouse
+      from cassandra.tpcds.inventory
+          ,cassandra.tpcds.item
+          ,cassandra.tpcds.warehouse
           ,cassandra.tpcds.date_dim
       where inv_item_sk = i_item_sk
         and inv_warehouse_sk = w_warehouse_sk

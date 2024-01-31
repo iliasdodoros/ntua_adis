@@ -1,11 +1,11 @@
 
 select  c_customer_id as customer_id
        , coalesce(c_last_name,'') || ', ' || coalesce(c_first_name,'') as customername
- from redis.customer.customer
+ from cassandra.tpcds.customer
      ,cassandra.tpcds.customer_address
-     ,mongodb.tpcds.customer_demographics
+     ,cassandra.tpcds.customer_demographics
      ,cassandra.tpcds.household_demographics
-     ,redis.income_band.income_band
+     ,cassandra.tpcds.income_band
      ,cassandra.tpcds.store_returns
  where ca_city	        =  'Hopewell'
    and c_current_addr_sk = ca_address_sk

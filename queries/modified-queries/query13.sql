@@ -3,9 +3,9 @@ select avg(ss_quantity)
        ,avg(ss_ext_sales_price)
        ,avg(ss_ext_wholesale_cost)
        ,sum(ss_ext_wholesale_cost)
- from mongodb.tpcds.store_sales
-     ,redis.store.store
-     ,mongodb.tpcds.customer_demographics
+ from cassandra.tpcds.store_sales
+     ,cassandra.tpcds.store
+     ,cassandra.tpcds.customer_demographics
      ,cassandra.tpcds.household_demographics
      ,cassandra.tpcds.customer_address
      ,cassandra.tpcds.date_dim

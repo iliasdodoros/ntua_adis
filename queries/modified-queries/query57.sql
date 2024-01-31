@@ -12,7 +12,7 @@ with v1 as(
           (partition by i_category, i_brand,
                      cc_name
            order by d_year, d_moy) rn
- from redis.item.item, mongodb.tpcds.catalog_sales, cassandra.tpcds.date_dim, redis.call_center.call_center
+ from cassandra.tpcds.item, cassandra.tpcds.catalog_sales, cassandra.tpcds.date_dim, cassandra.tpcds.call_center
  where cs_item_sk = i_item_sk and
        cs_sold_date_sk = d_date_sk and
        cc_call_center_sk= cs_call_center_sk and

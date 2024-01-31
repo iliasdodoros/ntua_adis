@@ -1,8 +1,8 @@
 
 select  sum(cs_ext_discount_amt)  as "excess discount amount" 
 from 
-   mongodb.tpcds.catalog_sales 
-   ,redis.item.item 
+   cassandra.tpcds.catalog_sales 
+   ,cassandra.tpcds.item 
    ,cassandra.tpcds.date_dim
 where
 i_manufact_id = 269
@@ -15,7 +15,7 @@ and cs_ext_discount_amt
          select 
             1.3 * avg(cs_ext_discount_amt) 
          from 
-            mongodb.tpcds.catalog_sales 
+            cassandra.tpcds.catalog_sales 
            ,cassandra.tpcds.date_dim
          where 
               cs_item_sk = i_item_sk 

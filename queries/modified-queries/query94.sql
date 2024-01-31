@@ -4,10 +4,10 @@ select
   ,sum(ws_ext_ship_cost) as "total shipping cost"
   ,sum(ws_net_profit) as "total net profit"
 from
-   mongodb.tpcds.web_sales ws1
+   cassandra.tpcds.web_sales ws1
   ,cassandra.tpcds.date_dim
   ,cassandra.tpcds.customer_address
-  ,redis.web_site.web_site
+  ,cassandra.tpcds.web_site
 where
     d_date between '1999-5-01' and 
            (cast('1999-5-01' as date) + 60 days)
@@ -17,7 +17,7 @@ and ca_state = 'TX'
 and ws1.ws_web_site_sk = web_site_sk
 and web_company_name = 'pri'
 and exists (select *
-            from mongodb.tpcds.web_sales ws2
+            from cassandra.tpcds.web_sales ws2
             where ws1.ws_order_number = ws2.ws_order_number
               and ws1.ws_warehouse_sk <> ws2.ws_warehouse_sk)
 and not exists(select *

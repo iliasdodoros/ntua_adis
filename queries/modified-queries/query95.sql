@@ -1,7 +1,7 @@
 
 with ws_wh as
 (select ws1.ws_order_number,ws1.ws_warehouse_sk wh1,ws2.ws_warehouse_sk wh2
- from mongodb.tpcds.web_sales ws1,mongodb.tpcds.web_sales ws2
+ from cassandra.tpcds.web_sales ws1,cassandra.tpcds.web_sales ws2
  where ws1.ws_order_number = ws2.ws_order_number
    and ws1.ws_warehouse_sk <> ws2.ws_warehouse_sk)
  select  
@@ -9,10 +9,10 @@ with ws_wh as
   ,sum(ws_ext_ship_cost) as "total shipping cost"
   ,sum(ws_net_profit) as "total net profit"
 from
-   mongodb.tpcds.web_sales ws1
+   cassandra.tpcds.web_sales ws1
   ,cassandra.tpcds.date_dim
   ,cassandra.tpcds.customer_address
-  ,redis.web_site.web_site
+  ,cassandra.tpcds.web_site
 where
     d_date between '1999-5-01' and 
            (cast('1999-5-01' as date) + 60 days)

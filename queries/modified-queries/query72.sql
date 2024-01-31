@@ -5,16 +5,16 @@ select  i_item_desc
       ,sum(case when p_promo_sk is null then 1 else 0 end) no_promo
       ,sum(case when p_promo_sk is not null then 1 else 0 end) promo
       ,count(*) total_cnt
-from mongodb.tpcds.catalog_sales
-join mongodb.tpcds.inventory on (cs_item_sk = inv_item_sk)
-join redis.warehouse.warehouse on (w_warehouse_sk=inv_warehouse_sk)
-join redis.item.item on (i_item_sk = cs_item_sk)
-join mongodb.tpcds.customer_demographics on (cs_bill_cdemo_sk = cd_demo_sk)
+from cassandra.tpcds.catalog_sales
+join cassandra.tpcds.inventory on (cs_item_sk = inv_item_sk)
+join cassandra.tpcds.warehouse on (w_warehouse_sk=inv_warehouse_sk)
+join cassandra.tpcds.item on (i_item_sk = cs_item_sk)
+join cassandra.tpcds.customer_demographics on (cs_bill_cdemo_sk = cd_demo_sk)
 join cassandra.tpcds.household_demographics on (cs_bill_hdemo_sk = hd_demo_sk)
 join cassandra.tpcds.date_dim d1 on (cs_sold_date_sk = d1.d_date_sk)
 join cassandra.tpcds.date_dim d2 on (inv_date_sk = d2.d_date_sk)
 join cassandra.tpcds.date_dim d3 on (cs_ship_date_sk = d3.d_date_sk)
-left outer join redis.promotion.promotion on (cs_promo_sk=p_promo_sk)
+left outer join cassandra.tpcds.promotion on (cs_promo_sk=p_promo_sk)
 left outer join cassandra.tpcds.catalog_returns on (cr_item_sk = cs_item_sk and cr_order_number = cs_order_number)
 where d1.d_week_seq = d2.d_week_seq
   and inv_quantity_on_hand < cs_quantity 

@@ -6,16 +6,16 @@ with my_customers as (
         ( select cs_sold_date_sk sold_date_sk,
                  cs_bill_customer_sk customer_sk,
                  cs_item_sk item_sk
-          from   mongodb.tpcds.catalog_sales
+          from   cassandra.tpcds.catalog_sales
           union all
           select ws_sold_date_sk sold_date_sk,
                  ws_bill_customer_sk customer_sk,
                  ws_item_sk item_sk
-          from   mongodb.tpcds.web_sales
+          from   cassandra.tpcds.web_sales
          ) cs_or_ws_sales,
-         redis.item.item,
+         cassandra.tpcds.item,
          cassandra.tpcds.date_dim,
-         redis.customer.customer
+         cassandra.tpcds.customer
  where   sold_date_sk = d_date_sk
          and item_sk = i_item_sk
          and i_category = 'Jewelry'
@@ -28,9 +28,9 @@ with my_customers as (
  select c_customer_sk,
         sum(ss_ext_sales_price) as revenue
  from   my_customers,
-        mongodb.tpcds.store_sales,
+        cassandra.tpcds.store_sales,
         cassandra.tpcds.customer_address,
-        redis.store.store,
+        cassandra.tpcds.store,
         cassandra.tpcds.date_dim
  where  c_current_addr_sk = ca_address_sk
         and ca_county = s_county

@@ -4,7 +4,7 @@ select  i_item_id,
         avg(cs_list_price) agg2,
         avg(cs_coupon_amt) agg3,
         avg(cs_sales_price) agg4 
- from mongodb.tpcds.catalog_sales, mongodb.tpcds.customer_demographics, cassandra.tpcds.date_dim, redis.item.item, redis.promotion.promotion
+ from cassandra.tpcds.catalog_sales, cassandra.tpcds.customer_demographics, cassandra.tpcds.date_dim, cassandra.tpcds.item, cassandra.tpcds.promotion
  where cs_sold_date_sk = d_date_sk and
        cs_item_sk = i_item_sk and
        cs_bill_cdemo_sk = cd_demo_sk and

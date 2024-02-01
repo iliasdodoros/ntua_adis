@@ -6,7 +6,7 @@ select
 from
    cassandra.tpcds.catalog_sales cs1
   ,cassandra.tpcds.date_dim
-  ,cassandra.tpcds.customer_address
+  ,redis.customer_address.customer_address
   ,cassandra.tpcds.call_center
 where
     d_date between '1999-2-01' and 

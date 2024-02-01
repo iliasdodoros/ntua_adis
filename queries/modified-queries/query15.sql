@@ -2,8 +2,8 @@
 select  ca_zip
        ,sum(cs_sales_price)
  from cassandra.tpcds.catalog_sales
-     ,cassandra.tpcds.customer
-     ,cassandra.tpcds.customer_address
+     ,redis.customer.customer
+     ,redis.customer_address.customer_address
      ,cassandra.tpcds.date_dim
  where cs_bill_customer_sk = c_customer_sk
  	and c_current_addr_sk = ca_address_sk 

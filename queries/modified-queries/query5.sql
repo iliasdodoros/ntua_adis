@@ -12,7 +12,7 @@ with ssr as
             ss_net_profit as profit,
             cast(0 as decimal(7,2)) as return_amt,
             cast(0 as decimal(7,2)) as net_loss
-    from cassandra.tpcds.store_sales
+    from mongodb.tpcds.store_sales
     union all
     select sr_store_sk as store_sk,
            sr_returned_date_sk as date_sk,
@@ -20,10 +20,10 @@ with ssr as
            cast(0 as decimal(7,2)) as profit,
            sr_return_amt as return_amt,
            sr_net_loss as net_loss
-    from cassandra.tpcds.store_returns
+    from mongodb.tpcds.store_returns
    ) salesreturns,
      cassandra.tpcds.date_dim,
-     cassandra.tpcds.store
+     mongodb.tpcds.store
  where date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date) 
                   and (cast('1998-08-04' as date) +  14 days)
@@ -74,7 +74,7 @@ with ssr as
             ws_net_profit as profit,
             cast(0 as decimal(7,2)) as return_amt,
             cast(0 as decimal(7,2)) as net_loss
-    from cassandra.tpcds.web_sales
+    from mongodb.tpcds.web_sales
     union all
     select ws_web_site_sk as wsr_web_site_sk,
            wr_returned_date_sk as date_sk,
@@ -82,12 +82,12 @@ with ssr as
            cast(0 as decimal(7,2)) as profit,
            wr_return_amt as return_amt,
            wr_net_loss as net_loss
-    from cassandra.tpcds.web_returns left outer join cassandra.tpcds.web_sales on
+    from mongodb.tpcds.web_returns left outer join mongodb.tpcds.web_sales on
          ( wr_item_sk = ws_item_sk
            and wr_order_number = ws_order_number)
    ) salesreturns,
      cassandra.tpcds.date_dim,
-     cassandra.tpcds.web_site
+     mongodb.tpcds.web_site
  where date_sk = d_date_sk
        and d_date between cast('1998-08-04' as date)
                   and (cast('1998-08-04' as date) +  14 days)
@@ -99,8 +99,8 @@ with ssr as
         , sum(returns) as returns
         , sum(profit) as profit
  from 
- (select 'cassandra.tpcds.store channel' as channel
-        , 'cassandra.tpcds.store' || s_store_id as id
+ (select 'mongodb.tpcds.store channel' as channel
+        , 'mongodb.tpcds.store' || s_store_id as id
         , sales
         , returns
         , (profit - profit_loss) as profit
@@ -114,7 +114,7 @@ with ssr as
  from  csr
  union all
  select 'web channel' as channel
-        , 'cassandra.tpcds.web_site' || web_site_id as id
+        , 'mongodb.tpcds.web_site' || web_site_id as id
         , sales
         , returns
         , (profit - profit_loss) as profit

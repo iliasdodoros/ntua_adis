@@ -103,11 +103,11 @@ select
  	,sum(case when d_moy = 12
  		then ws_net_paid_inc_tax * ws_quantity else 0 end) as dec_net
      from
-          cassandra.tpcds.web_sales
+          mongodb.tpcds.web_sales
          ,cassandra.tpcds.warehouse
          ,cassandra.tpcds.date_dim
          ,cassandra.tpcds.time_dim
- 	  ,cassandra.tpcds.ship_mode
+ 	  ,mongodb.tpcds.ship_mode
      where
             ws_warehouse_sk =  w_warehouse_sk
         and ws_sold_date_sk = d_date_sk
@@ -187,7 +187,7 @@ select
          ,cassandra.tpcds.warehouse
          ,cassandra.tpcds.date_dim
          ,cassandra.tpcds.time_dim
- 	 ,cassandra.tpcds.ship_mode
+ 	 ,mongodb.tpcds.ship_mode
      where
             cs_warehouse_sk =  w_warehouse_sk
         and cs_sold_date_sk = d_date_sk

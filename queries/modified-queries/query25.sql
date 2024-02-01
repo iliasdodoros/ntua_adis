@@ -8,14 +8,14 @@ select
  ,sum(sr_net_loss) as store_returns_loss
  ,sum(cs_net_profit) as catalog_sales_profit
  from
- cassandra.tpcds.store_sales
- ,cassandra.tpcds.store_returns
+ mongodb.tpcds.store_sales
+ ,mongodb.tpcds.store_returns
  ,cassandra.tpcds.catalog_sales
  ,cassandra.tpcds.date_dim d1
  ,cassandra.tpcds.date_dim d2
  ,cassandra.tpcds.date_dim d3
- ,cassandra.tpcds.store
- ,cassandra.tpcds.item
+ ,mongodb.tpcds.store
+ ,redis.item.item
  where
  d1.d_moy = 4
  and d1.d_year = 2000

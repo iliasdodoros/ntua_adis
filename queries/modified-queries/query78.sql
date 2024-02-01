@@ -5,8 +5,8 @@ with ws as
     sum(ws_quantity) ws_qty,
     sum(ws_wholesale_cost) ws_wc,
     sum(ws_sales_price) ws_sp
-   from cassandra.tpcds.web_sales
-   left join cassandra.tpcds.web_returns on wr_order_number=ws_order_number and ws_item_sk=wr_item_sk
+   from mongodb.tpcds.web_sales
+   left join mongodb.tpcds.web_returns on wr_order_number=ws_order_number and ws_item_sk=wr_item_sk
    join cassandra.tpcds.date_dim on ws_sold_date_sk = d_date_sk
    where wr_order_number is null
    group by d_year, ws_item_sk, ws_bill_customer_sk
@@ -29,8 +29,8 @@ ss as
     sum(ss_quantity) ss_qty,
     sum(ss_wholesale_cost) ss_wc,
     sum(ss_sales_price) ss_sp
-   from cassandra.tpcds.store_sales
-   left join cassandra.tpcds.store_returns on sr_ticket_number=ss_ticket_number and ss_item_sk=sr_item_sk
+   from mongodb.tpcds.store_sales
+   left join mongodb.tpcds.store_returns on sr_ticket_number=ss_ticket_number and ss_item_sk=sr_item_sk
    join cassandra.tpcds.date_dim on ss_sold_date_sk = d_date_sk
    where sr_ticket_number is null
    group by d_year, ss_item_sk, ss_customer_sk

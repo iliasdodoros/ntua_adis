@@ -8,10 +8,10 @@ from
         cassandra.tpcds.call_center,
         cassandra.tpcds.catalog_returns,
         cassandra.tpcds.date_dim,
-        cassandra.tpcds.customer,
-        cassandra.tpcds.customer_address,
-        cassandra.tpcds.customer_demographics,
-        cassandra.tpcds.household_demographics
+        redis.customer.customer,
+        redis.customer_address.customer_address,
+        redis.customer_demographics.customer_demographics,
+        redis.household_demographics.household_demographics
 where
         cr_call_center_sk       = cc_call_center_sk
 and     cr_returned_date_sk     = d_date_sk

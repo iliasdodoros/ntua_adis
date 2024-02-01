@@ -14,7 +14,7 @@ WITH all_sales AS (
              ,i_manufact_id
              ,cs_quantity - COALESCE(cr_return_quantity,0) AS sales_cnt
              ,cs_ext_sales_price - COALESCE(cr_return_amount,0.0) AS sales_amt
-       FROM cassandra.tpcds.catalog_sales JOIN cassandra.tpcds.item ON i_item_sk=cs_item_sk
+       FROM cassandra.tpcds.catalog_sales JOIN redis.item.item ON i_item_sk=cs_item_sk
                           JOIN cassandra.tpcds.date_dim ON d_date_sk=cs_sold_date_sk
                           LEFT JOIN cassandra.tpcds.catalog_returns ON (cs_order_number=cr_order_number 
                                                     AND cs_item_sk=cr_item_sk)
@@ -27,9 +27,9 @@ WITH all_sales AS (
              ,i_manufact_id
              ,ss_quantity - COALESCE(sr_return_quantity,0) AS sales_cnt
              ,ss_ext_sales_price - COALESCE(sr_return_amt,0.0) AS sales_amt
-       FROM cassandra.tpcds.store_sales JOIN cassandra.tpcds.item ON i_item_sk=ss_item_sk
+       FROM mongodb.tpcds.store_sales JOIN redis.item.item ON i_item_sk=ss_item_sk
                         JOIN cassandra.tpcds.date_dim ON d_date_sk=ss_sold_date_sk
-                        LEFT JOIN cassandra.tpcds.store_returns ON (ss_ticket_number=sr_ticket_number 
+                        LEFT JOIN mongodb.tpcds.store_returns ON (ss_ticket_number=sr_ticket_number 
                                                 AND ss_item_sk=sr_item_sk)
        WHERE i_category='Sports'
        UNION
@@ -40,9 +40,9 @@ WITH all_sales AS (
              ,i_manufact_id
              ,ws_quantity - COALESCE(wr_return_quantity,0) AS sales_cnt
              ,ws_ext_sales_price - COALESCE(wr_return_amt,0.0) AS sales_amt
-       FROM cassandra.tpcds.web_sales JOIN cassandra.tpcds.item ON i_item_sk=ws_item_sk
+       FROM mongodb.tpcds.web_sales JOIN redis.item.item ON i_item_sk=ws_item_sk
                       JOIN cassandra.tpcds.date_dim ON d_date_sk=ws_sold_date_sk
-                      LEFT JOIN cassandra.tpcds.web_returns ON (ws_order_number=wr_order_number 
+                      LEFT JOIN mongodb.tpcds.web_returns ON (ws_order_number=wr_order_number 
                                             AND ws_item_sk=wr_item_sk)
        WHERE i_category='Sports') sales_detail
  GROUP BY d_year, i_brand_id, i_class_id, i_category_id, i_manufact_id)

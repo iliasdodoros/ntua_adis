@@ -8,8 +8,8 @@ select i_item_id
       ,sum(ss_ext_sales_price)*100/sum(sum(ss_ext_sales_price)) over
           (partition by i_class) as revenueratio
 from	
-	cassandra.tpcds.store_sales
-    	,cassandra.tpcds.item 
+	mongodb.tpcds.store_sales
+    	,redis.item.item 
     	,cassandra.tpcds.date_dim
 where 
 	ss_item_sk = i_item_sk 

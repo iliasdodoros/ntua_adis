@@ -28,24 +28,24 @@ cross_sales as
      ,sum(ss_wholesale_cost) s1
      ,sum(ss_list_price) s2
      ,sum(ss_coupon_amt) s3
-  FROM   cassandra.tpcds.store_sales
-        ,cassandra.tpcds.store_returns
+  FROM   mongodb.tpcds.store_sales
+        ,mongodb.tpcds.store_returns
         ,cs_ui
         ,cassandra.tpcds.date_dim d1
         ,cassandra.tpcds.date_dim d2
         ,cassandra.tpcds.date_dim d3
-        ,cassandra.tpcds.store
-        ,cassandra.tpcds.customer
-        ,cassandra.tpcds.customer_demographics cd1
-        ,cassandra.tpcds.customer_demographics cd2
-        ,cassandra.tpcds.promotion
-        ,cassandra.tpcds.household_demographics hd1
-        ,cassandra.tpcds.household_demographics hd2
-        ,cassandra.tpcds.customer_address ad1
-        ,cassandra.tpcds.customer_address ad2
-        ,cassandra.tpcds.income_band ib1
-        ,cassandra.tpcds.income_band ib2
-        ,cassandra.tpcds.item
+        ,mongodb.tpcds.store
+        ,redis.customer.customer
+        ,redis.customer_demographics.customer_demographics cd1
+        ,redis.customer_demographics.customer_demographics cd2
+        ,redis.promotion.promotion
+        ,redis.household_demographics.household_demographics hd1
+        ,redis.household_demographics.household_demographics hd2
+        ,redis.customer_address.customer_address ad1
+        ,redis.customer_address.customer_address ad2
+        ,redis.income_band.income_band ib1
+        ,redis.income_band.income_band ib2
+        ,redis.item.item
   WHERE  ss_store_sk = s_store_sk AND
          ss_sold_date_sk = d1.d_date_sk AND
          ss_customer_sk = c_customer_sk AND

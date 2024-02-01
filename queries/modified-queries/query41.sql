@@ -1,9 +1,9 @@
 
 select  distinct(i_product_name)
- from cassandra.tpcds.item i1
+ from redis.item.item i1
  where i_manufact_id between 742 and 742+40 
    and (select count(*) as item_cnt
-        from cassandra.tpcds.item
+        from redis.item.item
         where (i_manufact = i1.i_manufact and
         ((i_category = 'Women' and 
         (i_color = 'orchid' or i_color = 'papaya') and 

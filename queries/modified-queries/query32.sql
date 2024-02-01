@@ -2,7 +2,7 @@
 select  sum(cs_ext_discount_amt)  as "excess discount amount" 
 from 
    cassandra.tpcds.catalog_sales 
-   ,cassandra.tpcds.item 
+   ,redis.item.item 
    ,cassandra.tpcds.date_dim
 where
 i_manufact_id = 269

@@ -14,7 +14,7 @@ select
 from
    cassandra.tpcds.catalog_sales
   ,cassandra.tpcds.warehouse
-  ,cassandra.tpcds.ship_mode
+  ,mongodb.tpcds.ship_mode
   ,cassandra.tpcds.call_center
   ,cassandra.tpcds.date_dim
 where
